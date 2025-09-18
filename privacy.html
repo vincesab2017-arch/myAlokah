@@ -4,18 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - Alokah Ventures Limited</title>
+
+  <!-- Main CSS -->
   <link rel="stylesheet" href="alokahstyle.css">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* Keep footer at bottom */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #111;
+      color: #fff;
+    }
+    h1, h2 {
+      color: #003366;
+    }
+    nav .nav-links li a {
+      color: #003366;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Navbar -->
   <nav>
     <div class="nav-logo">
       <img src="assets/images/logo_nobg.png" alt="Alokah Ventures">
     </div>
+
+    <!-- Hamburger for mobile -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Nav links -->
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
+      <li><a href="ourservices.html">Services</a></li>
+      <li><a href="ourpartners.html">Our Partners</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
     </ul>
   </nav>
 
+  <!-- Main Content -->
   <main>
     <h1>Privacy Policy</h1>
     <p>At Alokah Ventures Limited, we respect your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data.</p>
@@ -37,8 +82,42 @@
     <p>If you have any questions about this Privacy Policy, contact us at <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>.</p>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <p>Connect with us:</p>
+      <div class="social-links">
+        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x">
+          <i class="fab fa-x-twitter"></i>
+        </a>
+        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </div>
+
+      <div class="legal-links">
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="terms&conditions.html">Terms of Service</a> | 
+        <a href="cookies.html">Cookie Policy</a>
+      </div>
+
+      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+    </div>
   </footer>
+
+  <!-- Script: Mobile Menu -->
+  <script>
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+  </script>
+
 </body>
 </html>

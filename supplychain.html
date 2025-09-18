@@ -4,8 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Supply Chain - Alokah Ventures Limited</title>
+
+  <!-- Main CSS -->
   <link rel="stylesheet" href="alokahstyle.css">
+
+  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Optional Inline CSS for minor tweaks -->
+  <style>
+    /* Ensure footer stays at bottom */
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    main {
+      flex: 1;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #111;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,7 +37,13 @@
     <div class="nav-logo">
       <img src="assets/images/logo_nobg.png" alt="Alokah Ventures">
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+
+    <!-- Hamburger for mobile -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Nav links -->
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="ourpartners.html">Our Partners</a></li>
@@ -25,36 +54,39 @@
     </ul>
   </nav>
 
-  <!-- Hero -->
-  <header>
-    <div>
-      <h1>Supply Chain Solutions</h1>
-      <p>Integrated strategies and technology-driven operations</p>
-    </div>
-  </header>
+  <main>
 
-  <!-- Supply Chain Features -->
-<section id="supplychain">
-  <h2>Our Supply Chain Capabilities</h2>
-  <ul class="about-highlights">
-    <li><i class="fas fa-box"></i> End-to-End Goods Flow Management</li>
-    <li><i class="fas fa-chart-line"></i> Optimization for Cost Reduction</li>
-    <li><i class="fas fa-eye"></i> Improved Visibility & Transparency</li>
-    <li><i class="fas fa-shield-alt"></i> Confidentiality & Resilience</li>
-    <li><i class="fas fa-database"></i> Record Keeping for Future Reference</li>
-    <li><i class="fas fa-clock"></i> Timely Customs Clearance</li>
-    <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
-  </ul>
-</section>
+    <!-- Hero Section -->
+    <header>
+      <div>
+        <h1>Supply Chain Solutions</h1>
+        <p>Integrated strategies and technology-driven operations</p>
+      </div>
+    </header>
 
+    <!-- Supply Chain Features -->
+    <section id="supplychain">
+      <h2>Our Supply Chain Capabilities</h2>
+      <ul class="about-highlights">
+        <li><i class="fas fa-box"></i> End-to-End Goods Flow Management</li>
+        <li><i class="fas fa-chart-line"></i> Optimization for Cost Reduction</li>
+        <li><i class="fas fa-eye"></i> Improved Visibility & Transparency</li>
+        <li><i class="fas fa-shield-alt"></i> Confidentiality & Resilience</li>
+        <li><i class="fas fa-database"></i> Record Keeping for Future Reference</li>
+        <li><i class="fas fa-clock"></i> Timely Customs Clearance</li>
+        <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
+      </ul>
+    </section>
 
-  <!-- Call to Action -->
-  <section>
-    <h2>Transform Your Supply Chain Today</h2>
-    <a href="index.html#contact" class="btn">Get Started</a>
-  </section>
+    <!-- Call to Action -->
+    <section>
+      <h2>Transform Your Supply Chain Today</h2>
+      <a href="index.html#contact" class="btn">Get Started</a>
+    </section>
 
-   <!-- Footer -->
+  </main>
+
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <p>Connect with us:</p>
@@ -72,14 +104,25 @@
           <i class="fab fa-linkedin"></i>
         </a>
       </div>
+
       <div class="legal-links">
         <a href="privacy.html">Privacy Policy</a> | 
         <a href="terms&conditions.html">Terms of Service</a> | 
         <a href="cookies.html">Cookie Policy</a>
       </div>
+
       <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const navLinks = document.querySelector('.nav-links');
+      navLinks.classList.toggle('active');
+    }
+  </script>
 
 </body>
 </html>

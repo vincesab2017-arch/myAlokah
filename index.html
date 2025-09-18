@@ -1,13 +1,23 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Page Title -->
   <title>Alokah Ventures Limited</title>
+
+  <!-- Main Stylesheet -->
   <link rel="stylesheet" href="alokahstyle.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Font Awesome Icons -->
+  <!-- Modern version first -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Backup older version -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- Inline Footer Styling -->
   <style>
     /* Keep footer always at the bottom */
     body {
@@ -33,7 +43,7 @@
       font-size: 14px;
     }
     .legal-links a {
-      color: #3399ff; /* professional blue */
+      color: #3399ff; /* Professional blue */
       margin: 0 10px;
       text-decoration: none;
     }
@@ -47,11 +57,16 @@
   <!-- Navbar -->
   <nav>
     <div class="nav-logo">
+      <!-- Company Logo -->
       <img src="assets/images/logo_nobg.png" alt="Alokah Ventures">
     </div>
+
+    <!-- Mobile Menu Toggle -->
     <div class="menu-toggle" onclick="toggleMenu()">
       <i class="fas fa-bars"></i>
     </div>
+
+    <!-- Navigation Links -->
     <ul class="nav-links">
       <li><a href="ourservices.html">About Us</a></li>
       <li><a href="#vision">Vision</a></li>
@@ -62,14 +77,12 @@
   </nav>
 
   <main>
-  <!-- Hero Section -->
-<header style="position: relative; background: url('assets/images/bg.jpeg') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 20px;">
-  <h1>ALOKAH VENTURES LIMITED</h1>
-  <p>..Always Ahead in Logistics and Supply Chain</p>
-  <a href="ourservices.html" class="btn">Learn More</a>
-</header>
-
-
+    <!-- Hero Section -->
+    <header style="position: relative; background: url('assets/images/bg.jpeg') no-repeat center center/cover; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 20px;">
+      <h1>ALOKAH VENTURES LIMITED</h1>
+      <p>..Always Ahead in Logistics and Supply Chain</p>
+      <a href="ourservices.html" class="btn">Learn More</a>
+    </header>
 
     <!-- About Section -->
     <section id="about">
@@ -79,6 +92,8 @@
         logistics and supply chain management globally. We deliver excellence through our
         dedicated team and expertise.
       </p>
+
+      <!-- Carousel of Highlights -->
       <div class="about-carousel">
         <div class="carousel-track">
           <div class="carousel-item">
@@ -118,14 +133,14 @@
       <div class="grid-container">
         <div class="grid-item"><i class="fas fa-plane"></i><p>Air Freight</p></div>
         <div class="grid-item"><i class="fas fa-ship"></i><p>Sea Freight</p></div>
-        <div class="grid-item"><i class="fas fa-trailer"></i><p>Land Freight</p></div>
+        <div class="grid-item"><i class="fas fa-truck-moving"></i><p>Land Freight</p></div>
         <div class="grid-item"><i class="fas fa-warehouse"></i><p>Warehousing</p></div>
         <div class="grid-item"><i class="fas fa-file-invoice"></i><p>Customs Clearance</p></div>
         <div class="grid-item"><i class="fas fa-handshake"></i><p>Supply Chain Solutions</p></div>
       </div>
     </section>
 
-    <!-- Supply Chain Section -->
+    <!-- Industries Section -->
     <section id="supply-chain">
       <h2>Industries We Serve</h2>
       <div class="industries-grid">
@@ -138,8 +153,8 @@
           <p>Infrastructure & Steel</p>
         </div>
         <div class="industry-item">
-          <img src="assets/images/cement.png" alt="Cement & Pharmaceuticals">
-          <p>construction materials</p>
+          <img src="assets/images/cement.png" alt="Construction Materials">
+          <p>Construction Materials</p>
         </div>
         <div class="industry-item">
           <img src="assets/images/mining.png" alt="Mining & Chemicals">
@@ -150,8 +165,8 @@
           <p>Aviation & Industrial Machinery</p>
         </div>
         <div class="industry-item">
-          <img src="assets/images/pharmacuetical.png" alt="pharmacueticals">
-          <p>pharmacueticals</p>
+          <img src="assets/images/pharmacuetical.png" alt="Pharmaceuticals">
+          <p>Pharmaceuticals</p>
         </div>
       </div>
     </section>
@@ -159,19 +174,27 @@
     <!-- Contact Section -->
     <section id="contact">
       <h2>Contact Us</h2>
+
+      <!-- Contact Form -->
       <form id="contactForm">
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-        <input type="text" id="organization" name="organization" placeholder="Organization" required>
+        <input type="text" id="name" name="name" placeholder="Your Name" autocomplete="name" required>
+        <input type="text" id="organization" name="organization" placeholder="Organization" autocomplete="organization" required>
+        
         <div class="phone-input">
           <select id="countryCode" name="countryCode" required></select>
-          <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+          <input type="tel" id="phone" name="phone" placeholder="Phone Number" autocomplete="tel" required>
         </div>
-        <input type="email" id="email" name="email" placeholder="Email Address" required>
+
+        <input type="email" id="email" name="email" placeholder="Email Address" autocomplete="email" required>
         <textarea id="enquiry" name="enquiry" placeholder="Your Enquiry" required></textarea>
         <button type="submit" id="submitBtn">Submit</button>
         <p id="formMessage" style="display:none;"></p>
       </form>
-      <p><strong>Email:</strong> <a href="mailto:info@alokahventures.com">info@alokahventures.com</a></p>
+
+      <!-- Contact Email -->
+      <p><strong>Email:</strong> 
+        <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>
+      </p>
     </section>
   </main>
 
@@ -179,6 +202,8 @@
   <footer class="footer">
     <div class="footer-container">
       <p>Connect with us:</p>
+
+      <!-- Social Media Links -->
       <div class="social-links">
         <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x">
           <i class="fab fa-x-twitter"></i>
@@ -193,15 +218,19 @@
           <i class="fab fa-linkedin"></i>
         </a>
       </div>
+
+      <!-- Legal Links -->
       <div class="legal-links">
         <a href="privacy.html">Privacy Policy</a> | 
         <a href="terms&conditions.html">Terms of Service</a> | 
         <a href="cookies.html">Cookie Policy</a>
       </div>
+
       <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
     </div>
   </footer>
 
+  <!-- Main JavaScript -->
   <script src="index.js"></script>
 </body>
 </html>
