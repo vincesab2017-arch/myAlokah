@@ -1,0 +1,616 @@
+
+
+/* General Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(135deg, #1b2735, #090a0f);
+    overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+/* Navbar */
+
+/* Navbar */
+/* Navbar */
+nav {
+    background: #ECECEC; /* Soft Warm Gray (Not Pure White) */
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    height: 70px; /* Fixed navbar height */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Logo Takes Full Navbar Height */
+.nav-logo img {
+    height: 100%; /* Full height of navbar */
+    max-height: 70px; /* Matches navbar height */
+    width: auto; /* Keeps aspect ratio */
+}
+
+/* Navbar Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding-right: 20px;
+    align-items: center; /* Align with the logo */
+}
+
+/* Navbar Text */
+.nav-links li a {
+    color: #444; /* Soft Dark Gray for readability */
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+}
+
+/* Navbar Hover Effect */
+.nav-links li a:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+
+/* Mobile Navigation */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Hero Section */
+header {
+    height: 100vh;
+    background: url('assets/images/bg.jpeg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 80px; /* Pushes content down so navbar doesn’t overlap */
+}
+
+header .overlay {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 50px;
+    border-radius: 10px;
+}
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    background: #ff6f00;
+    color: white;
+    padding: 12px 20px;
+    margin-top: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Sections */
+section {
+    padding: 60px 10%;
+    background: rgba(255, 255, 255, 0.1); /* Transparent effect */
+    border-radius: 10px;
+    margin: 40px auto;
+    width: 90%;
+    max-width: 900px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Section Headings */
+h2 {
+    font-size: 28px;
+    color: #ffae00;
+    margin-bottom: 20px;
+}
+
+/* Section Paragraphs */
+section p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Grid Layout for Services */
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 1px;
+}
+
+.grid-item {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    border-radius: 8px;
+    width: 30%;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+}
+
+.grid-item i {
+    font-size: 40px;
+    color: #ffae00;
+}
+
+/* Contact Section */
+#contact a {
+    color: #ffae00;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#contact a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: rgba(34, 34, 34, 0.9);
+    color: white;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+/* Fix for Navbar Covering Titles */
+section::before {
+    content: "";
+    display: block;
+    height: 80px;
+    margin-top: -80px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        background: rgba(34, 34, 34, 0.9);
+        top: 60px;
+        width: 100%;
+        left: 0;
+        padding: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+    /* Fix grid layout in mobile */
+    .grid-item {
+        width: 100%;
+    }
+}
+
+/* Contact Form Styling */
+#contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+#contact input, #contact textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#contact textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+#contact button {
+    background: #ff6f00;
+    color: white;
+    padding: 12px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#contact button:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+#formMessage {
+    font-size: 16px;
+    margin-top: 10px;
+    color: green;
+}
+
+/* Phone Input Styling */
+.phone-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.phone-input select {
+    width: 160px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.phone-input select option {
+    padding: 5px;
+}
+
+/* Country Flag Styling */
+.phone-input select option {
+    padding-left: 20px;
+}
+
+.blog-page {
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.blog-page article {
+  margin-bottom: 40px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.blog-page h3 {
+  color: #003366;
+  margin-bottom: 10px;
+}
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.footer .social-links {
+  margin: 15px 0;
+}
+
+.footer .social-links a {
+  margin: 0 10px;
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.footer .social-links a:hover {
+  transform: scale(1.2);
+}
+
+/* Platform-specific colors */
+.footer .social-links a.x {
+  color: #fff; /* default X logo color */
+}
+.footer .social-links a.x:hover {
+  color: #1DA1F2; /* Twitter/X blue */
+}
+
+.footer .social-links a.whatsapp {
+  color: #25D366;
+}
+.footer .social-links a.whatsapp:hover {
+  color: #128C7E;
+}
+
+.footer .social-links a.youtube {
+  color: #FF0000;
+}
+.footer .social-links a.youtube:hover {
+  color: #CC0000;
+}
+
+.footer .social-links a.linkedin {
+  color: #0077B5;
+}
+.footer .social-links a.linkedin:hover {
+  color: #005582;
+}
+
+.footer .copyright {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #aaa;
+}
+
+/* Testimonials Section */
+.testimonials {
+  background: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.testimonials h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.testimonial-slider {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.testimonial {
+  display: none;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.testimonial.active {
+  display: block;
+}
+
+.client-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #0077B5; /* LinkedIn Blue border */
+}
+
+.client-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.client-message {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Navigation Dots */
+.dots {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #0077B5; /* Active LinkedIn Blue */
+}
+
+/* Carousel container */
+.about-carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Track with all items */
+.carousel-track {
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+
+/* Pause animation on hover */
+.about-carousel:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+/* Each item */
+.carousel-item {
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 300px; /* adjust width for items */
+  margin: 0 10px;
+  text-align: center;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 200px;  /* adjust size as needed */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.caption {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Keyframe for infinite scrolling */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* Animated Gradient Background */
+body {
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+  background-size: 400% 400%;
+  animation: gradientBG 18s ease infinite;
+  color: #ffffff; /* Ensures text stays visible on dark background */
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Industries Section */
+.industries-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.industry-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industry-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.industry-item img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+    filter: brightness(1.1); /* make icons brighter */
+}
+
+.industry-item p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffcc00; /* matches your website’s accent color */
+}
+
+/* Industries grid base layout */
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Industry item images */
+.industries-grid img {
+  width: 200px;   /* larger size */
+  max-width: 100%;  /* don’t overflow container */
+  height: auto;
+  display: block;
+  margin: 0 auto 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.industries-grid img:hover {
+  transform: scale(1.05);
+}
+
+/* Caption styling */
+.industry-item p {
+  text-align: center;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .industries-grid img {
+    width: 160px; /* slightly smaller on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .industries-grid img {
+    width: 120px; /* smaller on mobile to fit nicely */
+  }
+  .industry-item p {
+    font-size: 14px;
+  }
+}
+
+/* Supply Chain Section Background */
+#supplychain {
+  background: url("assets/images/network.jpg") no-repeat center center;
+  background-size: cover;
+  padding: 60px 20px;
+  color: #ffffff; /* text stays visible */
+  position: relative;
+}
+
+/* Optional: dark overlay for better text contrast */
+#supplychain::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* adjust darkness */
+  z-index: 1;
+}
+
+/* Ensure text stays on top of overlay */
+#supplychain h2,
+#supplychain .about-highlights {
+  position: relative;
+  z-index: 2;
+}
