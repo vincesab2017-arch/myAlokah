@@ -295,6 +295,10 @@ section::before {
   padding-bottom: 20px;
 }
 
+.blog-page h1 {
+    color: #003366;
+}
+
 .blog-page h3 {
   color: #003366;
   margin-bottom: 10px;
