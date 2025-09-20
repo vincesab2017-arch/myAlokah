@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     const otherOption = document.createElement("option");
     otherOption.value = "Other";
-    otherOption.textContent = "🌍 Other (Enter manually)";
+    otherOption.textContent = "Other (Enter manually)";
     countryDropdown.appendChild(otherOption);
   }
 
@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
     dots.forEach((dot, i) => dot.addEventListener("click", () => { currentIndex = i; showTestimonial(currentIndex); clearInterval(autoSlide); autoSlide = setInterval(nextTestimonial, 5000); }));
   }
 
-  /*** BLOG POSTS DYNAMIC LOADING ***/
+  /*** BLOG POSTS DYNAMIC LOADING (updated to match blogs.html) ***/
   const blogContainer = document.getElementById("blog-container");
   if (blogContainer) {
     fetch("blogs.json")
@@ -191,25 +191,24 @@ document.addEventListener("DOMContentLoaded", function () {
           post.classList.add("blog-post");
           post.innerHTML = `
             <h3>${blog.title}</h3>
-            <p><strong>${blog.author}</strong> | ${blog.date}</p>
-            <p class="blog-preview">${blog.content.substring(0, 150)}...</p>
-            <button class="read-more">Read More</button>
-            <div class="full-content" style="display:none;"><p>${blog.content}</p></div>
+            <div class="blog-content"><p>${blog.content}</p></div>
+            <button class="read-more-btn">Read More</button>
           `;
-          post.querySelector(".read-more").addEventListener("click", function () {
-            const fullContent = post.querySelector(".full-content");
-            if (fullContent.style.display === "none") {
-              fullContent.style.display = "block";
-              this.textContent = "Show Less";
-            } else {
-              fullContent.style.display = "none";
-              this.textContent = "Read More";
-            }
-          });
           blogContainer.appendChild(post);
         });
+
+        // Toggle Read More / Read Less
+        document.querySelectorAll(".read-more-btn").forEach(btn => {
+          btn.addEventListener("click", function () {
+            const post = this.parentElement;
+            post.classList.toggle("expanded");
+            this.textContent = post.classList.contains("expanded") ? "Read Less" : "Read More";
+          });
+        });
       })
-      .catch(err => { blogContainer.innerHTML = `<p style="color:red;">Error loading blogs: ${err.message}</p>`; });
+      .catch(err => {
+        blogContainer.innerHTML = `<p style="color:red;">Error loading blogs: ${err.message}</p>`;
+      });
   }
 
 });

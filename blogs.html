@@ -6,52 +6,6 @@
   <title>Alokah Ventures Blog</title>
   <link rel="stylesheet" href="alokahstyle.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-  <style>
-    .blog-page {
-      padding: 40px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .blog-post {
-      margin-bottom: 40px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 20px;
-    }
-    .blog-post h3 {
-      color: #0073e6;
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      transition: color 0.3s ease;
-    }
-    .blog-post h3:hover {
-      color: #0055aa;
-      cursor: pointer;
-    }
-    .blog-content {
-      max-height: 120px;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .blog-post.expanded .blog-content {
-      max-height: 2000px;
-    }
-    .read-more-btn {
-      display: inline-block;
-      margin-top: 10px;
-      background: #003366;
-      color: #fff;
-      padding: 8px 16px;
-      border: none;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    .read-more-btn:hover {
-      background: #0055aa;
-    }
-  </style>
 </head>
 <body>
 
@@ -83,71 +37,19 @@
   <section class="blog-page">
     <h2>Our Blogs</h2>
     <div id="blog-container">
-      <!-- Blog posts will load here dynamically -->
+      <!-- Blog posts will load here dynamically from index.js -->
     </div>
   </section>
-
-  <!-- Script to load blog posts -->
-  <script>
-    async function loadBlogs() {
-      try {
-        const response = await fetch("blogs.json"); // ✅ must be same directory as blogs.html
-        if (!response.ok) throw new Error("Could not load blogs.json");
-        
-        const blogs = await response.json();
-        const container = document.getElementById("blog-container");
-
-        blogs.forEach(blog => {
-          const post = document.createElement("div");
-          post.classList.add("blog-post");
-
-          post.innerHTML = `
-            <h3>${blog.title}</h3>
-            <div class="blog-content">
-              <p>${blog.content}</p>
-            </div>
-            <button class="read-more-btn">Read More</button>
-          `;
-
-          container.appendChild(post);
-        });
-
-        // Attach read more toggles
-        document.querySelectorAll(".read-more-btn").forEach(btn => {
-          btn.addEventListener("click", function() {
-            const post = this.parentElement;
-            post.classList.toggle("expanded");
-            this.textContent = post.classList.contains("expanded") ? "Read Less" : "Read More";
-          });
-        });
-
-      } catch (error) {
-        console.error("Error loading blogs:", error);
-        document.getElementById("blog-container").innerHTML = 
-          `<p style="color:red;">Failed to load blogs. Check console for details.</p>`;
-      }
-    }
-
-    loadBlogs();
-  </script>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <p>Connect with us:</p>
       <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x">
-          <i class="fab fa-x-twitter"></i>
-        </a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube">
-          <i class="fab fa-youtube"></i>
-        </a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin">
-          <i class="fab fa-linkedin"></i>
-        </a>
+        <a href="https://x.com/YourPage" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://wa.me/YourNumber" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://youtube.com/YourChannel" target="_blank"><i class="fab fa-youtube"></i></a>
+        <a href="https://linkedin.com/in/YourProfile" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
       <div class="legal-links">
         <a href="privacy.html">Privacy Policy</a> | 
@@ -158,6 +60,7 @@
     </div>
   </footer>
 
+  <!-- Main JS -->
   <script src="index.js"></script>
 </body>
 </html>
