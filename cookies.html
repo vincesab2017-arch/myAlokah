@@ -11,10 +11,20 @@
   <nav>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="terms.html">Terms & Conditions</a></li>
+      <li><a href="terms&conditions.html">Terms & Conditions</a></li>
       <li><a href="cookies.html">Cookies Policy</a></li>
     </ul>
   </nav>
+  <style>
+  /* Automatically offset all sections navigated via anchor links */
+  [id]:target::before {
+    content: "";
+    display: block;
+    height: 70px; /* height of your navbar */
+    margin-top: -70px; /* same as navbar height */
+  }
+</style>
+
 
   <!-- Main Content -->
   <main>
