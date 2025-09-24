@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cookies Policy - Alokah Ventures Limited</title>
   <link rel="stylesheet" href="alokahstyle.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
   <!-- Navbar -->
@@ -20,7 +21,7 @@
   [id]:target::before {
     content: "";
     display: block;
-    height: 70px; /* height of your navbar */
+    height:  70px; /* height of your navbar */
     margin-top: -70px; /* same as navbar height */
   }
 </style>
@@ -54,8 +55,22 @@
   </main>
 
   <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+  <footer class="footer">
+    <div class="footer-container">
+      <p>Connect with us:</p>
+      <div class="social-links">
+        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
+        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <div class="legal-links">
+        <a href="privacy.html">Privacy Policy</a> | 
+        <a href="terms&conditions.html">Terms of Service</a> | 
+        <a href="cookies.html">Cookie Policy</a>
+      </div>
+      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+    </div>
   </footer>
 </body>
 </html>
