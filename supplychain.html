@@ -63,7 +63,7 @@
   <link rel="stylesheet" href="alokahstyle.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <!-- Optional Inline CSS -->
+  <!-- Inline CSS -->
   <style>
     body {
       display: flex;
@@ -79,6 +79,48 @@
       background: #111;
       color: #fff;
     }
+    /* Supply Chain Section */
+.supply-heading {
+  font-size: 2rem;
+  text-align: center;
+  color: #003366; /* professional deep blue */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  -webkit-text-stroke: 1px #e6e6e6; /* stroke effect */
+  margin-bottom: 20px;
+}
+
+.supply-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px 30px;
+  padding: 0;
+  list-style: none;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.supply-list li {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: #333;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 10px 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.supply-list li i {
+  color: #0066cc; /* highlight icon color */
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+.supply-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
   </style>
 </head>
 <body>
@@ -105,24 +147,25 @@
     <!-- Hero Section -->
     <header>
       <div>
-        <h1>Supply Chain Solutions</h1>
+        <h1 style="color:#003366;">Supply Chain Solutions</h1>
         <p>Integrated strategies and technology-driven operations</p>
       </div>
     </header>
 
-    <!-- Supply Chain Features -->
-    <section id="supplychain">
-      <h2>Our Supply Chain Capabilities</h2>
-      <ul class="about-highlights">
-        <li><i class="fas fa-box"></i> End-to-End Goods Flow Management</li>
-        <li><i class="fas fa-chart-line"></i> Optimization for Cost Reduction</li>
-        <li><i class="fas fa-eye"></i> Improved Visibility & Transparency</li>
-        <li><i class="fas fa-shield-alt"></i> Confidentiality & Resilience</li>
-        <li><i class="fas fa-database"></i> Record Keeping for Future Reference</li>
-        <li><i class="fas fa-clock"></i> Timely Customs Clearance</li>
-        <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
-      </ul>
-    </section>
+   <!-- Supply Chain Features -->
+<section id="supplychain">
+  <h2 class="supply-heading">Our Supply Chain Capabilities</h2>
+  <ul class="supply-list">
+    <li><i class="fas fa-box"></i> End-to-End Goods Flow Management</li>
+    <li><i class="fas fa-chart-line"></i> Optimization for Cost Reduction</li>
+    <li><i class="fas fa-eye"></i> Improved Visibility & Transparency</li>
+    <li><i class="fas fa-shield-alt"></i> Confidentiality & Resilience</li>
+    <li><i class="fas fa-database"></i> Record Keeping for Future Reference</li>
+    <li><i class="fas fa-clock"></i> Timely Customs Clearance</li>
+    <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
+  </ul>
+</section>
+
 
     <!-- Call to Action -->
     <section>

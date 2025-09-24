@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy - Alokah Ventures Limited</title>
+  <meta name="description" content="Official Privacy Policy for Alokah Ventures Limited. Learn how we collect, use, and protect your personal information.">
+  <meta name="keywords" content="Alokah Ventures, privacy, personal information, data protection, logistics, supply chain, legal">
+  <meta name="author" content="Alokah Ventures Limited">
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="alokahstyle.css">
@@ -12,11 +15,11 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
-    /* Keep footer at bottom */
     body {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      background-color: #fefefe; /* light background for contrast */
     }
     main {
       flex: 1;
@@ -30,11 +33,33 @@
       background: #111;
       color: #fff;
     }
-    h1, h2 {
-      color: #003366;
-    }
     nav .nav-links li a {
       color: #003366;
+    }
+
+    /* Only affects headings and paragraphs in main content */
+    main h1, main h2, main p {
+      text-align: left;
+      color: #1a1a1a;       /* Dark gray for readability */
+      line-height: 1.7;
+      margin-bottom: 15px;
+      font-weight: 400;
+    }
+
+    main h1 {
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    main h2 {
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 12px;
+    }
+
+    main ul li {
+      margin-bottom: 10px;
+      color: #1a1a1a;
     }
   </style>
 </head>
@@ -45,13 +70,9 @@
     <div class="nav-logo">
       <img src="assets/images/logo_nobg.png" alt="Alokah Ventures">
     </div>
-
-    <!-- Hamburger for mobile -->
     <div class="menu-toggle" onclick="toggleMenu()">
       <i class="fas fa-bars"></i>
     </div>
-
-    <!-- Nav links -->
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="ourservices.html">Services</a></li>
@@ -62,27 +83,27 @@
 
   <!-- Main Content -->
   <main>
-    <h1>Privacy Policy</h1>
+    <h1 style="color:#003366;">Privacy Policy</h1>
     <p>At Alokah Ventures Limited, we respect your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data.</p>
 
     <h2>Information We Collect</h2>
-    <p>We may collect personal details such as your name, organization, phone number, and email address when you contact us through our website.</p>
+    <p>We may collect personal details such as your name, organization, phone number, and email address when you contact us through our website. This information helps us provide tailored services and respond effectively to your inquiries.</p>
 
     <h2>How We Use Your Information</h2>
     <ul>
-      <li>To respond to your inquiries</li>
-      <li>To provide logistics and supply chain services</li>
-      <li>To improve our website and customer service</li>
+      <li>To respond to your inquiries promptly and professionally</li>
+      <li>To provide logistics and supply chain services efficiently</li>
+      <li>To improve our website functionality and overall customer service experience</li>
     </ul>
 
     <h2>Data Security</h2>
-    <p>We implement appropriate security measures to protect your information from unauthorized access, alteration, or disclosure.</p>
+    <p>We implement robust security measures to protect your information from unauthorized access, alteration, disclosure, or destruction. Regular audits and secure storage ensure your data remains confidential and safeguarded.</p>
 
     <h2>Contact</h2>
-    <p>If you have any questions about this Privacy Policy, contact us at <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>.</p>
+    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>. We are happy to clarify any concerns regarding the collection or use of your personal information.</p>
   </main>
 
- <!-- Footer -->
+  <!-- Footer -->
   <footer class="footer">
     <div class="footer-container">
       <p>Connect with us:</p>
@@ -101,11 +122,9 @@
     </div>
   </footer>
 
-  <!-- Script: Mobile Menu -->
   <script>
     function toggleMenu() {
-      const navLinks = document.querySelector('.nav-links');
-      navLinks.classList.toggle('active');
+      document.querySelector('.nav-links').classList.toggle('active');
     }
   </script>
 

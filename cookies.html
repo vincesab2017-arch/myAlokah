@@ -6,6 +6,63 @@
   <title>Cookies Policy - Alokah Ventures Limited</title>
   <link rel="stylesheet" href="alokahstyle.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #fefefe;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #111;
+      color: #fff;
+    }
+    nav .nav-links li a {
+      color: #003366;
+    }
+
+    /* Left-align headings and paragraphs with professional colors */
+    main h1, main h2, main p {
+      text-align: left;
+      color: #1a1a1a; /* dark gray for readability */
+      line-height: 1.7;
+      margin-bottom: 15px;
+      font-weight: 400;
+    }
+
+    main h1 {
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    main h2 {
+      font-weight: 500;
+      margin-top: 20px;
+      margin-bottom: 12px;
+    }
+
+    main ul li {
+      margin-bottom: 10px;
+      color: #1a1a1a;
+    }
+
+    /* Offset anchor links for navbar */
+    [id]:target::before {
+      content: "";
+      display: block;
+      height: 70px; /* height of your navbar */
+      margin-top: -70px; /* same as navbar height */
+    }
+  </style>
 </head>
 <body>
   <!-- Navbar -->
@@ -13,24 +70,14 @@
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="terms&conditions.html">Terms & Conditions</a></li>
-      <li><a href="cookies.html">Cookies Policy</a></li>
+      <li><a href="cookies.html" class="active">Cookies Policy</a></li>
     </ul>
   </nav>
-  <style>
-  /* Automatically offset all sections navigated via anchor links */
-  [id]:target::before {
-    content: "";
-    display: block;
-    height:  70px; /* height of your navbar */
-    margin-top: -70px; /* same as navbar height */
-  }
-</style>
-
 
   <!-- Main Content -->
   <main>
     <section>
-      <h1>Cookies Policy</h1>
+      <h1 style="color:#003366;">Cookies Policy</h1>
       <p>Our website uses cookies to enhance your browsing experience. By continuing to use our site, you agree to the use of cookies as described below.</p>
     </section>
 
@@ -50,7 +97,7 @@
 
     <section>
       <h2>Managing Cookies</h2>
-      <p>You can control cookies through your browser settings. Please note that disabling cookies may affect website functionality and some features may not work as intended.</p>
+      <p>You can control cookies through your browser settings. Please note that disabling cookies may affect website functionality, and some features may not work as intended.</p>
     </section>
   </main>
 
