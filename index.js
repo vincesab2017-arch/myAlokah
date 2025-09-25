@@ -1,23 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Website Loaded Successfully!");
 
-  /*** ========== SMOOTH SCROLLING FOR ANCHORS ========== ***/
+  /*** SMOOTH SCROLLING FOR ANCHORS ***/
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", event => {
-      event.preventDefault();
+    anchor.addEventListener("click", e => {
+      e.preventDefault();
       const target = document.querySelector(anchor.getAttribute("href"));
       if (target) target.scrollIntoView({ behavior: "smooth" });
       document.querySelector('.nav-links')?.classList.remove('active');
     });
   });
 
-  /*** ========== MOBILE MENU TOGGLE ========== ***/
+  /*** MOBILE MENU TOGGLE ***/
   const menuToggle = document.querySelector(".menu-toggle");
   menuToggle?.addEventListener("click", () => {
     document.querySelector('.nav-links')?.classList.toggle('active');
   });
 
-  /*** ========== COUNTRY DROPDOWN ========== ***/
+  /*** COUNTRY DROPDOWN AUTO-POPULATION ***/
   const countryDropdown = document.getElementById("countryCode");
   if (countryDropdown) {
     const countries = [
@@ -61,22 +61,18 @@ document.addEventListener("DOMContentLoaded", () => {
       continents[c.continent].push(c);
     });
 
-    Object.keys(continents).forEach(continent =>
-      continents[continent].sort((a, b) => a.name.localeCompare(b.name))
-    );
-
-    const sortedContinents = ["Africa", "Asia", "Europe", "North America", "Oceania"];
-    sortedContinents.forEach(continent => {
+    ["Africa","Asia","Europe","North America","Oceania"].forEach(continent => {
       if (!continents[continent]) return;
       const group = document.createElement("optgroup");
       group.label = continent;
-      continents[continent].forEach(country => {
-        const option = document.createElement("option");
-        option.value = country.code;
-        option.textContent = `${country.flag} ${country.name} (${country.code})`;
-        if (country.default) option.selected = true;
-        group.appendChild(option);
-      });
+      continents[continent].sort((a,b)=>a.name.localeCompare(b.name))
+        .forEach(country => {
+          const option = document.createElement("option");
+          option.value = country.code;
+          option.textContent = `${country.flag} ${country.name} (${country.code})`;
+          if (country.default) option.selected = true;
+          group.appendChild(option);
+        });
       countryDropdown.appendChild(group);
     });
 
@@ -86,156 +82,87 @@ document.addEventListener("DOMContentLoaded", () => {
     countryDropdown.appendChild(otherOption);
   }
 
-  /*** ========== CONTACT FORM ========== ***/
+  /*** CONTACT FORM HANDLING ***/
   const contactForm = document.getElementById("contactForm");
-  if (contactForm) {
+  if(contactForm){
     fetch("https://api64.ipify.org?format=json")
-      .then(resp => resp.json())
-      .then(data => {
-        contactForm.addEventListener("submit", async event => {
-          event.preventDefault();
+      .then(resp=>resp.json())
+      .then(data=>{
+        contactForm.addEventListener("submit", async e=>{
+          e.preventDefault();
           const submitBtn = document.getElementById("submitBtn");
           const formMessage = document.getElementById("formMessage");
           submitBtn.disabled = true;
-          formMessage.style.display = "none";
+          formMessage.style.display="none";
 
           try {
             let formData = new FormData(contactForm);
             formData.append("ip", data.ip);
             formData.append("origin", window.location.hostname);
 
-            const errors = validateForm(formData);
-            if (errors.length > 0) throw new Error(errors.join("\n"));
+            // Basic validation
+            if(!formData.get("name") || formData.get("name").length<2) throw new Error("Enter a valid name");
+            if(!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email"))) throw new Error("Invalid email");
+            if(!formData.get("enquiry") || formData.get("enquiry").length<10) throw new Error("Enquiry too short");
 
-            formData = sanitizeFormData(formData);
-            const scriptURL = "https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec";
-            const response = await fetch(scriptURL, { method: "POST", body: formData });
+            const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec",{
+              method:"POST",
+              body: formData
+            });
             const result = await response.json();
-
-            if (result.status === "success") {
-              showMessage("We have received your message and will get back to you!", "success");
+            if(result.status==="success"){
+              showMessage("We have received your message!", "success");
               contactForm.reset();
-              const ugandaOption = Array.from(countryDropdown.options).find(o => o.textContent.includes("Uganda"));
-              if (ugandaOption) ugandaOption.selected = true;
+              // Reset country to Uganda
+              const ugandaOption = Array.from(countryDropdown.options).find(o=>o.textContent.includes("Uganda"));
+              if(ugandaOption) ugandaOption.selected = true;
             } else throw new Error(result.message || "Submission failed");
-          } catch (err) {
-            showMessage(err.message || "Something went wrong. Please try again.", "error");
+          } catch(err){
+            showMessage(err.message,"error");
           } finally {
-            setTimeout(() => { submitBtn.disabled = false; }, 3000);
+            setTimeout(()=>{submitBtn.disabled=false;},2000);
+          }
+
+          function showMessage(msg,type="success"){
+            formMessage.style.display="block";
+            formMessage.style.color = type==="success"?"green":"red";
+            formMessage.textContent = msg;
+            if(type==="success") setTimeout(()=>{formMessage.style.display="none";},5000);
           }
         });
-      })
-      .catch(err => console.error("IP fetch error:", err));
-
-    function showMessage(message, type = "success") {
-      const formMessage = document.getElementById("formMessage");
-      formMessage.style.display = "block";
-      formMessage.textContent = message;
-      formMessage.style.color = type === "success" ? "green" : "red";
-      if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 5000);
-    }
-
-    function validateForm(formData) {
-      const errors = [];
-      const validationRules = {
-        name: { min: 2, max: 100, pattern: /^[a-zA-Z\s'-]+$/ },
-        email: { pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
-        phone: { pattern: /^[\d\s()+\-]{8,}$/ },
-        enquiry: { min: 10, max: 5000 }
-      };
-
-      const name = formData.get("name");
-      if (!name || name.length < validationRules.name.min || name.length > validationRules.name.max || !validationRules.name.pattern.test(name))
-        errors.push("Please enter a valid name (2-100 letters only)");
-
-      const email = formData.get("email");
-      if (!email || !validationRules.email.pattern.test(email))
-        errors.push("Please enter a valid email address");
-
-      const phone = formData.get("phone");
-      if (phone && !validationRules.phone.pattern.test(phone))
-        errors.push("Please enter a valid phone number");
-
-      const enquiry = formData.get("enquiry");
-      if (!enquiry || enquiry.length < validationRules.enquiry.min || enquiry.length > validationRules.enquiry.max)
-        errors.push("Enquiry must be between 10 and 5000 characters");
-
-      return errors;
-    }
-
-    function sanitizeFormData(formData) {
-      const sanitized = new FormData();
-      for (let [key, value] of formData.entries()) sanitized.append(key, sanitizeString(value));
-      return sanitized;
-    }
-
-    function sanitizeString(str) {
-      if (typeof str !== "string") return str;
-      return str.trim()
-        .replace(/[<>]/g, "")
-        .replace(/&/g, "&amp;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#x27;")
-        .replace(/\//g, "&#x2F;");
-    }
+      }).catch(err=>console.error("IP fetch error:",err));
   }
 
-  /*** ========== TESTIMONIAL SLIDER ========== ***/
-  const testimonials = document.querySelectorAll(".testimonial");
-  const dots = document.querySelectorAll(".dot");
-  if (testimonials.length && dots.length) {
-    let currentIndex = 0;
-    const showTestimonial = index => {
-      testimonials.forEach((t, i) => t.classList.toggle("active", i === index));
-      dots.forEach((d, i) => d.classList.toggle("active", i === index));
-    };
-    const nextTestimonial = () => { currentIndex = (currentIndex + 1) % testimonials.length; showTestimonial(currentIndex); };
-    let autoSlide = setInterval(nextTestimonial, 5000);
-
-    dots.forEach((dot, i) => dot.addEventListener("click", () => {
-      currentIndex = i;
-      showTestimonial(currentIndex);
-      clearInterval(autoSlide);
-      autoSlide = setInterval(nextTestimonial, 5000);
-    }));
-  }
-
-  /*** ========== BLOG POSTS (DYNAMIC) ========== ***/
+  /*** DYNAMIC BLOGS ***/
   const blogContainer = document.getElementById("blog-container");
-  if (blogContainer) {
-    blogContainer.innerHTML = ""; // Clear previous posts
+  if(blogContainer){
     fetch(`blogs.json?v=${Date.now()}`)
-      .then(resp => { if (!resp.ok) throw new Error("Failed to load blogs"); return resp.json(); })
-      .then(blogs => {
-        if (!blogs || blogs.length === 0) {
-          blogContainer.innerHTML = "<p>No blog posts available at the moment. Please check back later.</p>";
+      .then(resp=>resp.json())
+      .then(blogs=>{
+        if(!blogs || blogs.length===0){
+          blogContainer.innerHTML="<p>No blogs available at the moment.</p>";
           return;
         }
-
-        blogs.forEach(blog => {
+        blogs.forEach(blog=>{
           const post = document.createElement("div");
           post.classList.add("blog-post");
-          post.innerHTML = `
+          post.innerHTML=`
             <h3>${blog.title}</h3>
-            <p><strong>${blog.author || "Admin"}</strong> | ${blog.date || "No Date"}</p>
-            <p class="blog-preview">${blog.content.substring(0, 150)}...</p>
+            <p><strong>${blog.author||"Admin"}</strong> | ${blog.date||"No Date"}</p>
+            <p class="blog-preview">${blog.content.substring(0,150)}...</p>
             <button class="read-more-btn">Read More</button>
             <div class="full-content" style="display:none;"><p>${blog.content}</p></div>
           `;
-
           const btn = post.querySelector(".read-more-btn");
           const fullContent = post.querySelector(".full-content");
-          btn.addEventListener("click", () => {
-            const isVisible = fullContent.style.display === "block";
-            fullContent.style.display = isVisible ? "none" : "block";
-            btn.textContent = isVisible ? "Read More" : "Read Less";
+          btn.addEventListener("click",()=>{
+            const visible = fullContent.style.display==="block";
+            fullContent.style.display = visible?"none":"block";
+            btn.textContent = visible?"Read More":"Read Less";
           });
-
           blogContainer.appendChild(post);
         });
       })
-      .catch(err => {
-        blogContainer.innerHTML = `<p style="color:red;">Error loading blogs: ${err.message}</p>`;
-      });
+      .catch(err=>blogContainer.innerHTML=`<p style="color:red;">Error loading blogs: ${err.message}</p>`);
   }
 });
