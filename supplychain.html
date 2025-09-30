@@ -121,6 +121,68 @@
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.footer .social-links {
+  margin: 15px 0;
+}
+
+.footer .social-links a {
+  margin: 0 10px;
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.footer .social-links a:hover {
+  transform: scale(1.2);
+}
+
+/* Platform-specific colors */
+.footer .social-links a.x {
+  color: #fff; /* default X logo color */
+}
+.footer .social-links a.x:hover {
+  color: #1DA1F2; /* Twitter/X blue */
+}
+
+.footer .social-links a.whatsapp {
+  color: #25D366;
+}
+.footer .social-links a.whatsapp:hover {
+  color: #128C7E;
+}
+
+.footer .social-links a.youtube {
+  color: #FF0000;
+}
+.footer .social-links a.youtube:hover {
+  color: #CC0000;
+}
+
+.footer .social-links a.linkedin {
+  color: #0077B5;
+}
+.footer .social-links a.linkedin:hover {
+  color: #005582;
+}
+
+.footer .copyright {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #aaa;
+}
+
   </style>
 </head>
 <body>
@@ -128,7 +190,9 @@
   <!-- Navbar -->
   <nav>
     <div class="nav-logo">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures">
+    <a href="index.html">
+      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
+    </a>
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">
       <i class="fas fa-bars"></i>
@@ -162,6 +226,7 @@
     <li><i class="fas fa-shield-alt"></i> Confidentiality & Resilience</li>
     <li><i class="fas fa-database"></i> Record Keeping for Future Reference</li>
     <li><i class="fas fa-clock"></i> Timely Customs Clearance</li>
+    <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
     <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
   </ul>
 </section>
