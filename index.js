@@ -207,7 +207,102 @@ if (contactForm) {
       });
     }).catch(err => console.error("IP fetch error:", err));
 }
+  /** quatatio handler**/
+document.addEventListener("DOMContentLoaded", () => {
+  const quotationForm = document.getElementById("quotationForm");
+  if (quotationForm) {
+    // Honeypot anti-spam field (hidden from users, detected by bots)
+    if (!document.getElementById("website_hp")) {
+      const honeypot = document.createElement("input");
+      honeypot.type = "text";
+      honeypot.name = "website_hp";
+      honeypot.id = "website_hp";
+      honeypot.style.display = "none";
+      honeypot.tabIndex = -1;
+      quotationForm.appendChild(honeypot);
+    }
 
+    // Message area for feedback
+    let formMessage = document.getElementById("quoteFormMessage");
+    if (!formMessage) {
+      formMessage = document.createElement("div");
+      formMessage.id = "quoteFormMessage";
+      formMessage.style.display = "none";
+      formMessage.setAttribute("tabindex", "-1");
+      quotationForm.insertBefore(formMessage, quotationForm.querySelector("button[type='submit']"));
+    }
+    formMessage.setAttribute("role", "alert");
+    formMessage.setAttribute("aria-live", "assertive");
+
+    quotationForm.addEventListener("submit", async e => {
+      e.preventDefault();
+      const submitBtn = quotationForm.querySelector("button[type='submit']");
+      submitBtn.disabled = true;
+      formMessage.style.display = "none";
+
+      try {
+        let formData = new FormData(quotationForm);
+
+        // Honeypot check
+        if (formData.get("website_hp")) throw new Error("Spam detected");
+
+        // Validation
+        if (!formData.get("fullname") || formData.get("fullname").length < 2)
+          throw new Error("Enter your full name (min 2 characters)");
+        if (!formData.get("company") || formData.get("company").length < 2)
+          throw new Error("Enter your company/organization");
+        if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
+          throw new Error("Enter a valid email address");
+        if (!formData.get("phone") || !/^[\d\s()+-]{7,}$/.test(formData.get("phone")))
+          throw new Error("Enter a valid phone number");
+        if (!formData.get("service")) throw new Error("Select a service");
+        if (!formData.get("urgency")) throw new Error("Select urgency");
+        if (!formData.get("origin") || !formData.get("destination"))
+          throw new Error("Specify origin and destination");
+        if (!formData.get("weight") || isNaN(formData.get("weight")) || Number(formData.get("weight")) < 1)
+          throw new Error("Enter a valid cargo weight (min 1kg)");
+        if (formData.get("volume") && (isNaN(formData.get("volume")) || Number(formData.get("volume")) < 0))
+          throw new Error("Enter a valid cargo volume");
+        if (!formData.get("description") || formData.get("description").length < 10)
+          throw new Error("Cargo description must be at least 10 characters");
+
+        // Fetch IP address
+        let ip = "";
+        try {
+          const ipResp = await fetch("https://api64.ipify.org?format=json");
+          ip = (await ipResp.json()).ip;
+        } catch {}
+        formData.append("ip", ip);
+        formData.append("origin_host", window.location.hostname);
+
+        // Send to backend (update URL to your Apps Script endpoint)
+        const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
+          method: "POST",
+          body: formData
+        });
+        const result = await response.json();
+
+        if (result.status === "success") {
+          showMessage("Your request has been submitted! Please check your email for confirmation.", "success");
+          quotationForm.reset();
+        } else throw new Error(result.message || "Submission failed");
+      } catch (err) {
+        showMessage(err.message, "error");
+      } finally {
+        setTimeout(() => { submitBtn.disabled = false; }, 2000);
+      }
+
+      function showMessage(msg, type = "success") {
+        formMessage.style.display = "block";
+        formMessage.style.color = type === "success" ? "green" : "red";
+        formMessage.textContent = msg;
+        formMessage.focus();
+        if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 6000);
+      }
+    });
+  }
+});
+  
   /*** DYNAMIC BLOGS ***/
   const blogContainer = document.getElementById("blog-container");
   if (blogContainer) {
