@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /*** CONTACT FORM HANDLING ***/
-  const contactForm = document.getElementById("contactForm");
+/**  const contactForm = document.getElementById("contactForm");
   if (contactForm) {
     fetch("https://api64.ipify.org?format=json")
       .then(resp => resp.json())
@@ -131,7 +131,82 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       }).catch(err => console.error("IP fetch error:", err));
+  } **/
+
+    /*** CONTACT FORM HANDLING new ***/
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  // Add honeypot anti-spam field dynamically if not present
+  if (!document.getElementById("website_hp")) {
+    const honeypot = document.createElement("input");
+    honeypot.type = "text";
+    honeypot.name = "website_hp";
+    honeypot.id = "website_hp";
+    honeypot.style.display = "none";
+    honeypot.tabIndex = -1;
+    contactForm.appendChild(honeypot);
   }
+
+  fetch("https://api64.ipify.org?format=json")
+    .then(resp => resp.json())
+    .then(data => {
+      contactForm.addEventListener("submit", async e => {
+        e.preventDefault();
+        const submitBtn = document.getElementById("submitBtn");
+        const formMessage = document.getElementById("formMessage");
+        submitBtn.disabled = true;
+        formMessage.style.display = "none";
+        formMessage.setAttribute("role", "alert"); // Accessibility: screen readers
+        formMessage.setAttribute("aria-live", "assertive");
+
+        try {
+          let formData = new FormData(contactForm);
+          formData.append("ip", data.ip);
+          formData.append("origin", window.location.hostname);
+
+          // Honeypot check
+          if (formData.get("website_hp")) throw new Error("Spam detected");
+
+          // Enhanced validation
+          if (!formData.get("name") || formData.get("name").length < 2)
+            throw new Error("Enter a valid name (min 2 characters)");
+          if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
+            throw new Error("Invalid email address");
+          if (!formData.get("enquiry") || formData.get("enquiry").length < 10)
+            throw new Error("Enquiry too short (min 10 characters)");
+          // Example: phone validation (optional, if you have a phone field)
+          if (formData.get("phone") && !/^[\d\s()+-]+$/.test(formData.get("phone")))
+            throw new Error("Invalid phone number format");
+
+          const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
+            method: "POST",
+            body: formData
+          });
+          const result = await response.json();
+          if (result.status === "success") {
+            showMessage("We have received your message! Please check your email for confirmation.", "success");
+            contactForm.reset();
+            // Reset country to Uganda
+            const ugandaOption = Array.from(countryDropdown.options).find(o => o.textContent.includes("Uganda"));
+            if (ugandaOption) ugandaOption.selected = true;
+          } else throw new Error(result.message || "Submission failed");
+        } catch (err) {
+          showMessage(err.message, "error");
+        } finally {
+          setTimeout(() => { submitBtn.disabled = false; }, 2000);
+        }
+
+        function showMessage(msg, type = "success") {
+          formMessage.style.display = "block";
+          formMessage.style.color = type === "success" ? "green" : "red";
+          formMessage.textContent = msg;
+          formMessage.setAttribute("tabindex", "-1");
+          formMessage.focus(); // Accessibility: focus error/success for screen readers
+          if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 5000);
+        }
+      });
+    }).catch(err => console.error("IP fetch error:", err));
+}
 
   /*** DYNAMIC BLOGS ***/
   const blogContainer = document.getElementById("blog-container");
