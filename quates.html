@@ -224,83 +224,85 @@
   </header>
 
   <!-- Quotation Form -->
-  <div class="container">
-    <h2>Quotation Form</h2>
-    <form id="quotationForm">
-      <div class="form-row">
-        <div>
-          <label for="fullname">Full Name *</label>
-          <input type="text" id="fullname" name="fullname" required>
-        </div>
-        <div>
-          <label for="company">Company/Organization *</label>
-          <input type="text" id="company" name="company" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div>
-          <label for="email">Email Address *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-          <label for="phone">Phone Number *</label>
-          <input type="tel" id="phone" name="phone" placeholder="+256 700 000000" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div>
-          <label for="service">Service Required *</label>
-          <select id="service" name="service" required>
-            <option value="">-- Select a Service --</option>
-            <option>Air Freight</option>
-            <option>Sea Freight</option>
-            <option>Land Freight</option>
-            <option>Warehousing</option>
-            <option>Customs Clearance</option>
-            <option>Supply Chain Consultancy</option>
-          </select>
-        </div>
-        <div>
-          <label for="urgency">Urgency *</label>
-          <select id="urgency" name="urgency" required>
-            <option value="">-- Select Urgency --</option>
-            <option>Standard (3-7 days)</option>
-            <option>Express (1-2 days)</option>
-            <option>Immediate</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div>
-          <label for="origin">Origin Location *</label>
-          <input type="text" id="origin" name="origin" placeholder="City, Country" required>
-        </div>
-        <div>
-          <label for="destination">Destination Location *</label>
-          <input type="text" id="destination" name="destination" placeholder="City, Country" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div>
-          <label for="weight">Cargo Weight (kg) *</label>
-          <input type="number" id="weight" name="weight" min="1" required>
-        </div>
-        <div>
-          <label for="volume">Cargo Volume (m³)</label>
-          <input type="number" id="volume" name="volume" min="0">
-        </div>
-      </div>
-      <div>
-        <label for="description">Cargo Description *</label>
-        <textarea id="description" name="description" placeholder="Describe the cargo type, packaging, special requirements..." required></textarea>
-      </div>
-      <div>
-        <label for="instructions">Additional Instructions</label>
-        <textarea id="instructions" name="instructions" placeholder="E.g., fragile goods, temperature control, delivery deadline..."></textarea>
-      </div>
-      <button type="submit">Submit Request</button>
-    </form>
+  <form id="quotationForm">
+  <div class="form-row">
+    <div>
+      <label for="fullname">Full Name *</label>
+      <input type="text" id="fullname" name="fullname" autocomplete="name" required minlength="2" placeholder="John Doe">
+    </div>
+    <div>
+      <label for="company">Company/Organization *</label>
+      <input type="text" id="company" name="company" autocomplete="organization" required minlength="2" placeholder="Acme Corp">
+    </div>
   </div>
+  <div class="form-row">
+    <div>
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" autocomplete="email" required placeholder="you@example.com">
+    </div>
+    <div>
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" required minlength="7" placeholder="+256 700 000000">
+    </div>
+  </div>
+  <div class="form-row">
+    <div>
+      <label for="service">Service Required *</label>
+      <select id="service" name="service" required>
+        <option value="">-- Select a Service --</option>
+        <option>Air Freight</option>
+        <option>Sea Freight</option>
+        <option>Land Freight</option>
+        <option>Warehousing</option>
+        <option>Customs Clearance</option>
+        <option>Supply Chain Consultancy</option>
+      </select>
+    </div>
+    <div>
+      <label for="urgency">Urgency *</label>
+      <select id="urgency" name="urgency" required>
+        <option value="">-- Select Urgency --</option>
+        <option>Standard (3-7 days)</option>
+        <option>Express (1-2 days)</option>
+        <option>Immediate</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-row">
+    <div>
+      <label for="origin">Origin Location *</label>
+      <input type="text" id="origin" name="origin" required placeholder="City, Country">
+    </div>
+    <div>
+      <label for="destination">Destination Location *</label>
+      <input type="text" id="destination" name="destination" required placeholder="City, Country">
+    </div>
+  </div>
+  <div class="form-row">
+    <div>
+      <label for="weight">Cargo Weight (kg) *</label>
+      <input type="number" id="weight" name="weight" min="1" required placeholder="e.g. 100">
+    </div>
+    <div>
+      <label for="volume">Cargo Volume (m³)</label>
+      <input type="number" id="volume" name="volume" min="0" placeholder="e.g. 10">
+    </div>
+  </div>
+  <div>
+    <label for="description">Cargo Description *</label>
+    <textarea id="description" name="description" required minlength="10" placeholder="Describe the cargo type, packaging, special requirements..."></textarea>
+  </div>
+  <div>
+    <label for="instructions">Additional Instructions</label>
+    <textarea id="instructions" name="instructions" placeholder="E.g., fragile goods, temperature control, delivery deadline..."></textarea>
+  </div>
+  <!-- Accessible message area for feedback -->
+  <div id="quoteFormMessage" tabindex="-1" style="display:none;"></div>
+  <!-- Honeypot anti-spam field (hidden from users) -->
+  <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
+  <button type="submit">Submit Request</button>
+</form>
+
 
    <!-- Footer -->
   <footer class="footer">
