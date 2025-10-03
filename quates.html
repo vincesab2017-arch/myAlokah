@@ -133,6 +133,21 @@
     button:hover {
       background: #0055aa;
     }
+    .hidden-honeypot {
+      display: none !important;
+      visibility: hidden !important;
+      height: 0 !important;
+      width: 0 !important;
+      pointer-events: none;
+    }
+    #quoteFormMessage {
+      margin-top: -10px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      padding: 10px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
 .footer {
   background: #111;
   color: #fff;
@@ -194,7 +209,6 @@
   margin-top: 10px;
   color: #aaa;
 }
-
   </style>
 </head>
 <body>
@@ -223,85 +237,88 @@
     <p>Please fill in the details below to receive a customized quote from Alokah Ventures Limited.</p>
   </header>
 
-  <!-- Quotation Form -->/**
-  <form id="quotationForm">
-  <div class="form-row">
-    <div>
-      <label for="fullname">Full Name *</label>
-      <input type="text" id="fullname" name="fullname" required>
-    </div>
-    <div>
-      <label for="company">Company/Organization *</label>
-      <input type="text" id="company" name="company" required>
-    </div>
+  <!-- Quotation Form -->
+  <div class="container">
+    <h2>Quotation Form</h2>
+    <form id="quotationForm" autocomplete="off">
+      <div class="form-row">
+        <div>
+          <label for="fullname">Full Name *</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div>
+          <label for="company">Company/Organization *</label>
+          <input type="text" id="company" name="company" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+256 700 000000" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="service">Service Required *</label>
+          <select id="service" name="service" required>
+            <option value="">-- Select a Service --</option>
+            <option>Air Freight</option>
+            <option>Sea Freight</option>
+            <option>Land Freight</option>
+            <option>Warehousing</option>
+            <option>Customs Clearance</option>
+            <option>Supply Chain Consultancy</option>
+          </select>
+        </div>
+        <div>
+          <label for="urgency">Urgency *</label>
+          <select id="urgency" name="urgency" required>
+            <option value="">-- Select Urgency --</option>
+            <option>Standard (3-7 days)</option>
+            <option>Express (1-2 days)</option>
+            <option>Immediate</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="origin">Origin Location *</label>
+          <input type="text" id="origin" name="origin" placeholder="City, Country" required>
+        </div>
+        <div>
+          <label for="destination">Destination Location *</label>
+          <input type="text" id="destination" name="destination" placeholder="City, Country" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label for="weight">Cargo Weight (kg) *</label>
+          <input type="number" id="weight" name="weight" min="1" required>
+        </div>
+        <div>
+          <label for="volume">Cargo Volume (m³)</label>
+          <input type="number" id="volume" name="volume" min="0">
+        </div>
+      </div>
+      <div>
+        <label for="description">Cargo Description *</label>
+        <textarea id="description" name="description" placeholder="Describe the cargo type, packaging, special requirements..." required></textarea>
+      </div>
+      <div>
+        <label for="instructions">Additional Instructions</label>
+        <textarea id="instructions" name="instructions" placeholder="E.g., fragile goods, temperature control, delivery deadline..."></textarea>
+      </div>
+      <!-- Honeypot anti-spam field (hidden!) -->
+      <input type="text" name="website_hp" id="website_hp" class="hidden-honeypot" tabindex="-1" autocomplete="off">
+      <!-- Accessible message area for feedback -->
+      <div id="quoteFormMessage" tabindex="-1" style="display:none;"></div>
+      <button type="submit">Submit Request</button>
+    </form>
   </div>
-  <div class="form-row">
-    <div>
-      <label for="email">Email Address *</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div>
-      <label for="phone">Phone Number *</label>
-      <input type="tel" id="phone" name="phone" placeholder="+256 700 000000" required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div>
-      <label for="service">Service Required *</label>
-      <select id="service" name="service" required>
-        <option value="">-- Select a Service --</option>
-        <option>Air Freight</option>
-        <option>Sea Freight</option>
-        <option>Land Freight</option>
-        <option>Warehousing</option>
-        <option>Customs Clearance</option>
-        <option>Supply Chain Consultancy</option>
-      </select>
-    </div>
-    <div>
-      <label for="urgency">Urgency *</label>
-      <select id="urgency" name="urgency" required>
-        <option value="">-- Select Urgency --</option>
-        <option>Standard (3-7 days)</option>
-        <option>Express (1-2 days)</option>
-        <option>Immediate</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-row">
-    <div>
-      <label for="origin">Origin Location *</label>
-      <input type="text" id="origin" name="origin" placeholder="City, Country" required>
-    </div>
-    <div>
-      <label for="destination">Destination Location *</label>
-      <input type="text" id="destination" name="destination" placeholder="City, Country" required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div>
-      <label for="weight">Cargo Weight (kg) *</label>
-      <input type="number" id="weight" name="weight" min="1" required>
-    </div>
-    <div>
-      <label for="volume">Cargo Volume (m³)</label>
-      <input type="number" id="volume" name="volume" min="0">
-    </div>
-  </div>
-  <div>
-    <label for="description">Cargo Description *</label>
-    <textarea id="description" name="description" placeholder="Describe the cargo type, packaging, special requirements..." required></textarea>
-  </div>
-  <div>
-    <label for="instructions">Additional Instructions</label>
-    <textarea id="instructions" name="instructions" placeholder="E.g., fragile goods, temperature control, delivery deadline..."></textarea>
-  </div>
-  <!-- Honeypot anti-spam field (hidden from users) -->
-  <input type="text" name="website_hp" id="website_hp" style="display:none;" tabindex="-1" autocomplete="off">
-  <!-- Accessible message area for feedback -->
-  <div id="quoteFormMessage" tabindex="-1" style="display:none;"></div>
-  <button type="submit">Submit Request</button>
-</form>
 
    <!-- Footer -->
   <footer class="footer">
@@ -322,10 +339,89 @@
     </div>
   </footer>
 
+  <!-- JS for menu and form handling -->
   <script>
     function toggleMenu() {
       document.querySelector('.nav-links').classList.toggle('active');
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Quotation Form Handling
+      const quotationForm = document.getElementById("quotationForm");
+      if (quotationForm) {
+        // Message area for feedback
+        const formMessage = document.getElementById("quoteFormMessage");
+        formMessage.setAttribute("role", "alert");
+        formMessage.setAttribute("aria-live", "assertive");
+
+        quotationForm.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          const submitBtn = quotationForm.querySelector("button[type='submit']");
+          submitBtn.disabled = true;
+          formMessage.style.display = "none";
+
+          try {
+            const formData = new FormData(quotationForm);
+
+            // Honeypot check
+            if (formData.get("website_hp")) throw new Error("Spam detected");
+
+            // Validation
+            if (!formData.get("fullname") || formData.get("fullname").length < 2)
+              throw new Error("Enter your full name (min 2 characters)");
+            if (!formData.get("company") || formData.get("company").length < 2)
+              throw new Error("Enter your company/organization");
+            if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
+              throw new Error("Enter a valid email address");
+            if (!formData.get("phone") || !/^[\d\s()+-]{7,}$/.test(formData.get("phone")))
+              throw new Error("Enter a valid phone number");
+            if (!formData.get("service")) throw new Error("Select a service");
+            if (!formData.get("urgency")) throw new Error("Select urgency");
+            if (!formData.get("origin") || !formData.get("destination"))
+              throw new Error("Specify origin and destination");
+            if (!formData.get("weight") || isNaN(formData.get("weight")) || Number(formData.get("weight")) < 1)
+              throw new Error("Enter a valid cargo weight (min 1kg)");
+            if (formData.get("volume") && (isNaN(formData.get("volume")) || Number(formData.get("volume")) < 0))
+              throw new Error("Enter a valid cargo volume");
+            if (!formData.get("description") || formData.get("description").length < 10)
+              throw new Error("Cargo description must be at least 10 characters");
+
+            // Fetch IP address
+            let ip = "";
+            try {
+              const ipResp = await fetch("https://api64.ipify.org?format=json");
+              ip = (await ipResp.json()).ip;
+            } catch {}
+            formData.append("ip", ip);
+            formData.append("origin_host", window.location.hostname);
+
+            // Send to backend (update URL to your Apps Script endpoint)
+            const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
+              method: "POST",
+              body: formData
+            });
+            const result = await response.json();
+
+            if (result.status === "success") {
+              showMessage("Your request has been submitted! Please check your email for confirmation.", "success");
+              quotationForm.reset();
+            } else throw new Error(result.message || "Submission failed");
+          } catch (err) {
+            showMessage(err.message, "error");
+          } finally {
+            setTimeout(() => { submitBtn.disabled = false; }, 2000);
+          }
+
+          function showMessage(msg, type = "success") {
+            formMessage.style.display = "block";
+            formMessage.style.color = type === "success" ? "green" : "red";
+            formMessage.textContent = msg;
+            formMessage.focus();
+            if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 6000);
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
