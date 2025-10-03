@@ -1,23 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Website Loaded Successfully!");
 
-  /*** SMOOTH SCROLLING FOR ANCHORS ***/
+  // Smooth scrolling for anchor links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener("click", e => {
-      e.preventDefault();
+    anchor.addEventListener("click", event => {
+      event.preventDefault();
       const target = document.querySelector(anchor.getAttribute("href"));
       if (target) target.scrollIntoView({ behavior: "smooth" });
       document.querySelector('.nav-links')?.classList.remove('active');
     });
   });
 
-  /*** MOBILE MENU TOGGLE ***/
+  // Mobile menu toggle
   const menuToggle = document.querySelector(".menu-toggle");
   menuToggle?.addEventListener("click", () => {
     document.querySelector('.nav-links')?.classList.toggle('active');
   });
 
-  /*** COUNTRY DROPDOWN WITH FLAGS ***/
+  // Country dropdown with flags
   const countryDropdown = document.getElementById("countryCode");
   if (countryDropdown) {
     const countries = [
@@ -56,23 +56,22 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const continents = {};
-    countries.forEach(c => {
-      if (!continents[c.continent]) continents[c.continent] = [];
-      continents[c.continent].push(c);
+    countries.forEach(country => {
+      if (!continents[country.continent]) continents[country.continent] = [];
+      continents[country.continent].push(country);
     });
 
     ["Africa", "Asia", "Europe", "North America", "Oceania"].forEach(continent => {
       if (!continents[continent]) return;
       const group = document.createElement("optgroup");
       group.label = continent;
-      continents[continent].sort((a, b) => a.name.localeCompare(b.name))
-        .forEach(country => {
-          const option = document.createElement("option");
-          option.value = country.code;
-          option.innerHTML = `<span class="fi fi-${country.iso}"></span> ${country.name} (${country.code})`;
-          if (country.default) option.selected = true;
-          group.appendChild(option);
-        });
+      continents[continent].sort((a, b) => a.name.localeCompare(b.name)).forEach(country => {
+        const option = document.createElement("option");
+        option.value = country.code;
+        option.innerHTML = `<span class="fi fi-${country.iso}"></span> ${country.name} (${country.code})`;
+        if (country.default) option.selected = true;
+        group.appendChild(option);
+      });
       countryDropdown.appendChild(group);
     });
 
@@ -82,28 +81,49 @@ document.addEventListener("DOMContentLoaded", () => {
     countryDropdown.appendChild(otherOption);
   }
 
-  /*** CONTACT FORM HANDLING ***/
-/**  const contactForm = document.getElementById("contactForm");
+  // Contact form handling
+  const contactForm = document.getElementById("contactForm");
   if (contactForm) {
+    // Add honeypot field if not present
+    if (!document.getElementById("website_hp")) {
+      const honeypot = document.createElement("input");
+      honeypot.type = "text";
+      honeypot.name = "website_hp";
+      honeypot.id = "website_hp";
+      honeypot.style.display = "none";
+      honeypot.tabIndex = -1;
+      contactForm.appendChild(honeypot);
+    }
+
     fetch("https://api64.ipify.org?format=json")
       .then(resp => resp.json())
       .then(data => {
-        contactForm.addEventListener("submit", async e => {
-          e.preventDefault();
+        contactForm.addEventListener("submit", async event => {
+          event.preventDefault();
           const submitBtn = document.getElementById("submitBtn");
           const formMessage = document.getElementById("formMessage");
           submitBtn.disabled = true;
           formMessage.style.display = "none";
+          formMessage.setAttribute("role", "alert");
+          formMessage.setAttribute("aria-live", "assertive");
 
           try {
-            let formData = new FormData(contactForm);
+            const formData = new FormData(contactForm);
             formData.append("ip", data.ip);
             formData.append("origin", window.location.hostname);
 
-            // Basic validation
-            if (!formData.get("name") || formData.get("name").length < 2) throw new Error("Enter a valid name");
-            if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email"))) throw new Error("Invalid email");
-            if (!formData.get("enquiry") || formData.get("enquiry").length < 10) throw new Error("Enquiry too short");
+            // Honeypot check
+            if (formData.get("website_hp")) throw new Error("Spam detected");
+
+            // Validation
+            if (!formData.get("name") || formData.get("name").length < 2)
+              throw new Error("Enter a valid name (min 2 characters)");
+            if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
+              throw new Error("Invalid email address");
+            if (!formData.get("enquiry") || formData.get("enquiry").length < 10)
+              throw new Error("Enquiry too short (min 10 characters)");
+            if (formData.get("phone") && !/^[\d\s()+-]+$/.test(formData.get("phone")))
+              throw new Error("Invalid phone number format");
 
             const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
               method: "POST",
@@ -111,107 +131,36 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             const result = await response.json();
             if (result.status === "success") {
-              showMessage("We have received your message!", "success");
+              showMessage("We have received your message! Please check your email for confirmation.", "success");
               contactForm.reset();
-              // Reset country to Uganda
-              const ugandaOption = Array.from(countryDropdown.options).find(o => o.textContent.includes("Uganda"));
+              const ugandaOption = Array.from(countryDropdown.options).find(option => option.textContent.includes("Uganda"));
               if (ugandaOption) ugandaOption.selected = true;
-            } else throw new Error(result.message || "Submission failed");
-          } catch (err) {
-            showMessage(err.message, "error");
+            } else {
+              throw new Error(result.message || "Submission failed");
+            }
+          } catch (error) {
+            showMessage(error.message, "error");
           } finally {
             setTimeout(() => { submitBtn.disabled = false; }, 2000);
           }
 
-          function showMessage(msg, type = "success") {
+          function showMessage(message, type = "success") {
             formMessage.style.display = "block";
             formMessage.style.color = type === "success" ? "green" : "red";
-            formMessage.textContent = msg;
+            formMessage.textContent = message;
+            formMessage.setAttribute("tabindex", "-1");
+            formMessage.focus();
             if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 5000);
           }
         });
-      }).catch(err => console.error("IP fetch error:", err));
-  } **/
-
-    /*** CONTACT FORM HANDLING new ***/
-const contactForm = document.getElementById("contactForm");
-if (contactForm) {
-  // Add honeypot anti-spam field dynamically if not present
-  if (!document.getElementById("website_hp")) {
-    const honeypot = document.createElement("input");
-    honeypot.type = "text";
-    honeypot.name = "website_hp";
-    honeypot.id = "website_hp";
-    honeypot.style.display = "none";
-    honeypot.tabIndex = -1;
-    contactForm.appendChild(honeypot);
+      })
+      .catch(error => console.error("IP fetch error:", error));
   }
 
-  fetch("https://api64.ipify.org?format=json")
-    .then(resp => resp.json())
-    .then(data => {
-      contactForm.addEventListener("submit", async e => {
-        e.preventDefault();
-        const submitBtn = document.getElementById("submitBtn");
-        const formMessage = document.getElementById("formMessage");
-        submitBtn.disabled = true;
-        formMessage.style.display = "none";
-        formMessage.setAttribute("role", "alert"); // Accessibility: screen readers
-        formMessage.setAttribute("aria-live", "assertive");
-
-        try {
-          let formData = new FormData(contactForm);
-          formData.append("ip", data.ip);
-          formData.append("origin", window.location.hostname);
-
-          // Honeypot check
-          if (formData.get("website_hp")) throw new Error("Spam detected");
-
-          // Enhanced validation
-          if (!formData.get("name") || formData.get("name").length < 2)
-            throw new Error("Enter a valid name (min 2 characters)");
-          if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
-            throw new Error("Invalid email address");
-          if (!formData.get("enquiry") || formData.get("enquiry").length < 10)
-            throw new Error("Enquiry too short (min 10 characters)");
-          // Example: phone validation (optional, if you have a phone field)
-          if (formData.get("phone") && !/^[\d\s()+-]+$/.test(formData.get("phone")))
-            throw new Error("Invalid phone number format");
-
-          const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
-            method: "POST",
-            body: formData
-          });
-          const result = await response.json();
-          if (result.status === "success") {
-            showMessage("We have received your message! Please check your email for confirmation.", "success");
-            contactForm.reset();
-            // Reset country to Uganda
-            const ugandaOption = Array.from(countryDropdown.options).find(o => o.textContent.includes("Uganda"));
-            if (ugandaOption) ugandaOption.selected = true;
-          } else throw new Error(result.message || "Submission failed");
-        } catch (err) {
-          showMessage(err.message, "error");
-        } finally {
-          setTimeout(() => { submitBtn.disabled = false; }, 2000);
-        }
-
-        function showMessage(msg, type = "success") {
-          formMessage.style.display = "block";
-          formMessage.style.color = type === "success" ? "green" : "red";
-          formMessage.textContent = msg;
-          formMessage.setAttribute("tabindex", "-1");
-          formMessage.focus(); // Accessibility: focus error/success for screen readers
-          if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 5000);
-        }
-      });
-    }).catch(err => console.error("IP fetch error:", err));
-}
-  /** quatatio handler**/
-document.addEventListener("DOMContentLoaded", () => {
+  // Quotation form handling
   const quotationForm = document.getElementById("quotationForm");
   if (quotationForm) {
-    // Honeypot anti-spam field (hidden from users, detected by bots)
+    // Add honeypot field if not present
     if (!document.getElementById("website_hp")) {
       const honeypot = document.createElement("input");
       honeypot.type = "text";
@@ -222,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
       quotationForm.appendChild(honeypot);
     }
 
-    // Message area for feedback
     let formMessage = document.getElementById("quoteFormMessage");
     if (!formMessage) {
       formMessage = document.createElement("div");
@@ -234,14 +182,14 @@ document.addEventListener("DOMContentLoaded", () => {
     formMessage.setAttribute("role", "alert");
     formMessage.setAttribute("aria-live", "assertive");
 
-    quotationForm.addEventListener("submit", async e => {
-      e.preventDefault();
+    quotationForm.addEventListener("submit", async event => {
+      event.preventDefault();
       const submitBtn = quotationForm.querySelector("button[type='submit']");
       submitBtn.disabled = true;
       formMessage.style.display = "none";
 
       try {
-        let formData = new FormData(quotationForm);
+        const formData = new FormData(quotationForm);
 
         // Honeypot check
         if (formData.get("website_hp")) throw new Error("Spam detected");
@@ -275,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("ip", ip);
         formData.append("origin_host", window.location.hostname);
 
-        // Send to backend (update URL to your Apps Script endpoint)
+        // Send to backend
         const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
           method: "POST",
           body: formData
@@ -285,25 +233,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (result.status === "success") {
           showMessage("Your request has been submitted! Please check your email for confirmation.", "success");
           quotationForm.reset();
-        } else throw new Error(result.message || "Submission failed");
-      } catch (err) {
-        showMessage(err.message, "error");
+        } else {
+          throw new Error(result.message || "Submission failed");
+        }
+      } catch (error) {
+        showMessage(error.message, "error");
       } finally {
         setTimeout(() => { submitBtn.disabled = false; }, 2000);
       }
 
-      function showMessage(msg, type = "success") {
+      function showMessage(message, type = "success") {
         formMessage.style.display = "block";
         formMessage.style.color = type === "success" ? "green" : "red";
-        formMessage.textContent = msg;
+        formMessage.textContent = message;
         formMessage.focus();
         if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 6000);
       }
     });
   }
-});
-  
-  /*** DYNAMIC BLOGS ***/
+
+  // Dynamic blogs loading
   const blogContainer = document.getElementById("blog-container");
   if (blogContainer) {
     fetch(`blogs.json?v=${Date.now()}`)
@@ -333,6 +282,8 @@ document.addEventListener("DOMContentLoaded", () => {
           blogContainer.appendChild(post);
         });
       })
-      .catch(err => blogContainer.innerHTML = `<p style="color:red;">Error loading blogs: ${err.message}</p>`);
+      .catch(error => {
+        blogContainer.innerHTML = `<p style="color:red;">Error loading blogs: ${error.message}</p>`;
+      });
   }
 });
