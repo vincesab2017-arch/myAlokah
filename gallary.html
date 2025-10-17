@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- ==========================
+        META TAGS
+       ========================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alokah Ventures Limited | Logistics & Supply Chain Experts</title>
+  <meta name="description"
+    content="Alokah Ventures Limited delivers logistics and supply chain management solutions, offering freight, warehousing, and consultancy services in Uganda and globally.">
+  <meta name="keywords"
+    content="alokah, logistics, supply chain, freight services, warehousing, Uganda, business consultancy">
+  <meta name="author" content="Alokah Ventures Limited">
+  <link rel="canonical" href="https://www.alokahventures.com/">
+  <meta name="robots" content="index, follow">
+
+  <!-- ==========================
+       OPEN GRAPH / TWITTER CARD
+       ========================== -->
+  <meta property="og:title" content="Alokah Ventures Limited | Logistics & Supply Chain Experts">
+  <meta property="og:description"
+    content="Leading logistics and supply chain management solutions for businesses across Uganda and globally.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alokahventures.com/">
+  <meta property="og:image" content="https://www.alokahventures.com/assets/images/og-home.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Alokah Ventures Limited | Logistics & Supply Chain Experts">
+  <meta name="twitter:description"
+    content="Expert freight, warehousing, and supply chain services tailored for global business success.">
+  <meta name="twitter:image" content="https://www.alokahventures.com/assets/images/og-home.jpg">
+
+  <!-- ==========================
+       STYLESHEETS & ICONS
+       ========================== -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
+  <link rel="stylesheet" href="alokahstyle.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/gallary.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">    
+
+  <!-- ==========================
+       JSON-LD STRUCTURED DATA
+       ========================== -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Alokah Ventures Limited",
+          "url": "https://www.alokahventures.com",
+          "logo": "https://www.alokahventures.com/assets/images/logo_nobg.png",
+          "sameAs": [
+            "https://x.com/YourPage",
+            "https://www.linkedin.com/in/YourProfile",
+            "https://youtube.com/YourChannel"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://www.alokahventures.com",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://www.alokahventures.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+  </script>
+</head>
+
+<body>
+  <div class="site-wrapper">
+
+  <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="ourservices.html">ABOUT US</a></li>
+    <li><a href="ourservices.html">SERVICES</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
+
+<main>
+<section class="hero-gallery">
+  <div class="container">
+    <h1>Gallery & Knowledge Hub</h1>
+    <p>Explore Alokah’s operations, container types, and logistics insights.</p>
+  </div>
+</section>
+
+<!-- Filter Buttons -->
+<section class="gallery-filters">
+  <div class="container">
+    <button class="filter-btn active" data-category="All">All</button>
+    <button class="filter-btn" data-category="Fleet">Fleet</button>
+    <button class="filter-btn" data-category="Warehouse">Warehouse</button>
+    <button class="filter-btn" data-category="Events">Events</button>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <h2 class="section-title">Our Gallery</h2>
+  <div class="gallery-container" id="galleryContainer">
+    <!-- Placeholder skeletons -->
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+    <div class="skeleton"></div>
+  </div>
+</section>
+
+<!-- Container Types Section -->
+<section class="container-types-section">
+  <h2 class="section-title">Container Types & Usage</h2>
+  <div class="container-cards" id="containerCards">
+    <!-- Placeholder skeletons -->
+    <div class="container-skeleton"></div>
+    <div class="container-skeleton"></div>
+  </div>
+</section>
+
+<!-- Did You Know Section -->
+<section class="did-you-know">
+  <h2 class="section-title">Did You Know?</h2>
+  <p id="factText">Loading fact...</p>
+</section>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImg">
+  <video class="modal-video" id="modalVideo" controls></video>
+  <div id="caption"></div>
+</div>
+</main>
+
+<!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="ourservices.html">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="supplychain.html">Supply Chain</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
+    </div>
+
+  </div> <!-- /.footer-container -->
+</footer>
+
+  <script src="index.js"></script>
+</div>
+</body>
+
+</html>

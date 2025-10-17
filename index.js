@@ -441,21 +441,6 @@ function initTestimonialCarousel() {
     log('3D testimonial carousel initialized');
   } catch (err) { console.error('initTestimonialCarousel error', err); }
 }
-/* === Layout Stability === */
-function initLayoutLock() {
-  try {
-    const isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-
-    if (!isLocal && window.innerWidth > 1024) {
-      document.body.classList.add("layout-stable");
-      console.log("✅ Layout stability mode active (hosted environment)");
-    } else {
-      console.log("🧩 Layout lock skipped (local development or small screen)");
-    }
-  } catch (error) {
-    console.error("Layout Lock Error:", error);
-  }
-}
 
 // -------------------------
 // Boot

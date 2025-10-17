@@ -6,25 +6,13 @@
     margin: 0;
     padding: 0;
 }
-
-body {
-  font-family: 'Arial', sans-serif;
-  color: #fff;
-  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
-  background-size: 400% 400%;
-  animation: gradientBG 18s ease infinite;
-  overflow-x: hidden;
-
-  /* 🧩 Stability & Responsiveness Enhancements */
-  max-width: 1440px;     /* keeps desktop layout from stretching too wide */
-  width: 100%;           /* allows full responsive scaling on smaller screens */
-  margin: 0 auto;        /* centers the layout nicely on large monitors */
-  box-sizing: border-box;
-}
-body.layout-stable {
-  max-width: 1440px;
-  margin: 0 auto;
-  overflow-x: hidden;
+ body {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
+    background-size: 400% 400%;
+    animation: gradientBG 18s ease infinite;
+    overflow-x: hidden;
 }
 
 
@@ -1068,7 +1056,7 @@ section:not(#about):not(#vision):not(#mission) p {
 @media (max-width: 480px)  { .carousel-item { width: 160px; } }
 
 /* ==========================
-   SERVICES SECTION (Stable Version)
+   SERVICES SECTION (Responsive)
 ========================== */
 .services-section {
   width: 100%;
@@ -1084,14 +1072,15 @@ section:not(#about):not(#vision):not(#mission) p {
   align-items: flex-start;
   gap: 60px;
   flex-wrap: wrap;
-  max-width: 1200px; /* prevents over-expansion */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Left Column */
 .services-left {
-  flex: 1 1 550px; /* ensures cards don’t shrink too small */
-  max-width: 600px; /* caps width */
-  min-width: 300px;
+  flex: 1 1 550px;
+  max-width: 600px;
+  min-width: 280px;
 }
 
 .services-left .section-title {
@@ -1143,7 +1132,7 @@ section:not(#about):not(#vision):not(#mission) p {
 
 /* Right Column Images */
 .services-right {
-  flex: 1 1 450px; /* ensures images don’t grow too wide */
+  flex: 1 1 450px;
   max-width: 500px;
   min-width: 280px;
   display: flex;
@@ -1163,7 +1152,36 @@ section:not(#about):not(#vision):not(#mission) p {
   transform: scale(1.05);
 }
 
-/* Responsive */
+/* ==========================
+   TABLET: 1200px - 901px
+========================== */
+@media (max-width: 1200px) and (min-width: 901px) {
+  .split-row {
+    flex-wrap: nowrap;        /* keep side-by-side */
+    gap: 30px;                /* reduce gap slightly */
+    align-items: flex-start;
+  }
+
+  .services-left {
+    flex: 1 1 55%;
+    max-width: 55%;
+  }
+
+  .services-right {
+    flex: 1 1 40%;
+    max-width: 40%;
+  }
+
+  /* Slightly reduce image size to prevent wrapping */
+  .services-right img {
+    width: 95%;       /* slightly smaller than 100% */
+    max-width: 95%;
+  }
+}
+
+/* ==========================
+   MOBILE: max-width 900px
+========================== */
 @media (max-width: 900px) {
   .split-row {
     flex-direction: column;
@@ -1184,7 +1202,13 @@ section:not(#about):not(#vision):not(#mission) p {
   .services-right img {
     max-width: 360px;
   }
+
+  .service-card {
+    width: 100%;
+    padding: 20px;
+  }
 }
+
 
 /** key services on ourservice page**/
 .key-services {
@@ -1885,101 +1909,83 @@ section:not(#about):not(#vision):not(#mission) p {
   padding: 80px 8%;
   background: #f5f5f5;
   color: #002b5c;
-  perspective: 1200px; /* 3D effect */
-  box-sizing: border-box; /* ensure no padding/margin changes size */
+  text-align: center;
 }
 
-.testimonials-section .section-title {
-  font-size: 2.5rem;
-  text-align: center;
-  color: #ffae00;
-  margin-bottom: 60px;
+.section-title {
+  font-size: 2.2rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  color: #ffae00;
   font-weight: bold;
+  margin-bottom: 60px;
+  letter-spacing: 1px;
 }
 
 .testimonial-carousel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  transform-style: preserve-3d;
   position: relative;
+  max-width: 700px;
+  margin: 0 auto;
   overflow: hidden;
-  min-height: 450px; /* prevents vertical shift */
+  height: 350px;
 }
 
 .testimonial-card {
-  flex: 0 0 300px; /* fixed width */
-  max-width: 300px; /* fixed max-width */
-  min-height: 400px; /* fixed height */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
   background: #fff;
   border-radius: 12px;
   padding: 2rem 1.5rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  text-align: center;
-  transition: transform 0.6s ease, filter 0.6s ease, opacity 0.6s ease;
-  opacity: 0.4;
-  transform: scale(0.9) rotateY(20deg);
-  cursor: grab;
-  box-sizing: border-box; /* include padding in width/height */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
-.testimonial-card.center {
-  transform: scale(1) rotateY(0deg);
+.testimonial-card.active {
   opacity: 1;
-  filter: blur(0);
+  transform: translateY(0);
   z-index: 2;
 }
 
 .testimonial-card img {
   width: 80px;
   height: 80px;
-  object-fit: cover;
   border-radius: 50%;
-  margin-bottom: 15px;
+  object-fit: cover;
   border: 3px solid #ffae00;
+  margin-bottom: 15px;
 }
 
-.testimonial-card .quote {
+.quote {
   font-style: italic;
   font-size: 1rem;
-  line-height: 1.6;
   color: #002b5c;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.testimonial-card .client-name {
+.client-name {
   font-weight: bold;
   font-size: 1.1rem;
   color: #003366;
-  margin-bottom: 5px;
 }
 
-.testimonial-card .client-position {
+.client-position {
   font-size: 0.9rem;
-  color: #555;
-}
-
-/* Responsive adjustments with fixed widths */
-@media (max-width: 1024px) {
-  .testimonial-card { flex: 0 0 280px; max-width: 280px; min-height: 380px; }
-}
-
-@media (max-width: 768px) {
-  .testimonial-card { flex: 0 0 250px; max-width: 250px; min-height: 350px; }
-  .testimonial-card img { width: 70px; height: 70px; }
+  color: #666;
 }
 
 @media (max-width: 480px) {
-  .testimonial-carousel { gap: 20px; }
-  .testimonial-card { flex: 0 0 200px; max-width: 200px; min-height: 320px; }
+  .testimonial-card { padding: 1rem; }
+  .quote { font-size: 0.9rem; }
 }
 
 
+
 /* ==========================
-   CONTACT SECTION — Full Width & Pro Design
+   CONTACT SECTION — 
 ========================== */
 #contact {
   width: 100vw;
@@ -2668,86 +2674,7 @@ section:not(#about):not(#vision):not(#mission) p {
   color: #fff;
   text-decoration: none;
 }
-/* ==========================
-   COOKIES PAGE STYLES
-   ========================== */
 
-.cookies-main {
-  flex: 1;
-  background: #fefefe;
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Hero Section */
-.cookies-hero {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.cookies-hero h1 {
-  color: #003366;
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.cookies-hero p {
-  color: #333;
-  font-size: 1rem;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-/* Card Layout */
-.cookies-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.cookie-card {
-  flex: 1 1 30%;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cookie-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-}
-
-.cookie-card h2 {
-  color: #003366;
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-}
-
-.cookie-card p,
-.cookie-card ul li {
-  color: #1a1a1a;
-  line-height: 1.6;
-}
-
-/* Responsive Layout */
-@media (max-width: 768px) {
-  .cookies-container {
-    flex-direction: column;
-  }
-
-  .cookie-card {
-    flex: 1 1 100%;
-  }
-
-  .cookies-hero h1 {
-    font-size: 1.6rem;
-  }
-}
 /* ==========================
    PRIVACY POLICY PAGE STYLES
    ========================== */
