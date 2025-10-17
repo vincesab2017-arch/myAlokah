@@ -13,137 +13,191 @@
   
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  
-  <style>
-    body { 
-      display: flex; 
-      flex-direction: column; 
-      min-height: 100vh; 
-      background-color: #fefefe; /* light background for contrast */
-    }
-    main { 
-      flex: 1; 
-      padding: 20px; 
-      max-width: 900px; 
-      margin: auto; 
-    }
-    footer { 
-      text-align: center; 
-      padding: 15px; 
-      background: #111; 
-      color: #fff; 
-    }
-    nav .nav-links li a { 
-      color: #003366; 
-    }
-
-    /* Only affects headings and paragraphs in main content */
-    main h1, main h2, main p {
-      text-align: left;          /* Left align */
-      color: #1a1a1a;            /* Dark gray for clarity and professional look */
-      line-height: 1.7;          /* Comfortable spacing */
-      margin-bottom: 15px;       /* Space after elements */
-      font-weight: 400;          /* Normal weight for paragraphs */
-    }
-
-    main h1 {
-      font-weight: 600;           /* Bold for main heading */
-      margin-bottom: 25px;        /* Extra spacing for main heading */
-    }
-
-    main h2 {
-      font-weight: 500;           /* Medium weight for subheadings */
-      margin-top: 20px;           /* Space above subheading */
-      margin-bottom: 12px;        /* Space below subheading */
-    }
-
-    main ul li {
-      margin-bottom: 10px;        /* Space between list items */
-      color: #1a1a1a;             /* Matches paragraphs */
-    }
-  </style>
 </head>
 <body>
+ <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="cookies.html">Cookie Policy</a></li>
-    </ul>
-  </nav>
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
 
-  <!-- Main Content -->
-  <main>
-    <h1 style="color:#003366;">Terms & Conditions</h1>
-    <p>Welcome to Alokah Ventures Limited. By accessing or using our website and services, you agree to comply with these Terms & Conditions. Please read them carefully.</p>
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="ourservices.html">SERVICES</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
+
+ <!-- ==========================
+     TERMS & CONDITIONS PAGE
+     ========================== -->
+
+<main class="terms-main">
+  <section class="terms-content">
+    <h1>Terms & Conditions</h1>
+    <p class="last-updated"><em>Last Updated: October 2025</em></p>
+
+    <p>
+      Welcome to <strong>Alokah Ventures Limited</strong>. By accessing or using our website and services,
+      you agree to comply with these Terms & Conditions. Please read them carefully to understand your
+      rights and obligations when using our platform and services.
+    </p>
 
     <h2>1. Acceptance of Terms</h2>
-    <p>By using this website, you acknowledge that you have read, understood, and agree to be bound by these Terms & Conditions and all applicable laws. If you do not agree, do not use this site or our services.</p>
+    <p>
+      By using this website, you acknowledge that you have read, understood, and agree to be bound by these
+      Terms & Conditions and all applicable laws. If you do not agree, please refrain from using this site
+      or our services.
+    </p>
 
     <h2>2. Governing Law</h2>
-    <p>These terms are governed by and interpreted in accordance with the laws of Uganda. Any disputes arising from use of this website or services shall be subject to the exclusive jurisdiction of the courts of Uganda.</p>
+    <p>
+      These Terms are governed by and interpreted in accordance with the laws of the Republic of Uganda.
+      Any disputes arising from the use of this website or our services shall be subject to the exclusive
+      jurisdiction of the courts of Uganda.
+    </p>
 
     <h2>3. Intellectual Property</h2>
-    <p>All content on this website, including text, images, graphics, logos, videos, and software, is the property of Alokah Ventures Limited or its partners and is protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, or use any content without prior written permission.</p>
+    <p>
+      All content on this website—including text, graphics, images, videos, logos, and software—is the
+      property of Alokah Ventures Limited or its affiliates and is protected by copyright, trademark,
+      and other intellectual property laws. You may not reproduce, modify, or distribute any material
+      without prior written consent.
+    </p>
 
     <h2>4. User Conduct</h2>
-    <p>You agree to use our website and services for lawful purposes only. Prohibited activities include:</p>
+    <p>Users must interact with our site and services lawfully. Prohibited activities include:</p>
     <ul>
-      <li>Unauthorized access to data or systems.</li>
-      <li>Uploading harmful, offensive, or illegal content.</li>
-      <li>Attempting to disrupt or impair website functionality.</li>
+      <li>Gaining unauthorized access to our systems or data.</li>
+      <li>Uploading or transmitting harmful, offensive, or illegal content.</li>
+      <li>Attempting to disrupt website functionality or interfere with other users.</li>
     </ul>
 
     <h2>5. Services & Availability</h2>
-    <p>Our logistics and supply chain services are offered subject to contractual agreements. Alokah Ventures Limited reserves the right to modify, suspend, or discontinue services at any time without prior notice. Service delivery is subject to availability, and timelines may vary.</p>
+    <p>
+      Our logistics and supply chain services are provided under specific agreements and terms. Alokah
+      Ventures Limited reserves the right to modify, suspend, or discontinue services at any time without
+      prior notice. All services are subject to availability, and delivery timelines may vary.
+    </p>
 
     <h2>6. Limitation of Liability</h2>
-    <p>To the fullest extent permitted by law, Alokah Ventures Limited shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising from your use of the website or services, including delays, errors, or interruptions.</p>
+    <p>
+      To the fullest extent permitted by law, Alokah Ventures Limited shall not be liable for any direct,
+      indirect, incidental, or consequential damages arising from your use of our website or services,
+      including interruptions, delays, or loss of data.
+    </p>
 
     <h2>7. Indemnification</h2>
-    <p>You agree to indemnify and hold harmless Alokah Ventures Limited, its affiliates, and employees from any claims, damages, losses, or expenses arising from your breach of these Terms or misuse of the website and services.</p>
+    <p>
+      You agree to indemnify and hold harmless Alokah Ventures Limited, its affiliates, officers, and
+      employees against any claims, damages, or expenses arising from your violation of these Terms or
+      misuse of our website and services.
+    </p>
 
     <h2>8. Termination</h2>
-    <p>We reserve the right to suspend or terminate your access to the website or services at our discretion, without notice, for violations of these Terms or any applicable law.</p>
+    <p>
+      We reserve the right to suspend or terminate your access to our website or services at any time,
+      without prior notice, if you violate these Terms or applicable laws.
+    </p>
 
     <h2>9. Privacy & Cookies</h2>
-    <p>Your use of this website is subject to our <a href="privacy.html">Privacy Policy</a> and <a href="cookies.html">Cookie Policy</a>, which explain how we collect, use, and store information.</p>
+    <p>
+      Your use of this website is also governed by our
+      <a href="privacy.html">Privacy Policy</a> and
+      <a href="cookies.html">Cookies Policy</a>. These documents explain how we collect, use, and protect
+      your personal information.
+    </p>
 
     <h2>10. Changes to Terms</h2>
-    <p>Alokah Ventures Limited may update these Terms at any time. Continued use of the website or services after changes constitutes acceptance of the updated Terms. We encourage you to review these Terms regularly.</p>
+    <p>
+      Alokah Ventures Limited reserves the right to update or revise these Terms & Conditions at any time.
+      Continued use of the website or services after updates signifies your acceptance of the revised Terms.
+      We recommend reviewing this page periodically.
+    </p>
 
     <h2>11. Contact Information</h2>
-    <p>If you have questions about these Terms & Conditions, contact us at <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>.</p>
-  </main>
+    <p>
+      If you have any questions or concerns regarding these Terms & Conditions, please contact us at:
+    </p>
+    <p class="contact-info">
+      <strong>Alokah Ventures Limited</strong><br>
+      Email: <a href="mailto:info@alokahventures.com">info@alokahventures.com</a><br>
+      Location: Kampala, Uganda
+    </p>
+  </section>
+</main>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+  <!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
     </div>
-  </footer>
+
+  </div> <!-- /.footer-container -->
+</footer>
 
   <script>
     function toggleMenu() {

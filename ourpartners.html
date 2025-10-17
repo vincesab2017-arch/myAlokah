@@ -77,68 +77,153 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="ourpartners.html" class="active">Our Partners</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="supplychain.html">Supply Chain</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+  <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+  <!-- Nav Links -->
+  <ul class="nav-links">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="ourpartners.html" class="active">OUR PARTNERS</a></li>
+      <li><a href="careers.html">CAREERS</a></li>
+      <li><a href="supplychain.html">SUPPLY CHAIN</a></li>
+      <li><a href="blogs.html">BLOGS</a></li>
+      <li><a href="index.html#contact">CONTACT</a></li>
     </ul>
-  </nav>
+</nav>
+<!-- ==========================
+         HERO SECTION
+         ========================== -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <h1>OUR TRUSTED PARTNERS</h1>
+        <p>Building strong alliances for global excellence</p>
+      </div>
+    </header>
+  <!-- Partners Section -->
+<section id="partners" class="partners-section">
+  <div class="container">
+    <h2 class="section-title">Strategic Global Partnerships</h2>
+    <p class="section-subtitle">
+      We collaborate with industry leaders to deliver end-to-end logistics and supply chain solutions, ensuring efficiency, reliability, and global reach.
+    </p>
 
-  <!-- Hero -->
-  <header>
-    <div>
-      <h1 style="color:#003366;">Our Trusted Partners</h1>
-      <p>Building strong alliances for global excellence</p>
+    <div class="partners-grid">
+      <div class="partner-card" data-aos="fade-up">
+        <img src="assets/images/partner1.png" alt="Partner One">
+        <div class="partner-info">
+          <p><strong>Partner One</strong></p>
+          <span>Specializes in international air cargo and time-critical deliveries.</span>
+        </div>
+      </div>
+
+      <div class="partner-card" data-aos="fade-up" data-aos-delay="100">
+        <img src="assets/images/partner2.png" alt="Partner Two">
+        <div class="partner-info">
+          <p><strong>Partner Two</strong></p>
+          <span>Global sea freight experts providing cost-efficient shipping solutions.</span>
+        </div>
+      </div>
+
+      <div class="partner-card" data-aos="fade-up" data-aos-delay="200">
+        <img src="assets/images/partner3.png" alt="Partner Three">
+        <div class="partner-info">
+          <p><strong>Partner Three</strong></p>
+          <span>Specialized in land transport with secure cross-border delivery.</span>
+        </div>
+      </div>
+
+      <div class="partner-card" data-aos="fade-up" data-aos-delay="300">
+        <img src="assets/images/partner4.png" alt="Partner Four">
+        <div class="partner-info">
+          <p><strong>Partner Four</strong></p>
+          <span>Trusted warehousing and inventory management partner worldwide.</span>
+        </div>
+      </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- Partners Grid -->
-  <section id="partners">
-    <h2>Strategic Global Partnerships</h2>
-    <p>We collaborate with industry leaders to deliver end-to-end logistics and supply chain solutions.</p>
-    <div class="grid-container">
-      <div class="grid-item"><img src="assets/images/partner1.png" alt="Partner 1"><p>Partner One</p></div>
-      <div class="grid-item"><img src="assets/images/partner2.png" alt="Partner 2"><p>Partner Two</p></div>
-      <div class="grid-item"><img src="assets/images/partner3.png" alt="Partner 3"><p>Partner Three</p></div>
-      <div class="grid-item"><img src="assets/images/partner4.png" alt="Partner 4"><p>Partner Four</p></div>
-    </div>
-  </section>
-
-  <!-- Call to Action -->
-  <section>
+<!-- CTA Section -->
+<section class="partners-cta">
+  <div class="container">
     <h2>Want to Partner With Us?</h2>
-    <a href="index.html#contact" class="btn">Contact Us</a>
-  </section>
+    <p>Join Alokah Ventures to collaborate on innovative logistics solutions that make a global impact.</p>
+    <a href="index.html#contact" class="cta-btn"><i class="fas fa-handshake"></i> Contact Us</a>
+  </div>
+</section>
 
- <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+  <!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
     </div>
-  </footer>
+
+  </div> <!-- /.footer-container -->
+</footer>
+
 
   <!-- JavaScript -->
   <script src="index.js"></script>

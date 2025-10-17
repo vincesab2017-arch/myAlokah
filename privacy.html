@@ -14,115 +14,189 @@
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background-color: #fefefe; /* light background for contrast */
-    }
-    main {
-      flex: 1;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #111;
-      color: #fff;
-    }
-    nav .nav-links li a {
-      color: #003366;
-    }
-
-    /* Only affects headings and paragraphs in main content */
-    main h1, main h2, main p {
-      text-align: left;
-      color: #1a1a1a;       /* Dark gray for readability */
-      line-height: 1.7;
-      margin-bottom: 15px;
-      font-weight: 400;
-    }
-
-    main h1 {
-      font-weight: 600;
-      margin-bottom: 25px;
-    }
-
-    main h2 {
-      font-weight: 500;
-      margin-top: 20px;
-      margin-bottom: 12px;
-    }
-
-    main ul li {
-      margin-bottom: 10px;
-      color: #1a1a1a;
-    }
-  </style>
 </head>
 <body>
+ <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="ourservices.html">Services</a></li>
-      <li><a href="ourpartners.html">Our Partners</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
 
-  <!-- Main Content -->
-  <main>
-    <h1 style="color:#003366;">Privacy Policy</h1>
-    <p>At Alokah Ventures Limited, we respect your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard your data.</p>
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="ourservices.html">SERVICES</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
 
-    <h2>Information We Collect</h2>
-    <p>We may collect personal details such as your name, organization, phone number, and email address when you contact us through our website. This information helps us provide tailored services and respond effectively to your inquiries.</p>
+  <!-- ==========================
+     PRIVACY POLICY PAGE
+     ========================== -->
 
-    <h2>How We Use Your Information</h2>
+<main class="privacy-main">
+  <section class="privacy-content">
+    <h1>Privacy Policy</h1>
+    <p class="last-updated"><em>Last Updated: October 2025</em></p>
+
+    <p>
+      At <strong>Alokah Ventures Limited</strong>, your privacy is of utmost importance to us. This Privacy
+      Policy explains how we collect, use, disclose, and protect your personal information when you visit our
+      website, engage our logistics or supply chain services, or interact with our team. By using our website,
+      you agree to the terms outlined in this policy.
+    </p>
+
+    <h2>1. Information We Collect</h2>
+    <p>We collect information to provide, improve, and secure our services. This may include:</p>
     <ul>
-      <li>To respond to your inquiries promptly and professionally</li>
-      <li>To provide logistics and supply chain services efficiently</li>
-      <li>To improve our website functionality and overall customer service experience</li>
+      <li><strong>Personal Information:</strong> such as your name, organization, phone number, and email address when you fill out contact forms or request a quotation.</li>
+      <li><strong>Usage Data:</strong> including your browser type, IP address, device information, and browsing behavior to help us understand how visitors interact with our website.</li>
+      <li><strong>Cookies and Tracking Technologies:</strong> small text files used to enhance your browsing experience, remember preferences, and analyze site performance.</li>
     </ul>
 
-    <h2>Data Security</h2>
-    <p>We implement robust security measures to protect your information from unauthorized access, alteration, disclosure, or destruction. Regular audits and secure storage ensure your data remains confidential and safeguarded.</p>
+    <h2>2. How We Use Your Information</h2>
+    <p>We use the information collected to ensure smooth business operations and to enhance your experience:</p>
+    <ul>
+      <li>To respond to inquiries, process requests, and provide tailored logistics solutions.</li>
+      <li>To communicate important updates, promotions, or service improvements.</li>
+      <li>To analyze traffic patterns and improve our website’s usability and functionality.</li>
+      <li>To ensure compliance with legal and regulatory requirements.</li>
+    </ul>
 
-    <h2>Contact</h2>
-    <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>. We are happy to clarify any concerns regarding the collection or use of your personal information.</p>
-  </main>
+    <h2>3. Data Retention</h2>
+    <p>
+      We retain your personal data only as long as necessary to fulfill the purposes outlined in this policy.
+      Data may be retained longer if required by law, regulation, or for legitimate business interests such as
+      accounting, record-keeping, or dispute resolution.
+    </p>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+    <h2>4. Data Security</h2>
+    <p>
+      We implement appropriate technical and organizational measures to protect your data from unauthorized
+      access, disclosure, alteration, or destruction. These measures include encrypted data storage, limited
+      access controls, and secure communication protocols. However, please note that no online platform can
+      guarantee complete security.
+    </p>
+
+    <h2>5. Sharing of Information</h2>
+    <p>
+      Alokah Ventures Limited does not sell, trade, or rent personal data to third parties. We may share
+      information with trusted partners or service providers who assist us in operating our business, provided
+      that they agree to maintain the confidentiality and security of your information.
+    </p>
+
+    <h2>6. Your Rights</h2>
+    <p>
+      You have the right to access, correct, or request deletion of your personal data. You may also request to
+      limit certain processing activities. To exercise these rights, please contact us at
+      <a href="mailto:info@alokahventures.com">info@alokahventures.com</a>.
+    </p>
+
+    <h2>7. Cookies Policy</h2>
+    <p>
+      Our website uses cookies to improve functionality and user experience. Cookies may store your preferences
+      or help analyze web traffic. You can manage or disable cookies through your browser settings. For detailed
+      information, please refer to our
+      <a href="cookies.html">Cookies Policy</a>.
+    </p>
+
+    <h2>8. External Links</h2>
+    <p>
+      Our website may contain links to external sites not operated by us. We are not responsible for the privacy
+      practices or content of such third-party websites. We encourage users to review the privacy policies of
+      any external sites they visit.
+    </p>
+
+    <h2>9. Policy Updates</h2>
+    <p>
+      We may update this Privacy Policy periodically to reflect changes in our practices or for operational,
+      legal, or regulatory reasons. The revised policy will be posted on this page with an updated revision
+      date.
+    </p>
+
+    <h2>10. Contact Us</h2>
+    <p>
+      If you have any questions, concerns, or requests regarding this Privacy Policy, please contact:
+    </p>
+    <p class="contact-info">
+      <strong>Alokah Ventures Limited</strong><br>
+      Email: <a href="mailto:info@alokahventures.com">info@alokahventures.com</a><br>
+      Location: Kampala, Uganda
+    </p>
+  </section>
+</main>
+
+   <!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
     </div>
-  </footer>
+
+  </div> <!-- /.footer-container -->
+</footer>
+
 
   <script>
     function toggleMenu() {

@@ -116,77 +116,184 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+ <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures">
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="ourpartners.html">Our Partners</a></li>
-      <li><a href="careers.html" class="active">Careers</a></li>
-      <li><a href="supplychain.html">Supply Chain</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
 
-  <!-- Hero -->
-  <header>
-    <div>
-      <h1 style="color:#003366;">Careers at Alokah Ventures</h1>
-      <p>Join our team and grow your career in logistics and supply chain</p>
-    </div>
-  </header>
-
-  <!-- Career Openings -->
-  <section id="careers">
-    <h2>Current Openings</h2>
-    <div class="grid-container">
-      <div class="grid-item">
-        <h3>Logistics Officer</h3>
-        <p>Ensure smooth coordination of freight operations across global routes.</p>
-        <a href="#" class="btn">Apply Now</a>
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="careers.html">CAREERS</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="index.html#contact">CONTACT</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
+   <!-- ==========================
+         HERO SECTION
+         ========================== -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <h1>CAREERS AT ALOKAH</h1>
+        <p>Join our team and grow your career in logistics and supply chain</p>
       </div>
-      <div class="grid-item">
-        <h3>Supply Chain Analyst</h3>
-        <p>Use data to optimize inventory and streamline operations.</p>
-        <a href="#" class="btn">Apply Now</a>
-      </div>
-      <div class="grid-item">
-        <h3>Customer Relations Manager</h3>
-        <p>Build client trust with excellent service and transparency.</p>
-        <a href="#" class="btn">Apply Now</a>
+    </header>
+
+  <main class="career-page">
+  <!-- Filter & Search Section -->
+  <section class="career-filters">
+    <div class="container">
+      <input type="text" id="searchJob" placeholder="Search for a role..." />
+      <select id="filter-role">
+        <option value="all">All Roles</option>
+        <option value="logistics">Logistics Officer</option>
+        <option value="analyst">Supply Chain Analyst</option>
+        <option value="crm">Customer Relations Manager</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Career Openings Section -->
+  <section id="careers" class="career-openings">
+    <div class="container">
+      <div class="jobs-grid">
+        <div class="job-card" data-role="logistics">
+          <h3>Logistics Officer</h3>
+          <p>Ensure smooth coordination of freight operations across global routes, managing timelines, and liaising with stakeholders.</p>
+          <div class="job-actions">
+            <a href="#" class="btn-apply" data-job="Logistics Officer">Apply Now</a>
+            <button class="btn-download" data-job="Logistics Officer">Download PDF</button>
+          </div>
+        </div>
+
+        <div class="job-card" data-role="analyst">
+          <h3>Supply Chain Analyst</h3>
+          <p>Analyze data to optimize inventory, streamline operations, and provide actionable insights for decision-making.</p>
+          <div class="job-actions">
+            <a href="#" class="btn-apply" data-job="Supply Chain Analyst">Apply Now</a>
+            <button class="btn-download" data-job="Supply Chain Analyst">Download PDF</button>
+          </div>
+        </div>
+
+        <div class="job-card" data-role="crm">
+          <h3>Customer Relations Manager</h3>
+          <p>Build client trust through excellent service, transparency, and maintaining strong relationships with partners.</p>
+          <div class="job-actions">
+            <a href="#" class="btn-apply" data-job="Customer Relations Manager">Apply Now</a>
+            <button class="btn-download" data-job="Customer Relations Manager">Download PDF</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Call to Action -->
-  <section>
-    <h2>Don't See Your Role?</h2>
-    <p>Send us your CV at <a href="mailto:careers@alokahventures.com">careers@alokahventures.com</a></p>
-  </section>
+  <!-- Modal Form for Application -->
+  <div id="applyModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3>Apply for <span id="modalJobTitle"></span></h3>
+      <form id="modalApplyForm">
+        <label for="applicantName">Full Name *</label>
+        <input type="text" id="applicantName" name="applicantName" required>
 
- <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
-      </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
-      </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+        <label for="applicantEmail">Email *</label>
+        <input type="email" id="applicantEmail" name="applicantEmail" required>
+
+        <label for="applicantCV">Upload CV *</label>
+        <input type="file" id="applicantCV" name="applicantCV" accept=".pdf,.doc,.docx" required>
+
+        <label>
+          <input type="checkbox" id="downloadCopy">
+          Download a copy of this submission
+        </label>
+
+        <button type="submit" class="btn-submit">Submit Application</button>
+      </form>
     </div>
-  </footer>
+  </div>
+
+  <!-- Call to Action Section -->
+  <section class="career-cta">
+    <div class="container">
+      <h2>Don't See Your Role?</h2>
+      <p>Send us your CV at <a href="mailto:careers@alokahventures.com">careers@alokahventures.com</a> and we will reach out if a suitable position opens.</p>
+    </div>
+  </section>
+</main>
+
+
+
+  <!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
+    </div>
+
+  </div> <!-- /.footer-container -->
+</footer>
+
 
   <!-- Script -->
   <script src="index.js"></script>

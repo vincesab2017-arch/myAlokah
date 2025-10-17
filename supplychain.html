@@ -63,199 +63,132 @@
   <link rel="stylesheet" href="alokahstyle.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-  <!-- Inline CSS -->
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    main {
-      flex: 1;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #111;
-      color: #fff;
-    }
-    /* Supply Chain Section */
-.supply-heading {
-  font-size: 2rem;
-  text-align: center;
-  color: #003366; /* professional deep blue */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-  -webkit-text-stroke: 1px #e6e6e6; /* stroke effect */
-  margin-bottom: 20px;
-}
 
-.supply-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 15px 30px;
-  padding: 0;
-  list-style: none;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.supply-list li {
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  color: #333;
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 10px 15px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.supply-list li i {
-  color: #0066cc; /* highlight icon color */
-  margin-right: 10px;
-  font-size: 1.2rem;
-}
-
-.supply-list li:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-}
-
-.footer {
-  background: #111;
-  color: #fff;
-  padding: 20px 0;
-  text-align: center;
-  margin-top: 40px;
-}
-
-.footer-container {
-  max-width: 1100px;
-  margin: auto;
-}
-
-.footer .social-links {
-  margin: 15px 0;
-}
-
-.footer .social-links a {
-  margin: 0 10px;
-  font-size: 28px;
-  transition: transform 0.3s ease;
-}
-
-.footer .social-links a:hover {
-  transform: scale(1.2);
-}
-
-/* Platform-specific colors */
-.footer .social-links a.x {
-  color: #fff; /* default X logo color */
-}
-.footer .social-links a.x:hover {
-  color: #1DA1F2; /* Twitter/X blue */
-}
-
-.footer .social-links a.whatsapp {
-  color: #25D366;
-}
-.footer .social-links a.whatsapp:hover {
-  color: #128C7E;
-}
-
-.footer .social-links a.youtube {
-  color: #FF0000;
-}
-.footer .social-links a.youtube:hover {
-  color: #CC0000;
-}
-
-.footer .social-links a.linkedin {
-  color: #0077B5;
-}
-.footer .social-links a.linkedin:hover {
-  color: #005582;
-}
-
-.footer .copyright {
-  font-size: 14px;
-  margin-top: 10px;
-  color: #aaa;
-}
-
-  </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="ourpartners.html">Our Partners</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="supplychain.html" class="active">Supply Chain</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="ourservices.html">SERVICES</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="blogs.html">BLOGS</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
 
   <main>
-    <!-- Hero Section -->
-    <header>
-      <div>
-        <h1 style="color:#003366;">Supply Chain Solutions</h1>
+   <!-- ==========================
+         HERO SECTION
+         ========================== -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <h1>SUPPLY CHAIN SOLUTIONS</h1>
         <p>Integrated strategies and technology-driven operations</p>
       </div>
-    </header>
-
-   <!-- Supply Chain Features -->
-<section id="supplychain">
-  <h2 class="supply-heading">Our Supply Chain Capabilities</h2>
-  <ul class="supply-list">
-    <li><i class="fas fa-box"></i> End-to-End Goods Flow Management</li>
-    <li><i class="fas fa-chart-line"></i> Optimization for Cost Reduction</li>
-    <li><i class="fas fa-eye"></i> Improved Visibility & Transparency</li>
-    <li><i class="fas fa-shield-alt"></i> Confidentiality & Resilience</li>
-    <li><i class="fas fa-database"></i> Record Keeping for Future Reference</li>
-    <li><i class="fas fa-clock"></i> Timely Customs Clearance</li>
-    <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
-    <li><i class="fas fa-globe"></i> Global Integrated Operations</li>
-  </ul>
+    </header> 
+<!-- ==========================
+     SUPPLY CHAIN SECTION
+========================== -->
+<section id="supplychain" class="supplychain-section">
+  <div class="container">
+    <h2 class="supply-heading">Our Supply Chain Capabilities</h2>
+    <ul class="supply-list">
+      <li><i class="fas fa-box" aria-hidden="true"></i> End-to-End Goods Flow Management</li>
+      <li><i class="fas fa-chart-line" aria-hidden="true"></i> Optimization for Cost Reduction</li>
+      <li><i class="fas fa-eye" aria-hidden="true"></i> Improved Visibility & Transparency</li>
+      <li><i class="fas fa-shield-alt" aria-hidden="true"></i> Confidentiality & Resilience</li>
+      <li><i class="fas fa-database" aria-hidden="true"></i> Record Keeping for Future Reference</li>
+      <li><i class="fas fa-clock" aria-hidden="true"></i> Timely Customs Clearance</li>
+      <li><i class="fas fa-globe" aria-hidden="true"></i> Global Integrated Operations</li>
+      <li><i class="fas fa-truck" aria-hidden="true"></i> International Freight & Logistics</li>
+    </ul>
+  </div>
 </section>
 
+  <!-- CTA Section -->
+<section class="partners-cta">
+  <div class="container">
+    <h2>Transform Your Supply Chain</h2>
+    <p>Join Alokah Ventures to collaborate on innovative logistics solutions that make a global impact.</p>
+    <a href="index.html#contact" class="cta-btn"><i class="fas fa-handshake"></i> Contact Us</a>
+  </div>
+</section>
+ <!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
 
-    <!-- Call to Action -->
-    <section>
-      <h2>Transform Your Supply Chain Today</h2>
-      <a href="index.html#contact" class="btn">Get Started</a>
-    </section>
-  </main>
-<!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
     </div>
-  </footer>
+
+  </div> <!-- /.footer-container -->
+</footer>
+
 
   <!-- Scripts -->
   <script>

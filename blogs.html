@@ -64,59 +64,137 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
+ <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
 
-  <!-- Hero Section -->
-  <header>
-    <div>
-      <h1 style="color:#003366;">ALOKAH VENTURES LIMITED</h1>
-      <p>..Always Ahead in Logistics and Supply Chain</p>
-    </div>
-  </header>
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="ourservices.html">Services</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="ourservices.html">SERVICES</a></li>
+    <li><a href="ourpartners.html">PARTNERS</a></li>
+    <li><a href="careers.html">CAREERS</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
 
-  <!-- Blog Section -->
-  <section class="blog-page">
-    <h2>Our Blogs</h2>
-    <div id="blog-container">
-      <!-- Blog posts will load dynamically from index.js -->
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+   <!-- ==========================
+         HERO SECTION
+         ========================== -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <h1>ALOKAH VENTURES LIMITED</h1>
+        <p>Always Ahead in Logistics and Supply Chain Management</p>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
-      </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+    </header>
+
+ <section class="blog-page">
+  <div class="container">
+    <h2 class="section-title">Our Blogs</h2>
+    <p class="section-subtitle">Insights, news, and updates from Alokah Ventures to keep you informed on logistics and supply chain trends.</p>
+
+    <!-- Search & Filter -->
+    <div class="blog-controls">
+      <input type="text" id="searchBlog" placeholder="Search blogs...">
+      <select id="filterCategory">
+        <option value="all">All Categories</option>
+        <option value="logistics">Logistics</option>
+        <option value="supplychain">Supply Chain</option>
+        <option value="technology">Technology</option>
+      </select>
     </div>
-  </footer>
+
+    <!-- Blog Grid -->
+    <div id="blog-container" class="blogs-grid">
+      <!-- Placeholder blogs shown initially -->
+      <div class="blog-placeholder">
+        <div class="image-placeholder"></div>
+        <div class="content-placeholder">
+          <div class="line-placeholder short"></div>
+          <div class="line-placeholder long"></div>
+          <div class="line-placeholder medium"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="load-more-container">
+      <button id="loadMoreBlogs" class="btn-load-more">Load More Blogs</button>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
+    </div>
+
+  </div> <!-- /.footer-container -->
+</footer>
 
   <!-- Main JS -->
   <script src="index.js"></script>

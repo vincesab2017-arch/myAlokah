@@ -6,123 +6,135 @@
   <title>Cookies Policy - Alokah Ventures Limited</title>
   <link rel="stylesheet" href="alokahstyle.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background-color: #fefefe;
-    }
-    main {
-      flex: 1;
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    footer {
-      text-align: center;
-      padding: 15px;
-      background: #111;
-      color: #fff;
-    }
-    nav .nav-links li a {
-      color: #003366;
-    }
-
-    /* Left-align headings and paragraphs with professional colors */
-    main h1, main h2, main p {
-      text-align: left;
-      color: #1a1a1a; /* dark gray for readability */
-      line-height: 1.7;
-      margin-bottom: 15px;
-      font-weight: 400;
-    }
-
-    main h1 {
-      font-weight: 600;
-      margin-bottom: 25px;
-    }
-
-    main h2 {
-      font-weight: 500;
-      margin-top: 20px;
-      margin-bottom: 12px;
-    }
-
-    main ul li {
-      margin-bottom: 10px;
-      color: #1a1a1a;
-    }
-
-    /* Offset anchor links for navbar */
-    [id]:target::before {
-      content: "";
-      display: block;
-      height: 70px; /* height of your navbar */
-      margin-top: -70px; /* same as navbar height */
-    }
-  </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav>
-     <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="terms&conditions.html">Terms & Conditions</a></li>
-      <li><a href="cookies.html" class="active">Cookies Policy</a></li>
+   <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
+
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
+
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html">HOME</a></li>
+    <li><a href="ourservices.html">SERVICES</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
+
+ <!-- ========================== 
+   COOKIES PAGE
+   ========================== -->
+
+<main class="cookies-main">
+  <section class="cookies-content">
+    <h1>Cookies Policy</h1>
+
+    <p>
+      This Cookies Policy explains how <strong>Alokah Ventures Limited</strong> (“we”, “our”, or “us”) uses cookies and similar technologies when you visit our website. 
+      By continuing to browse or  use our site, you agree to our use of cookies as described in this policy.
+    </p>
+
+    <h2>What Are Cookies?</h2>
+    <p>
+      Cookies are small text files that are stored on your computer or mobile device when you visit a website. 
+      They are used to make websites function efficiently, provide a better browsing experience, 
+      and help website owners understand how visitors interact with their site.
+    </p>
+
+    <h2>How We Use Cookies</h2>
+    <p>
+      We use cookies to improve your browsing experience and the functionality of our website. These cookies may be used to:
+    </p>
+    <ul>
+      <li>Remember your preferences and settings for future visits.</li>
+      <li>Analyze site traffic and usage patterns to enhance performance.</li>
+      <li>Improve website functionality, speed, and security.</li>
+      <li>Provide personalized content where applicable.</li>
     </ul>
-  </nav>
 
-  <!-- Main Content -->
-  <main>
-    <section>
-      <h1 style="color:#003366;">Cookies Policy</h1>
-      <p>Our website uses cookies to enhance your browsing experience. By continuing to use our site, you agree to the use of cookies as described below.</p>
-    </section>
+    <h2>Managing Cookies</h2>
+    <p>
+      Most web browsers allow you to manage or disable cookies through your browser settings. 
+      You can choose to accept or reject cookies; however, please note that disabling cookies may 
+      affect the functionality of some parts of our website.
+    </p>
 
-    <section>
-      <h2>What Are Cookies?</h2>
-      <p>Cookies are small files stored on your device to help us analyze site traffic, remember your preferences, and improve our services.</p>
-    </section>
+    <h2>Updates to This Policy</h2>
+    <p>
+      We may update this Cookies Policy from time to time to reflect changes in technology, regulations, 
+      or our internal practices. Any updates will be published on this page with a revised “Last Updated” date.
+    </p>
 
-    <section>
-      <h2>How We Use Cookies</h2>
-      <ul>
-        <li>To remember your preferences and settings</li>
-        <li>To analyze website traffic and performance</li>
-        <li>To improve user experience across our site</li>
-      </ul>
-    </section>
+    <h2>Contact Us</h2>
+    <p>
+      For any questions about our use of cookies or this policy, please contact us at:<br>
+    </p>
+  
+  <p class="contact-info">
+      <strong>Alokah Ventures Limited</strong><br>
+      Email: <a href="mailto:info@alokahventures.com">info@alokahventures.com</a><br>
+      Location: Kampala, Uganda
+    </p>
+    <p class="last-updated"><em>Last Updated: October 2025</em></p>
+  </section>
+</main>
 
-    <section>
-      <h2>Managing Cookies</h2>
-      <p>You can control cookies through your browser settings. Please note that disabling cookies may affect website functionality, and some features may not work as intended.</p>
-    </section>
-  </main>
-
-  <!-- Footer -->
+   <!-- ==========================
+         FOOTER 
+         ========================== -->
   <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+  <div class="footer-container">
+    <div class="footer-sections">
+
+      <!-- CONNECT SECTION -->
+      <div class="footer-column">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
+
+      <!-- QUICK LINKS SECTION -->
+      <div class="footer-column">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+
+      <!-- MAP SECTION -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
     </div>
-  </footer>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

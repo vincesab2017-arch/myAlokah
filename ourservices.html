@@ -4,206 +4,247 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary Meta -->
   <title>Services — Alokah Ventures Limited | Supply Chain & Consultancy</title>
   <meta name="description" content="Explore Alokah Ventures' services: air, sea, and land freight, warehousing, customs clearance, and supply chain consultancy for businesses in Uganda and beyond.">
   <meta name="keywords" content="alokah services, supply chain, air freight, sea freight, land freight, warehousing, customs clearance, consultancy, Uganda">
   <meta name="author" content="Alokah Ventures Limited">
   <link rel="canonical" href="https://www.alokahventures.com/ourservices.html">
 
-  <!-- Robots -->
-  <meta name="robots" content="index, follow">
-
-  <!-- Open Graph / Facebook / LinkedIn -->
-  <meta property="og:title" content="Services — Alokah Ventures Limited | Supply Chain & Consultancy">
-  <meta property="og:description" content="Air, sea, and land freight, warehousing, customs clearance, and supply chain solutions — discover our key services.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.alokahventures.com/ourservices.html">
-  <meta property="og:image" content="https://www.alokahventures.com/assets/images/og-services.jpg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Services — Alokah Ventures Limited">
-  <meta name="twitter:description" content="Air, sea, and land freight, warehousing, customs clearance, and supply chain solutions — discover our key services.">
-  <meta name="twitter:image" content="https://www.alokahventures.com/assets/images/og-services.jpg">
-
-  <!-- Favicon -->
   <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-
-  <!-- JSON-LD Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "name": "Alokah Ventures Limited",
-        "url": "https://www.alokahventures.com",
-        "logo": "https://www.alokahventures.com/assets/images/logo_nobg.png",
-        "sameAs": [
-          "https://x.com/YourPage",
-          "https://wa.me/YourNumber",
-          "https://youtube.com/YourChannel",
-          "https://linkedin.com/in/YourProfile"
-        ]
-      },
-      {
-        "@type": "Service",
-        "serviceType": "Supply Chain & Logistics Services",
-        "provider": {
-          "@type": "Organization",
-          "name": "Alokah Ventures Limited"
-        },
-        "areaServed": {
-          "@type": "Place",
-          "name": "Uganda, East Africa"
-        }
-      }
-    ]
-  }
-  </script>
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="alokahstyle.css">
-  <!-- FontAwesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav>
-    <div class="nav-logo">
-    <a href="index.html">
-      <img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo">
-    </a>
-    </div>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="supplychain.html">Supply Chain</a></li>
-      <li><a href="blogs.html">Blogs</a></li>
-      <li><a href="ourpartners.html">Our Partners</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-      <li><a href="quates.html" class="btn-quote">Request Quote</a></li>
+   <!-- ==========================
+     NAVIGATION
+========================== -->
+<nav class="main-nav">
+  <div class="nav-logo">
+    <a href="index.html"><img src="assets/images/logo_nobg.png" alt="Alokah Ventures Logo"></a>
+  </div>
 
-    </ul>
-  </nav>
+  <!-- Mobile Menu Toggle -->
+ <div class="menu-toggle" onclick="toggleMenu()">
+  <i class="fas fa-bars"></i>
+</div>
 
-  <!-- Hero -->
-  <header>
-    <div>
-      <h1 style="color:#003366;">Our Services</h1>
-      <p>Always Ahead in Logistics and Supply Chain</p>
-    </div>
-  </header>
-
-  <!-- Video Section -->
-  <section id="videos">
-    <h2>Watch Our Services in Action</h2>
-    <div class="video-container">
-      <iframe width="100%" height="300" 
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        title="YouTube video">
-      </iframe>
-    </div>
-  </section>
-
-  <!-- Services Grid -->
-  <section id="services">
-    <h2>Our Key Services</h2>
-    <div class="grid-container">
-      <div class="grid-item"><i class="fas fa-plane"></i><p>Air Freight</p></div>
-      <div class="grid-item"><i class="fas fa-ship"></i><p>Sea Freight</p></div>
-      <div class="grid-item"><i class="fas fa-trailer"></i><p>Land Freight</p></div>
-      <div class="grid-item"><i class="fas fa-warehouse"></i><p>Warehousing</p></div>
-      <div class="grid-item"><i class="fas fa-file-invoice"></i><p>Customs Clearance</p></div>
-      <div class="grid-item"><i class="fas fa-handshake"></i><p>Supply Chain Solutions</p></div>
-    </div>
-  </section>
-
-  <!-- Blog Section -->
-  <section id="blog">
-    <h2>Latest Insights</h2>
-    <div class="grid-container">
-      <div class="grid-item">
-        <img src="assets/images/logo_nobg.png" alt="Blog 1" style="width:100%; border-radius:8px;">
-        <h3>Trends in Global Shipping</h3>
-        <p>Explore the latest logistics strategies shaping world trade...</p>
-        <a href="blogs.html?id=1" class="btn">Read More</a>
+  <!-- Nav Links -->
+  <ul class="nav-links" id="nav-links">
+    <li><a href="INDEX.html">HOME</a></li>
+    <li><a href="#services">SERVICES</a></li>
+    <li><a href="ourpartners.html">OUR PARTNERS</a></li>
+    <li><a href="index.html#contact">CONTACT</a></li>
+    <li><a href="quates.html" class="btn-quote">REQUEST A QUOTE</a></li>
+  </ul>
+</nav>
+<!-- ==========================
+         HERO SECTION
+         ========================== -->
+    <header class="hero-section">
+      <div class="hero-content">
+        <h1>OUR SERVICES</h1>
+        <p>Always Ahead in Logistics and Supply Chain Management</p>
       </div>
-      <div class="grid-item">
-        <img src="assets/images/logo_nobg.png" alt="Blog 2" style="width:100%; border-radius:8px;">
-        <h3>Customs Simplified</h3>
-        <p>How to save time and costs in customs clearance read to the end.</p>
-        <a href="blogs.html?id=2" class="btn">Read More</a>
-      </div>
-      <div class="grid-item">
-        <img src="assets/images/logo_nobg.png" alt="Blog 3" style="width:100%; border-radius:8px;">
-        <h3>Sustainability in Logistics</h3>
-        <p>Our commitment to eco-friendly supply chain solutions.</p>
-        <a href="blogs.html?id=3" class="btn">Read More</a>
+    </header>   
+
+<main id="our-services">
+
+<!--VIDEO SECTION-->
+<section id="alokah-video-section" class="alokah-video-section">
+  <div class="container">
+    <h2 class="section-title">Delivering Excellence in Every Mile</h2>
+    <p class="section-subtitle">
+      Experience how Alokah Ventures combines innovation, reliability, and speed to move your cargo efficiently across the globe.
+    </p>
+
+    <div class="video-wrapper">
+      <div class="video-frame">
+        <iframe 
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Alokah Ventures Services"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
-  </section>
 
-  <!-- Testimonials -->
-  <section id="testimonials" class="testimonials">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial-slider">
-      <div class="testimonial active">
-        <img src="assets/images/client1.jpg" alt="Client 1" class="client-img">
-        <h3 class="client-name">Sarah Johnson</h3>
-        <p class="client-message">"Alokah Ventures helped me scale my business globally with transparency and efficiency. I highly recommend their services!"</p>
+    <div class="video-info">
+      <h3>Our Commitment</h3>
+      <p>
+        We provide world-class logistics solutions that connect businesses and communities. From warehousing to last-mile delivery, 
+        our focus remains on reliability, transparency, and performance.
+      </p>
+
+      <ul class="video-highlights">
+        <li><i class="fas fa-truck-moving"></i> Seamless Global Freight Movement</li>
+        <li><i class="fas fa-map-marked-alt"></i> Real-Time Shipment Tracking</li>
+        <li><i class="fas fa-handshake"></i> Trusted Partnerships and Support</li>
+        <li><i class="fas fa-globe"></i> Sustainable and Efficient Operations</li>
+      </ul>
+
+      <a href="quates.html" class="video-btn">Request a Quote</a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Key Services Section -->
+<section id="key-services" class="key-services">
+  <div class="container">
+    <h2 class="section-title">Our Key Services</h2>
+    <p class="section-subtitle">
+      Alokah Ventures offers a full spectrum of logistics and freight solutions — built on trust, efficiency, 
+      and innovation to keep your business moving across borders.
+    </p>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon-wrapper"><i class="fas fa-plane"></i></div>
+        <h3>Air Freight</h3>
+        <p>Fast, secure, and efficient air cargo solutions for time-sensitive deliveries.</p>
       </div>
-      <div class="testimonial">
-        <img src="assets/images/client2.png" alt="Client 2" class="client-img">
-        <h3 class="client-name">Michael Okello</h3>
-        <p class="client-message">"Their customer-centered approach made all the difference in our partnership. We felt supported every step of the way."</p>
+
+      <div class="service-card">
+        <div class="icon-wrapper"><i class="fas fa-ship"></i></div>
+        <h3>Sea Freight</h3>
+        <p>Global shipping routes that ensure cost-effective international trade logistics.</p>
       </div>
-      <div class="testimonial">
-        <img src="assets/images/client3.jpg" alt="Client 3" class="client-img">
-        <h3 class="client-name">Aisha Khan</h3>
-        <p class="client-message">"Professional, transparent, and globally connected. Truly a company that puts clients first."</p>
+
+      <div class="service-card">
+        <div class="icon-wrapper"><i class="fas fa-truck"></i></div>
+        <h3>Land Freight</h3>
+        <p>Reliable transportation across borders with flexible truck and trailer solutions.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon-wrapper"><i class="fas fa-warehouse"></i></div>
+        <h3>Warehousing</h3>
+        <p>Secure and scalable warehousing facilities to keep your inventory safe.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon-wrapper"><i class="fas fa-file-invoice"></i></div>
+        <h3>Customs Clearance</h3>
+        <p>Streamlined customs processes to reduce delays and unnecessary costs.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon-wrapper"><i class="fas fa-handshake"></i></div>
+        <h3>Supply Chain Solutions</h3>
+        <p>Integrated supply chain management for optimal efficiency and growth.</p>
       </div>
     </div>
-    <!-- Navigation Dots -->
-    <div class="dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Call to Action -->
-  <section>
+  <!-- ===============================
+     TESTIMONIALS SECTION
+     =============================== -->
+<section id="testimonials" class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonial-carousel">
+      <div class="testimonial-card">
+        <img src="assets/images/client1.jpg" alt="Client 1">
+        <p class="quote">"Alokah Ventures transformed our logistics operations. Fast, reliable, and professional."</p>
+        <h3 class="client-name">John Doe</h3>
+        <span class="client-position">CEO, Global Trade Ltd.</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="assets/images/client2.jpg" alt="Client 2">
+        <p class="quote">"Excellent service! The team’s expertise in supply chain management is unmatched."</p>
+        <h3 class="client-name">Jane Smith</h3>
+        <span class="client-position">Operations Manager, SteelCorp</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="assets/images/client3.jpg" alt="Client 3">
+        <p class="quote">"Reliable, efficient, and innovative logistics solutions. Highly recommended."</p>
+        <h3 class="client-name">Michael Johnson</h3>
+        <span class="client-position">Logistics Director, PharmaTech</span>
+      </div>
+      <div class="testimonial-card">
+        <img src="assets/images/client4.jpg" alt="Client 4">
+        <p class="quote">"Professional team, fast delivery, excellent communication."</p>
+        <h3 class="client-name">Emily Davis</h3>
+        <span class="client-position">Logistics Head, Aviation Co.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+ <!-- Call to Action -->
+<section id="cta-section" class="cta-section">
+  <div class="container">
     <h2>Ready to Partner With Us?</h2>
-    <a href="index.html#contact" class="btn">Get in Touch</a>
-  </section>
+    <p>
+      Let’s move your business forward with trusted logistics and supply chain solutions tailored to your needs.
+    </p>
+    <a href="index.html#contact" class="cta-btn">Get in Touch</a>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-container">
-      <p>Connect with us:</p>
-      <div class="social-links">
-        <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://wa.me/YourNumber" target="_blank" aria-label="WhatsApp" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
-        <a href="https://youtube.com/YourChannel" target="_blank" aria-label="YouTube" class="youtube"><i class="fab fa-youtube"></i></a>
-        <a href="https://linkedin.com/in/YourProfile" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin"></i></a>
+
+<!-- ==========================
+     FOOTER
+========================== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-sections">
+
+      <!-- CONNECT / SOCIAL LINKS -->
+      <div class="footer-column connect">
+        <p class="footer-title">Connect with us:</p>
+        <div class="social-links">
+          <a href="https://x.com/YourPage" target="_blank" aria-label="X (Twitter)" class="x"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://facebook.com/YourPage" target="_blank" aria-label="Facebook" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/YourPage" target="_blank" aria-label="Instagram" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/company/YourPage" target="_blank" aria-label="LinkedIn" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
       </div>
-      <div class="legal-links">
-        <a href="privacy.html">Privacy Policy</a> | 
-        <a href="terms&conditions.html">Terms of Service</a> | 
-        <a href="cookies.html">Cookie Policy</a>
+
+      <!-- QUICK LINKS (desktop only) -->
+      <div class="footer-column quick-links">
+        <p class="footer-title">Quick Links</p>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#supplychain">Supply Chain</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
       </div>
-      <p>&copy; 2025 Alokah Ventures Limited. All rights reserved.</p>
+
+      <!-- LEGAL LINKS (mobile only) -->
+      <div class="footer-column legal-links">
+        <p class="footer-title">Legal</p>
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms&conditions.html">Terms & Conditions</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+        </ul>
+      </div>
+
+      <!-- MAP -->
+      <div class="footer-column map">
+        <p class="footer-title">Our Location</p>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7979.510729920837!2d32.620841544183925!3d0.3218682031019067!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8d2aaf2035495af5%3A0xd37c92187dacba0b!2sALOKAH%20VENTURES%20LIMITED!5e0!3m2!1sen!2sus!4v1760099897282!5m2!1sen!2sus"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+    </div> <!-- /.footer-sections -->
+
+    <!-- FOOTER BOTTOM -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Alokah Ventures Limited. All Rights Reserved.</p>
     </div>
-  </footer>
+
+  </div> <!-- /.footer-container -->
+</footer>
 
   <script src="index.js"></script>
 </body>
