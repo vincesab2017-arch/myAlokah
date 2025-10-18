@@ -568,3 +568,26 @@ document.querySelectorAll(".gallery-card img").forEach(img => {
     img.classList.remove("skeleton");
   }, 1000);
 });
+/* ===============================
+   OUR SERVICES VIDEO PLAY JS
+   Handles overlay play interaction
+   =============================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const videoContainer = document.querySelector(".video-with-overlay");
+  if (!videoContainer) return; // Exit if video section not present
+
+  const videoFrame = videoContainer.querySelector("iframe");
+  const overlay = videoContainer.querySelector(".video-overlay");
+
+  if (!videoFrame || !overlay) return;
+
+  overlay.addEventListener("click", () => {
+    // Get the actual video URL from data-src
+    const videoSrc = videoFrame.getAttribute("data-src");
+    if (!videoSrc) return;
+
+    videoFrame.setAttribute("src", videoSrc); // Load video
+    videoContainer.classList.add("playing");  // Hide overlay
+    videoFrame.style.pointerEvents = "auto";  // Enable iframe interaction
+  });
+});
