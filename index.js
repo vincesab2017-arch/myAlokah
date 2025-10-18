@@ -467,3 +467,104 @@ document.addEventListener('DOMContentLoaded', () => {
 
   log('Alokah main.js ready');
 });
+
+
+// =========================
+// FACTS ANIMATION
+// =========================
+const facts = [
+  "Alokah’s dry containers transport electronics safely.",
+  "Reefer containers maintain cold chain for perishables.",
+  "Tanker containers move liquids including fuel and chemicals.",
+  "Our fleet adheres to international safety standards.",
+  "Containers are cleaned and inspected before each journey."
+];
+
+let factIndex = 0;
+const factEl = document.getElementById("fact");
+
+function showFact() {
+  factEl.textContent = facts[factIndex];
+  factIndex = (factIndex + 1) % facts.length;
+}
+setInterval(showFact, 4000);
+showFact();
+
+// =========================
+// GALLERY MODAL
+// =========================
+const modal = document.getElementById("modal");
+const modalCarousel = modal.querySelector(".modal-carousel");
+const caption = document.getElementById("caption");
+const closeBtn = modal.querySelector(".close");
+let currentMediaIndex = 0;
+let currentMedia = [];
+
+document.querySelectorAll(".gallery-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const media = JSON.parse(card.getAttribute("data-media"));
+    currentMedia = media;
+    currentMediaIndex = 0;
+    openModal(media, card.querySelector("h3").textContent);
+  });
+});
+
+function openModal(mediaArray, title) {
+  modal.style.display = "block";
+  caption.textContent = title;
+  modalCarousel.innerHTML = "";
+  mediaArray.forEach((src, index) => {
+    let element;
+    if (src.endsWith(".mp4")) {
+      element = document.createElement("video");
+      element.src = src;
+      element.controls = true;
+    } else {
+      element = document.createElement("img");
+      element.src = src;
+    }
+    element.classList.add(index === 0 ? "" : "hide");
+    modalCarousel.appendChild(element);
+  });
+}
+
+function showMedia(index) {
+  const items = modalCarousel.querySelectorAll("img, video");
+  items.forEach((item, i) => {
+    if(i === index) item.classList.remove("hide");
+    else item.classList.add("hide");
+  });
+}
+
+closeBtn.onclick = () => modal.style.display = "none";
+
+// MODAL CAROUSEL NAVIGATION
+const prev = document.createElement("span");
+prev.className = "prev";
+prev.textContent = "‹";
+const next = document.createElement("span");
+next.className = "next";
+next.textContent = "›";
+
+modalCarousel.appendChild(prev);
+modalCarousel.appendChild(next);
+
+prev.addEventListener("click", () => {
+  currentMediaIndex = (currentMediaIndex - 1 + currentMedia.length) % currentMedia.length;
+  showMedia(currentMediaIndex);
+});
+
+next.addEventListener("click", () => {
+  currentMediaIndex = (currentMediaIndex + 1) % currentMedia.length;
+  showMedia(currentMediaIndex);
+});
+
+// PLACEHOLDER IMAGE LOADING
+document.querySelectorAll(".gallery-card img").forEach(img => {
+  const realSrc = img.parentElement.getAttribute("data-media");
+  setTimeout(() => {
+    const mediaArray = JSON.parse(realSrc);
+    if(!mediaArray[0].endsWith(".mp4")) img.src = mediaArray[0];
+    img.classList.remove("skeleton");
+  }, 1000);
+});

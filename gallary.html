@@ -108,51 +108,60 @@
   </div>
 </section>
 
-<!-- Filter Buttons -->
-<section class="gallery-filters">
-  <div class="container">
-    <button class="filter-btn active" data-category="All">All</button>
-    <button class="filter-btn" data-category="Fleet">Fleet</button>
-    <button class="filter-btn" data-category="Warehouse">Warehouse</button>
-    <button class="filter-btn" data-category="Events">Events</button>
+<main class="gallery-main">
+
+  <!-- SECTION TITLE -->
+  <h2 class="section-title">Container Gallery</h2>
+
+  <!-- FILTER BUTTONS -->
+  <div class="gallery-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="dry">Dry Containers</button>
+    <button class="filter-btn" data-filter="reefer">Reefer Containers</button>
+    <button class="filter-btn" data-filter="tanker">Tankers</button>
   </div>
-</section>
 
-<!-- Gallery Section -->
-<section class="gallery-section">
-  <h2 class="section-title">Our Gallery</h2>
-  <div class="gallery-container" id="galleryContainer">
-    <!-- Placeholder skeletons -->
-    <div class="skeleton"></div>
-    <div class="skeleton"></div>
-    <div class="skeleton"></div>
+  <!-- GALLERY CONTAINER -->
+  <div class="gallery-container">
+
+    <!-- SINGLE IMAGE CARD -->
+    <div class="gallery-card dry" data-media='["images/container1.jpg"]'>
+      <img src="images/skeleton.jpg" alt="Dry Container" class="skeleton">
+      <h3>Dry Container</h3>
+      <p>Suitable for dry goods, electronics, furniture.</p>
+    </div>
+
+    <!-- MULTI IMAGE CARD -->
+    <div class="gallery-card reefer" data-media='["assets/images/network.jpg","containers.png"]'>
+      <img src="assets/images/container-types.png" alt="Reefer Container" class="skeleton">
+      <h3>Reefer Container</h3>
+      <p>Used for perishable items like fruits and pharmaceuticals.</p>
+    </div>
+
+    <!-- VIDEO CARD -->
+    <div class="gallery-card tanker" data-media='["videos/tanker1.mp4"]'>
+      <img src="assets/images/containers.jpg" alt="Tanker Container" class="skeleton">
+      <h3>Tanker Container</h3>
+      <p>Designed for liquid cargo transportation.</p>
+    </div>
+
+    <!-- ADD MORE CARDS HERE -->
   </div>
-</section>
 
-<!-- Container Types Section -->
-<section class="container-types-section">
-  <h2 class="section-title">Container Types & Usage</h2>
-  <div class="container-cards" id="containerCards">
-    <!-- Placeholder skeletons -->
-    <div class="container-skeleton"></div>
-    <div class="container-skeleton"></div>
+  <!-- DID YOU KNOW FACTS -->
+  <section class="did-you-know">
+    <p id="fact">Loading interesting fact...</p>
+  </section>
+
+  <!-- MODAL FOR CARDS -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <div class="modal-carousel"></div>
+    <div id="caption"></div>
   </div>
-</section>
 
-<!-- Did You Know Section -->
-<section class="did-you-know">
-  <h2 class="section-title">Did You Know?</h2>
-  <p id="factText">Loading fact...</p>
-</section>
-
-<!-- Modal -->
-<div id="modal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="modalImg">
-  <video class="modal-video" id="modalVideo" controls></video>
-  <div id="caption"></div>
-</div>
 </main>
+
 
 <!-- ==========================
      FOOTER
