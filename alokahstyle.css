@@ -1239,7 +1239,7 @@ section:not(#about):not(#vision):not(#mission) p {
 }
 
 
-/** key services on ourservice page**/
+/* Key services styles (replace the existing .key-services/.services-grid block with this) */
 .key-services {
   background: linear-gradient(to bottom right, #ffffff, #f3f7fb);
   padding: 80px 20px;
@@ -1261,9 +1261,10 @@ section:not(#about):not(#vision):not(#mission) p {
   line-height: 1.6;
 }
 
+/* Force 3 columns on large screens, 2 columns on medium, 1 on small */
 .key-services .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 cards per row on desktop */
   gap: 25px;
   justify-content: center;
 }
@@ -1314,18 +1315,30 @@ section:not(#about):not(#vision):not(#mission) p {
   line-height: 1.6;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Responsive breakpoints */
+/* Medium: 2 columns (tablets / small desktops) */
+@media (max-width: 992px) {
+  .key-services .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .key-services {
-    padding: 60px 10px;
+    padding: 60px 15px;
   }
-
   .key-services .section-title {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
   }
-
   .key-services .service-card {
     padding: 30px 15px;
+  }
+}
+
+/* Small: 1 column (mobile) */
+@media (max-width: 576px) {
+  .key-services .services-grid {
+    grid-template-columns: 1fr;
+  }
+  .key-services .section-title {
+    font-size: 1.6rem;
   }
 }
 /* CTA BUTTON ourservices.html */
