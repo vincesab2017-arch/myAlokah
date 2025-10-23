@@ -216,7 +216,6 @@
     margin-left: auto;
     margin-right: auto;
 }
-
 /* ==========================================
    OUR SERVICES PAGE - VIDEO SECTION STYLES
    ========================================== */
@@ -258,39 +257,6 @@
   border: none;
   border-radius: 16px;
   display: block;
-}
-
-/* Video Overlay (Play Button) */
-.video-with-overlay {
-  position: relative;
-  cursor: pointer;
-}
-
-.video-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.4s ease;
-  z-index: 2;
-}
-
-.video-overlay i {
-  font-size: 4rem;
-  color: #fff;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.video-overlay:hover i {
-  transform: scale(1.15);
-  opacity: 0.9;
-}
-
-.video-with-overlay.playing .video-overlay {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* Text Section */
@@ -352,16 +318,12 @@
   transform: translateY(-3px);
 }
 
-/* Fade-in Animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
-
+/* Remove fade-in completely */
+.fade-in,
 .fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
 }
 
 /* Responsive Design */
@@ -407,6 +369,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 /* Carousel Wrapper */
 .about-carousel-wrapper {
