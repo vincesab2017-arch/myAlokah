@@ -113,7 +113,10 @@
 <main class="gallery-main">
 
   <!-- SECTION TITLE -->
-  <h2 class="section-title">Container Gallery</h2>
+  <section class="gallery-header">
+    <h2 class="section-title">Container Gallery</h2>
+    <p class="section-subtitle">Explore different types of containers we provide for various cargo needs.</p>
+  </section>
 
   <!-- FILTER BUTTONS -->
   <div class="gallery-filters">
@@ -123,39 +126,64 @@
     <button class="filter-btn" data-filter="tanker">Tankers</button>
   </div>
 
-  <!-- GALLERY CONTAINER -->
-  <div class="gallery-container">
+  <!-- GALLERY GRID -->
+  <main>
+  <section class="gallery-container">
 
     <!-- SINGLE IMAGE CARD -->
-    <div class="gallery-card dry" data-media='["images/container1.jpg"]'>
-      <img src="images/skeleton.jpg" alt="Dry Container" class="skeleton">
-      <h3>Dry Container</h3>
-      <p>Suitable for dry goods, electronics, furniture.</p>
-    </div>
+    <article class="gallery-card dry" data-media='["assets/images/open.png"]'>
+      <div class="card-media">
+        <img src="assets/images/dry_container.png" alt="Dry Container" loading="lazy">
+        <div class="overlay">
+          <span class="view-text">View Details</span>
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Dry Container</h3>
+        <p>Ideal for transporting dry goods, electronics, and furniture safely.</p>
+      </div>
+    </article>
 
     <!-- MULTI IMAGE CARD -->
-    <div class="gallery-card reefer" data-media='["assets/images/network.jpg","assets/images/containers.png"]'>
-      <img src="assets/images/container-types.png" alt="Reefer Container" class="skeleton">
-      <h3>Reefer Container</h3>
-      <p>Used for perishable items like fruits and pharmaceuticals.</p>
-    </div>
+    <article class="gallery-card reefer" data-media='["assets/images/open.png","assets/images/dry_container.png","assets/images/steel.png","assets/images/auto_container.png","assets/images/cement.png"]'>
+      <div class="card-media">
+        <img src="assets/images/container-types-1-1.png" alt="Reefer Container" loading="lazy">
+        <div class="overlay">
+          <span class="view-text">View Gallery</span>
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Reefer Container</h3>
+        <p>Temperature-controlled units for perishable cargo like fruits and pharmaceuticals.</p>
+      </div>
+    </article>
 
     <!-- VIDEO CARD -->
-    <div class="gallery-card tanker" data-media='["assets/images/a logistics.mp4"]'>
-      <img src="assets/images/containers.jpg" alt="Tanker Container" class="skeleton">
-      <h3>Tanker Container</h3>
-      <p>Designed for liquid cargo transportation.</p>
-    </div>
+    <article class="gallery-card tanker" data-media='["assets/images/A_logistics.mp4"]'>
+      <div class="card-media">
+        <img src="assets/images/oilandenergy.png" alt="Tanker Container" loading="lazy">
+        <div class="overlay">
+          <span class="view-text">Play Video</span>
+        </div>
+      </div>
+      <div class="card-content">
+        <h3>Tanker Container</h3>
+        <p>Designed for safe transportation of liquid and hazardous cargo.</p>
+      </div>
+    </article>
 
-    <!-- ADD MORE CARDS HERE -->
-  </div>
+    <!-- Additional Cards Placeholder -->
+    <!-- <article class="gallery-card ...">...</article> -->
+
+  </section>
 
   <!-- DID YOU KNOW FACTS -->
   <section class="did-you-know">
+    <h3>Did You Know?</h3>
     <p id="fact">Loading interesting fact...</p>
   </section>
 
-  <!-- MODAL FOR CARDS -->
+  <!-- MODAL VIEW -->
   <div id="modal" class="modal">
     <span class="close">&times;</span>
     <div class="modal-carousel"></div>
@@ -227,7 +255,7 @@
 
   </div> <!-- /.footer-container -->
 </footer>
-
+<script src="assets/css/gallary.js"></script>
   <script src="index.js"></script>
 </div>
 </body>

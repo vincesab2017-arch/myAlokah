@@ -1,250 +1,232 @@
-/* ==========================
-   GALLERY MAIN SECTION
-========================== */
+/* ========== GALLERY SECTION STYLES ========== */
 .gallery-main {
-  width: 100%;
-  padding: 80px 8%;
-  background: #f9f9f9;
-  box-sizing: border-box;
-  color: #002b5c;
-  font-family: 'Arial', sans-serif;
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  color: #222;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* SECTION TITLE */
-.section-title {
+/* SECTION HEADER */
+.gallery-header {
   text-align: center;
-  font-size: 2.5rem;
-  color: #ffae00;
-  margin-bottom: 50px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: bold;
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0b2545;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
 }
 
 /* FILTER BUTTONS */
 .gallery-filters {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 2rem;
 }
+
 .filter-btn {
-  padding: 10px 20px;
-  margin: 0 10px 15px;
+  background: #e9ecef;
+  color: #0b2545;
   border: none;
-  border-radius: 50px;
-  background: #003366;
-  color: #fff;
+  padding: 0.6rem 1.2rem;
+  margin: 0.3rem;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 1rem;
   transition: all 0.3s ease;
+  font-weight: 500;
 }
-.filter-btn.active,
+
 .filter-btn:hover {
-  background: #ffae00;
-  color: #003366;
+  background: #0b2545;
+  color: #fff;
+}
+
+.filter-btn.active {
+  background: #0b2545;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* GALLERY GRID */
 .gallery-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* CARD STYLING */
+/* GALLERY CARD */
 .gallery-card {
   background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  width: 300px;
-  min-height: 350px;
-  text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
+
 .gallery-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
-/* IMAGE/VIDEO PLACEHOLDER */
-.gallery-card img,
-.gallery-card video {
+/* CARD IMAGE SECTION */
+.card-media {
+  position: relative;
   width: 100%;
-  max-height: 180px;
-  border-radius: 12px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  margin-bottom: 15px;
-  background: #e0e0e0; /* skeleton placeholder */
+  transition: transform 0.4s ease;
 }
 
-/* CARD TITLE & DESCRIPTION */
-.gallery-card h3 {
-  font-size: 1.4rem;
-  color: #003366;
-  margin-bottom: 10px;
-}
-.gallery-card p {
-  font-size: 1rem;
-  color: #444;
-  line-height: 1.5;
+.gallery-card:hover .card-media img {
+  transform: scale(1.05);
 }
 
-/* DID YOU KNOW FACTS */
-.did-you-know {
-  margin-top: 80px;
+/* OVERLAY EFFECT */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(11, 37, 69, 0.65);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .overlay {
+  opacity: 1;
+}
+
+.view-text {
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
+
+/* CARD CONTENT */
+.card-content {
+  padding: 1rem 1.2rem;
   text-align: center;
-  font-size: 1.2rem;
-  color: #003366;
-  font-weight: bold;
-}
-.did-you-know p {
-  display: inline-block;
-  animation: factScroll 12s linear infinite;
-}
-@keyframes factScroll {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
 }
 
-/* MODAL STYLING */
+.card-content h3 {
+  font-size: 1.1rem;
+  color: #0b2545;
+  margin-bottom: 0.5rem;
+}
+
+.card-content p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* DID YOU KNOW SECTION */
+.did-you-know {
+  background: #0b2545;
+  color: #fff;
+  text-align: center;
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  border-radius: 15px;
+}
+
+.did-you-know h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: #ffc107;
+}
+
+.did-you-know p {
+  font-size: 1rem;
+  color: #f8f9fa;
+}
+
+/* MODAL STYLES */
 .modal {
   display: none;
   position: fixed;
-  z-index: 999;
-  padding-top: 60px;
+  z-index: 2000;
+  padding-top: 70px;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.85);
+  transition: opacity 0.3s ease;
 }
-.modal .close {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
+
+.modal.show {
+  display: block;
 }
+
 .modal-carousel {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
+
 .modal-carousel img,
 .modal-carousel video {
-  max-width: 90%;
-  max-height: 70vh;
-  border-radius: 12px;
-  object-fit: contain;
+  max-width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
 }
+
 #caption {
+  color: #ddd;
   text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+/* CLOSE BUTTON */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
   color: #fff;
-  font-size: 1.2rem;
-  margin-top: 20px;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #ffc107;
 }
 
 /* RESPONSIVE */
-@media (max-width: 1024px) {
-  .gallery-card { width: 280px; }
-}
 @media (max-width: 768px) {
-  .gallery-card { width: 240px; }
-}
-@media (max-width: 480px) {
-  .gallery-card { width: 200px; }
-  .filter-btn { padding: 8px 15px; margin: 5px 5px; font-size: 0.9rem; }
-}
-/* ==========================
-   PROFESSIONAL DID-YOU-KNOW FACTS
-========================== */
-.did-you-know-section {
-  margin-top: 80px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.did-you-know-title {
-  font-size: 2rem;
-  color: #ffae00;
-  font-weight: bold;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.did-you-know-carousel {
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.fact-card {
-  flex: 0 0 300px;
-  background: #003366;
-  color: #fff;
-  border-radius: 12px;
-  padding: 20px 25px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  font-style: italic;
-  opacity: 0.6;
-  transform: scale(0.9);
-  transition: all 0.5s ease;
-  min-height: 150px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.fact-card.active {
-  opacity: 1;
-  transform: scale(1);
-  z-index: 2;
-}
-
-/* Animation for automatic rotation */
-@keyframes rotateFacts {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(-100%); }
-  40% { transform: translateX(-200%); }
-  60% { transform: translateX(-300%); }
-  80% { transform: translateX(-400%); }
-  100% { transform: translateX(0); }
-}
-
-.did-you-know-carousel.auto-scroll {
-  animation: rotateFacts 20s linear infinite;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .fact-card { flex: 0 0 250px; }
-}
-
-@media (max-width: 768px) {
-  .fact-card { flex: 0 0 200px; font-size: 1rem; }
-}
-
-@media (max-width: 480px) {
-  .fact-card { flex: 0 0 180px; font-size: 0.9rem; padding: 15px; }
+  .gallery-main {
+    padding: 2rem 1rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+  }
+  .card-media {
+    height: 180px;
+  }
 }
