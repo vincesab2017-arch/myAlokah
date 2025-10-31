@@ -221,89 +221,168 @@
 </footer>
 
 
-  <!-- JS for menu and form handling -->
-  <script
-    function toggleMenu() {
-      document.querySelector('.nav-links').classList.toggle('active');
-    }
+ <!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<!-- jsPDF for PDF download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    document.addEventListener("DOMContentLoaded", () => {
-      // Quotation Form Handling
-      const quotationForm = document.getElementById("quotationForm");
-      if (quotationForm) {
-        // Message area for feedback
-        const formMessage = document.getElementById("quoteFormMessage");
-        formMessage.setAttribute("role", "alert");
-        formMessage.setAttribute("aria-live", "assertive");
+<!-- JS for menu and quotation form -->
+<script>
+  // Toggle navigation menu
+  function toggleMenu() {
+    document.querySelector('.nav-links').classList.toggle('active');
+  }
 
-        quotationForm.addEventListener("submit", async function(e) {
-          e.preventDefault();
-          const submitBtn = quotationForm.querySelector("button[type='submit']");
-          submitBtn.disabled = true;
-          formMessage.style.display = "none";
-
-          try {
-            const formData = new FormData(quotationForm);
-
-            // Honeypot check
-            if (formData.get("website_hp")) throw new Error("Spam detected");
-
-            // Validation
-            if (!formData.get("fullname") || formData.get("fullname").length < 2)
-              throw new Error("Enter your full name (min 2 characters)");
-            if (!formData.get("company") || formData.get("company").length < 2)
-              throw new Error("Enter your company/organization");
-            if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
-              throw new Error("Enter a valid email address");
-            if (!formData.get("phone") || !/^[\d\s()+-]{7,}$/.test(formData.get("phone")))
-              throw new Error("Enter a valid phone number");
-            if (!formData.get("service")) throw new Error("Select a service");
-            if (!formData.get("urgency")) throw new Error("Select urgency");
-            if (!formData.get("origin") || !formData.get("destination"))
-              throw new Error("Specify origin and destination");
-            if (!formData.get("weight") || isNaN(formData.get("weight")) || Number(formData.get("weight")) < 1)
-              throw new Error("Enter a valid cargo weight (min 1kg)");
-            if (formData.get("volume") && (isNaN(formData.get("volume")) || Number(formData.get("volume")) < 0))
-              throw new Error("Enter a valid cargo volume");
-            if (!formData.get("description") || formData.get("description").length < 10)
-              throw new Error("Cargo description must be at least 10 characters");
-
-            // Fetch IP address
-            let ip = "";
-            try {
-              const ipResp = await fetch("https://api64.ipify.org?format=json");
-              ip = (await ipResp.json()).ip;
-            } catch {}
-            formData.append("ip", ip);
-            formData.append("origin_host", window.location.hostname);
-
-            // Send to backend (update URL to your Apps Script endpoint)
-            const response = await fetch("https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec", {
-              method: "POST",
-              body: formData
-            });
-            const result = await response.json();
-
-            if (result.status === "success") {
-              showMessage("Your request has been submitted! Please check your email for confirmation.", "success");
-              quotationForm.reset();
-            } else throw new Error(result.message || "Submission failed");
-          } catch (err) {
-            showMessage(err.message, "error");
-          } finally {
-            setTimeout(() => { submitBtn.disabled = false; }, 2000);
-          }
-
-          function showMessage(msg, type = "success") {
-            formMessage.style.display = "block";
-            formMessage.style.color = type === "success" ? "green" : "red";
-            formMessage.textContent = msg;
-            formMessage.focus();
-            if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 6000);
-          }
-        });
-      }
+  // Initialize EmailJS
+  (function() {
+    emailjs.init({
+      publicKey: "Gzr0d4tNcndWpcLWa", // 🔹 Replace with your actual EmailJS public key
     });
-  </script>
+  })();
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const quotationForm = document.getElementById("quotationForm");
+    if (quotationForm) {
+      const formMessage = document.getElementById("quoteFormMessage");
+      formMessage.setAttribute("role", "alert");
+      formMessage.setAttribute("aria-live", "assertive");
+
+      quotationForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const submitBtn = quotationForm.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        formMessage.style.display = "none";
+
+        try {
+          const formData = new FormData(quotationForm);
+
+          // 🛡️ Honeypot check
+          if (formData.get("website_hp")) throw new Error("Spam detected");
+
+          // ✅ Validation
+          if (!formData.get("fullname") || formData.get("fullname").length < 2)
+            throw new Error("Enter your full name (min 2 characters)");
+          if (!formData.get("company") || formData.get("company").length < 2)
+            throw new Error("Enter your company/organization");
+          if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
+            throw new Error("Enter a valid email address");
+          if (!formData.get("phone") || !/^[\d\s()+-]{7,}$/.test(formData.get("phone")))
+            throw new Error("Enter a valid phone number");
+          if (!formData.get("service")) throw new Error("Select a service");
+          if (!formData.get("urgency")) throw new Error("Select urgency");
+          if (!formData.get("origin") || !formData.get("destination"))
+            throw new Error("Specify origin and destination");
+          if (!formData.get("weight") || isNaN(formData.get("weight")) || Number(formData.get("weight")) < 1)
+            throw new Error("Enter a valid cargo weight (min 1kg)");
+          if (formData.get("volume") && (isNaN(formData.get("volume")) || Number(formData.get("volume")) < 0))
+            throw new Error("Enter a valid cargo volume");
+          if (!formData.get("description") || formData.get("description").length < 10)
+            throw new Error("Cargo description must be at least 10 characters");
+
+          // 🌍 Optional IP fetch
+          let ip = "";
+          try {
+            const ipResp = await fetch("https://api64.ipify.org?format=json");
+            ip = (await ipResp.json()).ip;
+          } catch {}
+
+          // 📨 Prepare EmailJS parameters
+          const templateParams = {
+            name: formData.get("fullname"),
+            company: formData.get("company"),
+            email: formData.get("email"),
+            phone: formData.get("phone"),
+            service: formData.get("service"),
+            urgency: formData.get("urgency"),
+            origin: formData.get("origin"),
+            destination: formData.get("destination"),
+            weight: formData.get("weight"),
+            volume: formData.get("volume"),
+            description: formData.get("description"),
+            instructions: formData.get("instructions"),
+            time: new Date().toLocaleString(),
+            ip_address: ip,
+          };
+
+          // ✉️ Send via EmailJS
+          const result = await emailjs.send(
+            "service_dfawmla",         // Service ID
+            "template_uc8mmjo",        // Template ID
+            templateParams
+          );
+
+          if (result.status === 200) {
+            showMessage("Your quotation request was sent successfully!", "success");
+
+            // 🧾 Generate PDF if checkbox is selected
+            const downloadPDF = document.getElementById("downloadPDF");
+            if (downloadPDF && downloadPDF.checked) {
+              generatePDF(templateParams);
+            }
+
+            quotationForm.reset();
+          } else {
+            throw new Error("Failed to send email. Please try again.");
+          }
+
+        } catch (err) {
+          showMessage(err.message, "error");
+        } finally {
+          setTimeout(() => { submitBtn.disabled = false; }, 2000);
+        }
+
+        // ✅ Show message feedback
+        function showMessage(msg, type = "success") {
+          formMessage.style.display = "block";
+          formMessage.style.color = type === "success" ? "green" : "red";
+          formMessage.textContent = msg;
+          formMessage.focus();
+          if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 6000);
+        }
+
+        // 🧾 Generate PDF using jsPDF
+        function generatePDF(data) {
+          const { jsPDF } = window.jspdf;
+          const doc = new jsPDF();
+
+          let y = 20;
+          doc.setFontSize(18);
+          doc.text("Alokah Ventures Limited", 105, y, { align: "center" });
+          y += 10;
+          doc.setFontSize(12);
+          doc.text("Quotation Request Summary", 105, y, { align: "center" });
+          y += 15;
+
+          const fields = [
+            ["Full Name", data.name],
+            ["Company", data.company],
+            ["Email", data.email],
+            ["Phone", data.phone],
+            ["Service", data.service],
+            ["Urgency", data.urgency],
+            ["Origin", data.origin],
+            ["Destination", data.destination],
+            ["Weight (kg)", data.weight],
+            ["Volume (m³)", data.volume || "N/A"],
+            ["Description", data.description],
+            ["Instructions", data.instructions || "N/A"],
+            ["Submitted At", data.time],
+            ["IP Address", data.ip_address || "N/A"]
+          ];
+
+          fields.forEach(([label, value]) => {
+            doc.text(`${label}: ${value}`, 20, y);
+            y += 8;
+            if (y > 270) { doc.addPage(); y = 20; }
+          });
+
+          doc.save(`Quotation_${data.name.replace(/\s+/g, "_")}.pdf`);
+        }
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
