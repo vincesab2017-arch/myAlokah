@@ -219,146 +219,88 @@ function initContactForm() {
     log('Contact form initialized');
   } catch (err) { console.error('initContactForm error', err); }
 }
-//=====================
-// Initialize EmailJS
-(function() {
-  emailjs.init("Gzr0d4tNcndWpcLWa");//public key
-})();
 
 function initQuotationForm() {
   try {
     const quotationForm = document.getElementById('quotationForm');
-    if (!quotationForm) {
-      console.warn('Quotation form not found.');
-      return;
-    }
+    if (!quotationForm) { log('Quotation form: not present'); return; }
+    if (quotationForm.dataset.bound) return; quotationForm.dataset.bound = 'true';
 
-    if (quotationForm.dataset.bound) return;
-    quotationForm.dataset.bound = 'true';
-
-    // Add honeypot to prevent spam
     ensureHoneypot(quotationForm);
 
-    // Prepare message container
+    // Ensure message area exists
     let formMessage = document.getElementById('quoteFormMessage');
     if (!formMessage) {
-      formMessage = document.createElement('div');
-      formMessage.id = 'quoteFormMessage';
-      formMessage.style.display = 'none';
-      quotationForm.insertBefore(formMessage, quotationForm.querySelector('button[type="submit"]'));
+      formMessage = document.createElement('div'); formMessage.id='quoteFormMessage'; formMessage.style.display='none'; quotationForm.insertBefore(formMessage, quotationForm.querySelector('button[type="submit"]'));
     }
+    formMessage.setAttribute('role','alert'); formMessage.setAttribute('tabindex','-1');
 
-    // Listen to submit event
-    quotationForm.addEventListener('submit', async (e) => {
+    on(quotationForm, 'submit', async (e) => {
       e.preventDefault();
-
       const submitBtn = quotationForm.querySelector('button[type="submit"]');
-      if (submitBtn) submitBtn.disabled = true;
-      formMessage.style.display = 'none';
+      if (submitBtn) submitBtn.disabled = true; formMessage.style.display='none';
 
       try {
         const fd = new FormData(quotationForm);
         if (fd.get('website_hp')) throw new Error('Spam detected');
 
-        // Extract form fields
-        const fullname = fd.get('fullname')?.trim() || '';
-        const email = fd.get('email')?.trim() || '';
-        const phone = fd.get('phone')?.trim() || '';
-        const service = fd.get('service')?.trim() || '';
-        const message = fd.get('message')?.trim() || '';
+        // Validation examples (extend as needed)
+        const fullname = fd.get('fullname') || ''; if (fullname.length < 2) throw new Error('Enter your full name');
+        const email = fd.get('email') || ''; if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Enter a valid email');
+        const phone = fd.get('phone') || ''; if (!/^[\d\s()+-]{7,}$/.test(phone)) throw new Error('Enter a valid phone');
+        if (!fd.get('service')) throw new Error('Select a service');
 
-        // Validate inputs
-        if (fullname.length < 2) throw new Error('Please enter your full name.');
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Please enter a valid email.');
-        if (!/^[\d\s()+-]{7,}$/.test(phone)) throw new Error('Please enter a valid phone number.');
-        if (!service) throw new Error('Please select a service.');
+        // Fetch IP
+        try { const ipResp = await fetch('https://api64.ipify.org?format=json'); const ipJson = await ipResp.json(); fd.append('ip', ipJson.ip || ''); } catch(e) { fd.append('ip',''); }
+        fd.append('origin_host', window.location.hostname);
 
-        // Fetch user IP (optional)
-        let userIP = '';
-        try {
-          const ipResp = await fetch('https://api64.ipify.org?format=json');
-          const ipJson = await ipResp.json();
-          userIP = ipJson.ip || '';
-        } catch {
-          userIP = 'Unavailable';
+        // Optionally send to backend
+        const resp = await fetch(FORM_ENDPOINT, { method: 'POST', body: fd });
+        const result = await resp.json();
+        if (result.status === 'success') {
+          showMessage(formMessage, 'Your request has been submitted! Please check your email for confirmation.', 'success');
+          quotationForm.reset();
+        } else {
+          throw new Error(result.message || 'Submission failed');
         }
-
-        // Prepare EmailJS template parameters
-        const templateParams = {
-          name: fullname,
-          email,
-          phone,
-          service,
-          message,
-          ip: userIP,
-          time: new Date().toLocaleString(),
-          origin_host: window.location.hostname
-        };
-
-        // Send email using EmailJS
-        await emailjs.send('service_dfawmla', 'template_uc8mmjo', templateParams);
-
-        // Show success message
-        showMessage(formMessage, 'Your quotation request has been sent successfully!', 'success');
-        quotationForm.reset();
-
-        // Generate PDF if checkbox checked
-        const downloadCheckbox = document.getElementById('downloadPDF');
-        if (downloadCheckbox && downloadCheckbox.checked) {
-          generatePDF(templateParams);
-        }
-
       } catch (err) {
-        showMessage(formMessage, err.message || 'Error sending quotation', 'error');
+        showMessage(formMessage, err.message || 'Error submitting form', 'error');
       } finally {
-        if (submitBtn) setTimeout(() => (submitBtn.disabled = false), 1200);
+        if (submitBtn) setTimeout(()=> submitBtn.disabled = false, 1200);
       }
     });
 
-    // PDF generator
+    // PDF generation using jsPDF if requested
     function generatePDF(dataObj) {
-      if (!window.jspdf) {
-        console.warn('jsPDF not loaded.');
-        return;
-      }
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-
-      let y = 15;
-      doc.setFontSize(16);
-      doc.text('Alokah Ventures Limited', 105, y, null, null, 'center');
-      y += 8;
-      doc.setFontSize(12);
-      doc.text('Quotation Request Summary', 14, y);
-      y += 8;
-
-      Object.keys(dataObj).forEach((k) => {
-        doc.setFontSize(10);
-        doc.text(`${k}: ${dataObj[k]}`, 14, y);
-        y += 6;
-        if (y > 280) {
-          doc.addPage();
-          y = 15;
-        }
+      if (!window.jspdf) { console.warn('jsPDF not present'); return; }
+      const { jsPDF } = window.jspdf; const doc = new jsPDF();
+      let y = 15; doc.setFontSize(16); doc.text('Alokah Ventures Limited', 105, y, null, null, 'center'); y += 8;
+      doc.setFontSize(10); doc.text('Quotation Request', 14, y); y += 8;
+      Object.keys(dataObj).forEach(k => {
+        doc.setFontSize(10); doc.text(`${k}: ${dataObj[k]}`, 14, y); y += 6; if (y > 280) { doc.addPage(); y = 15; }
       });
-
       doc.save('Quotation_Request.pdf');
     }
 
-    // Display messages
-    function showMessage(el, msg, type = 'success') {
-      if (!el) return;
-      el.style.display = 'block';
-      el.textContent = msg;
-      el.style.color = type === 'success' ? '#0a7' : 'red';
-      el.focus?.();
-      if (type === 'success') setTimeout(() => (el.style.display = 'none'), 6000);
+    // Handle download checkbox
+    const downloadCheckbox = document.getElementById('downloadPDF');
+    if (downloadCheckbox) {
+      quotationForm.addEventListener('submit', (e) => {
+        // If checked, generate pdf from form values (non-blocking)
+        if (downloadCheckbox.checked) {
+          const formData = new FormData(quotationForm); const obj = {};
+          formData.forEach((v,k) => { if (k !== 'website_hp') obj[k] = v; });
+          generatePDF(obj);
+        }
+      });
     }
 
-    console.log('Quotation form initialized with EmailJS.');
-  } catch (err) {
-    console.error('initQuotationForm error:', err);
-  }
+    function showMessage(el, msg, type='success') {
+      if (!el) return; el.style.display='block'; el.textContent = msg; el.style.color = (type==='success') ? '#0a7' : 'red'; el.focus && el.focus(); if (type==='success') setTimeout(()=>{ el.style.display='none'; }, 6000);
+    }
+
+    log('Quotation form initialized');
+  } catch (err) { console.error('initQuotationForm error', err); }
 }
 
 function initBlogs() {
