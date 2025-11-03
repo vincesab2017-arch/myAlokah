@@ -221,19 +221,18 @@
 </footer>
 
 
- <!-- EmailJS SDK -->
+<!-- EmailJS SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <!-- jsPDF for PDF download -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-<!-- JS for menu and quotation form -->
 <script>
-  // Toggle navigation menu
+  // === MENU TOGGLE ===
   function toggleMenu() {
     document.querySelector('.nav-links').classList.toggle('active');
   }
 
-  // Initialize EmailJS
+  // === INITIALIZE EMAILJS ===
   (function() {
     emailjs.init({
       publicKey: "Gzr0d4tNcndWpcLWa", // 🔹 Replace with your actual EmailJS public key
@@ -242,205 +241,181 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const quotationForm = document.getElementById("quotationForm");
-    if (quotationForm) {
-      const formMessage = document.getElementById("quoteFormMessage");
-      formMessage.setAttribute("role", "alert");
-      formMessage.setAttribute("aria-live", "assertive");
+    const formMessage = document.getElementById("quoteFormMessage");
 
-      quotationForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    if (!quotationForm) return;
 
-        const submitBtn = quotationForm.querySelector("button[type='submit']");
-        submitBtn.disabled = true;
-        formMessage.style.display = "none";
+    quotationForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
+      const submitBtn = quotationForm.querySelector("button[type='submit']");
+      submitBtn.disabled = true;
+      formMessage.style.display = "none";
+
+      try {
+        const formData = new FormData(quotationForm);
+
+        // 🛡️ Simple validation
+        const required = ["fullname", "company", "email", "phone", "service", "urgency", "origin", "destination", "description"];
+        for (const field of required) {
+          if (!formData.get(field) || formData.get(field).trim() === "") {
+            throw new Error(`Please fill in the ${field} field.`);
+          }
+        }
+
+        // Validate email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email"))) {
+          throw new Error("Please enter a valid email address.");
+        }
+
+        // Validate phone
+        if (!/^[\d\s()+-]{7,}$/.test(formData.get("phone"))) {
+          throw new Error("Please enter a valid phone number.");
+        }
+
+        // 🌍 Get IP (optional)
+        let ip = "";
         try {
-          const formData = new FormData(quotationForm);
+          const ipResp = await fetch("https://api64.ipify.org?format=json");
+          ip = (await ipResp.json()).ip;
+        } catch {}
 
-          // 🛡️ Honeypot check
-          if (formData.get("website_hp")) throw new Error("Spam detected");
+        // === EMAILJS PARAMETERS ===
+        const params = {
+          name: formData.get("fullname"),
+          company: formData.get("company"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          service: formData.get("service"),
+          urgency: formData.get("urgency"),
+          origin: formData.get("origin"),
+          destination: formData.get("destination"),
+          weight: formData.get("weight"),
+          volume: formData.get("volume"),
+          description: formData.get("description"),
+          instructions: formData.get("instructions"),
+          ip_address: ip,
+          time: new Date().toLocaleString(),
+        };
 
-          // ✅ Validation
-          if (!formData.get("fullname") || formData.get("fullname").length < 2)
-            throw new Error("Enter your full name (min 2 characters)");
-          if (!formData.get("company") || formData.get("company").length < 2)
-            throw new Error("Enter your company/organization");
-          if (!formData.get("email") || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.get("email")))
-            throw new Error("Enter a valid email address");
-          if (!formData.get("phone") || !/^[\d\s()+-]{7,}$/.test(formData.get("phone")))
-            throw new Error("Enter a valid phone number");
-          if (!formData.get("service")) throw new Error("Select a service");
-          if (!formData.get("urgency")) throw new Error("Select urgency");
-          if (!formData.get("origin") || !formData.get("destination"))
-            throw new Error("Specify origin and destination");
-          if (!formData.get("weight") || isNaN(formData.get("weight")) || Number(formData.get("weight")) < 1)
-            throw new Error("Enter a valid cargo weight (min 1kg)");
-          if (formData.get("volume") && (isNaN(formData.get("volume")) || Number(formData.get("volume")) < 0))
-            throw new Error("Enter a valid cargo volume");
-          if (!formData.get("description") || formData.get("description").length < 10)
-            throw new Error("Cargo description must be at least 10 characters");
+        // === SEND EMAIL ===
+        const result = await emailjs.send("service_dfawmla", "template_uc8mmjo", params);
 
-          // 🌍 Optional IP fetch
-          let ip = "";
-          try {
-            const ipResp = await fetch("https://api64.ipify.org?format=json");
-            ip = (await ipResp.json()).ip;
-          } catch {}
+        if (result.status === 200) {
+          showMessage("✅ Your quotation request has been sent successfully!", "success");
 
-          // 📨 Prepare EmailJS parameters
-          const templateParams = {
-            name: formData.get("fullname"),
-            company: formData.get("company"),
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            service: formData.get("service"),
-            urgency: formData.get("urgency"),
-            origin: formData.get("origin"),
-            destination: formData.get("destination"),
-            weight: formData.get("weight"),
-            volume: formData.get("volume"),
-            description: formData.get("description"),
-            instructions: formData.get("instructions"),
-            time: new Date().toLocaleString(),
-            ip_address: ip,
-          };
-
-          // ✉️ Send via EmailJS
-          const result = await emailjs.send(
-            "service_dfawmla",         // Service ID
-            "template_uc8mmjo",        // Template ID
-            templateParams
-          );
-
-          if (result.status === 200) {
-            showMessage("Your quotation request was sent successfully!", "success");
-
-            // 🧾 Generate PDF if checkbox is selected
-            const downloadPDF = document.getElementById("downloadPDF");
-            if (downloadPDF && downloadPDF.checked) {
-              generatePDF(templateParams);
-            }
-
-            quotationForm.reset();
-          } else {
-            throw new Error("Failed to send email. Please try again.");
+          // Generate PDF if checkbox is checked
+          const downloadPDF = document.getElementById("downloadPDF");
+          if (downloadPDF && downloadPDF.checked) {
+            await generatePDF(params);
           }
 
+          quotationForm.reset();
+        } else {
+          throw new Error("Failed to send email. Please try again.");
+        }
+
+      } catch (err) {
+        showMessage(err.message, "error");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    // === FEEDBACK MESSAGE ===
+    function showMessage(msg, type = "success") {
+      formMessage.style.display = "block";
+      formMessage.style.color = type === "success" ? "green" : "red";
+      formMessage.textContent = msg;
+      if (type === "success") {
+        setTimeout(() => (formMessage.style.display = "none"), 6000);
+      }
+    }
+
+    // === GENERATE PDF FUNCTION ===
+    async function generatePDF(params) {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF();
+
+      // HEADER INFO
+      const logoImg = document.querySelector(".quotation-header .logo img")?.src || "";
+      const companyName = document.querySelector(".company-details h1")?.textContent || "Alokah Ventures Limited";
+      const tagline = document.querySelector(".company-details p:nth-child(2)")?.textContent || "";
+      const contactInfo = document.querySelector(".company-details p:nth-child(3)")?.textContent || "";
+
+      // Add Logo
+      if (logoImg) {
+        try {
+          const logoBase64 = await toDataURL(logoImg);
+          pdf.addImage(logoBase64, "PNG", 10, 10, 30, 30);
         } catch (err) {
-          showMessage(err.message, "error");
-        } finally {
-          setTimeout(() => { submitBtn.disabled = false; }, 2000);
+          console.warn("Logo could not be loaded:", err);
         }
+      }
 
-        // ✅ Show message feedback
-        function showMessage(msg, type = "success") {
-          formMessage.style.display = "block";
-          formMessage.style.color = type === "success" ? "green" : "red";
-          formMessage.textContent = msg;
-          formMessage.focus();
-          if (type === "success") setTimeout(() => { formMessage.style.display = "none"; }, 6000);
+      // Company Info
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(16);
+      pdf.text(companyName, 50, 20);
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+      pdf.text(tagline, 50, 27);
+      pdf.text(contactInfo, 50, 34);
+
+      // Line
+      pdf.setLineWidth(0.5);
+      pdf.line(10, 42, 200, 42);
+
+      // Quotation Info
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(14);
+      pdf.text("Quotation Request Details", 10, 52);
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+
+      let y = 62;
+      for (const [key, value] of Object.entries(params)) {
+        const label = key.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        const text = `${label}: ${value || "N/A"}`;
+        const lines = pdf.splitTextToSize(text, 180);
+        pdf.text(lines, 10, y);
+        y += lines.length * 7;
+        if (y > 270) {
+          pdf.addPage();
+          y = 20;
         }
+      }
 
-        // Generate a professional PDF copy
-async function generatePDF() {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF();
+      // FOOTER — company info + website
+      pdf.setFontSize(10);
+      pdf.setTextColor(100);
+      pdf.line(10, 275, 200, 275); // Footer separator
+      pdf.text("Generated by Alokah Ventures Limited Quotation System", 10, 282);
+      pdf.text("Head Office: Plot 45, Jinja Road, Kampala, Uganda", 10, 288);
+      pdf.text("Website: www.alokahventures.com | Email: info@alokahventures.com", 10, 294);
+      pdf.text(new Date().toLocaleString(), 150, 294);
 
-  // === HEADER SECTION ===
-  const logo = document.querySelector(".quotation-header .logo img").src;
-  const companyName = document.querySelector(".company-details h1").textContent;
-  const tagline = document.querySelector(".company-details p:nth-child(2)").textContent;
-  const contactInfo = document.querySelector(".company-details p:nth-child(3)").textContent;
+      pdf.save("Alokah_Quotation.pdf");
+    }
 
-  // Add Logo
-  try {
-    const img = await loadImage(logo);
-    pdf.addImage(img, "PNG", 10, 10, 30, 30); // (image, format, x, y, width, height)
-  } catch (err) {
-    console.warn("Logo not loaded in PDF:", err);
-  }
-
-  // Company Info
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(16);
-  pdf.text(companyName, 50, 20);
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(11);
-  pdf.text(tagline, 50, 27);
-  pdf.text(contactInfo, 50, 34);
-
-  // Divider line
-  pdf.setLineWidth(0.5);
-  pdf.line(10, 42, 200, 42);
-
-  // === FORM DETAILS ===
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(14);
-  pdf.text("Quotation Request Details", 10, 52);
-  pdf.setFont("helvetica", "normal");
-  pdf.setFontSize(11);
-
-  const formFields = [
-    { label: "Full Name", id: "fullname" },
-    { label: "Company/Organization", id: "company" },
-    { label: "Email Address", id: "email" },
-    { label: "Phone Number", id: "phone" },
-    { label: "Service Required", id: "service" },
-    { label: "Urgency", id: "urgency" },
-    { label: "Origin Location", id: "origin" },
-    { label: "Destination Location", id: "destination" },
-    { label: "Cargo Weight (kg)", id: "weight" },
-    { label: "Cargo Volume (m³)", id: "volume" },
-    { label: "Cargo Description", id: "description" },
-    { label: "Additional Instructions", id: "instructions" },
-  ];
-
-  let y = 62; // start position for form data
-
-  formFields.forEach(field => {
-    const element = document.getElementById(field.id);
-    const value = element ? element.value.trim() || "N/A" : "N/A";
-
-    // Wrap long text fields
-    const lines = pdf.splitTextToSize(`${field.label}: ${value}`, 180);
-    pdf.text(lines, 10, y);
-    y += lines.length * 7;
-
-    // Add page if near bottom
-    if (y > 270) {
-      pdf.addPage();
-      y = 20;
+    // === IMAGE TO BASE64 HELPER ===
+    function toDataURL(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+          resolve(canvas.toDataURL("image/png"));
+        };
+        img.onerror = reject;
+        img.src = url;
+      });
     }
   });
-
-  // === FOOTER ===
-  pdf.setFontSize(10);
-  pdf.setTextColor(100);
-  pdf.text("Generated by Alokah Ventures Limited Quotation System", 10, 285);
-  pdf.text(new Date().toLocaleString(), 150, 285);
-
-  // Save PDF
-  pdf.save("Quotation_Request_Alokah.pdf");
-
-  // Helper function to convert image to base64
-  function loadImage(url) {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        resolve(canvas.toDataURL("image/png"));
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
-  }
-}
-
 </script>
 
 </body>
