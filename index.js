@@ -122,12 +122,14 @@ function initAboutCarousel() {
     log('About carousel initialized');
   } catch (err) { console.error('initAboutCarousel error', err); }
 }
-
+// ================================
+// COUNTRY DROPDOWN INITIALIZATION 
+//=================================
 function initCountryDropdown() {
   try {
-    const countryDropdown = document.getElementById('countryCode');
-    if (!countryDropdown) { log('Country dropdown: not present'); return; }
-    if (countryDropdown.dataset.bound) return; countryDropdown.dataset.bound = 'true';
+    const dropdown = document.getElementById('countryCode');
+    if (!dropdown || dropdown.dataset.bound) return;
+    dropdown.dataset.bound = 'true';
 
     const countries = [
       { name: "Uganda", code: "+256", iso: "ug", continent: "Africa", default: true },
@@ -143,83 +145,146 @@ function initCountryDropdown() {
     ];
 
     const continents = {};
-    countries.forEach(c => { continents[c.continent] = continents[c.continent] || []; continents[c.continent].push(c); });
+    countries.forEach(c => {
+      if (!continents[c.continent]) continents[c.continent] = [];
+      continents[c.continent].push(c);
+    });
 
     ["Africa","Asia","Europe","North America","Oceania"].forEach(cont => {
       if (!continents[cont]) return;
-      const group = document.createElement('optgroup'); group.label = cont;
+      const group = document.createElement('optgroup');
+      group.label = cont;
       continents[cont].sort((a,b)=>a.name.localeCompare(b.name)).forEach(country => {
-        const opt = document.createElement('option'); opt.value = country.code;
+        const opt = document.createElement('option');
+        opt.value = country.code;
         opt.textContent = `${country.name} (${country.code})`;
         if (country.default) opt.selected = true;
         group.appendChild(opt);
       });
-      countryDropdown.appendChild(group);
+      dropdown.appendChild(group);
     });
 
-    const other = document.createElement('option'); other.value='Other'; other.textContent='Other (Enter manually)'; countryDropdown.appendChild(other);
+    const other = document.createElement('option');
+    other.value = 'Other';
+    other.textContent = 'Other (Enter manually)';
+    dropdown.appendChild(other);
 
-    log('Country dropdown populated');
-  } catch (err) { console.error('initCountryDropdown error', err); }
+    console.log("✅ Country dropdown initialized");
+  } catch (err) {
+    console.error("initCountryDropdown error:", err);
+  }
 }
 
+// === CONTACT FORM INITIALIZATION (EMAILJS + SPINNER) ===
 function initContactForm() {
   try {
     const contactForm = document.getElementById('contactForm');
-    if (!contactForm) { log('Contact form: not present'); return; }
-    if (contactForm.dataset.bound) return; contactForm.dataset.bound = 'true';
+    if (!contactForm || contactForm.dataset.bound) return;
+    contactForm.dataset.bound = 'true';
 
-    ensureHoneypot(contactForm);
+    // Initialize EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // 🔁 Replace with your actual EmailJS Public Key
 
-    // Pre-fetch IP for small speedup (best-effort)
+    // Optional honeypot
+    if (typeof ensureHoneypot === 'function') ensureHoneypot(contactForm);
+
+    // Fetch IP (best effort)
     let cachedIP = '';
-    fetch('https://api64.ipify.org?format=json').then(r=>r.json()).then(d=>{ cachedIP = d.ip; }).catch(()=>{});
+    fetch('https://api64.ipify.org?format=json')
+      .then(r => r.json())
+      .then(d => cachedIP = d.ip)
+      .catch(() => {});
 
-    on(contactForm, 'submit', async (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const submitBtn = contactForm.querySelector('#submitBtn');
+      const submitBtn = document.getElementById('submitBtn');
       const formMessage = document.getElementById('formMessage');
-      if (submitBtn) submitBtn.disabled = true;
-      if (formMessage) { formMessage.style.display='none'; }
+      if (!submitBtn) return;
+
+      // Add spinner + disable button
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="spinner" style="
+        display:inline-block;
+        width:18px; height:18px;
+        border:2px solid #fff;
+        border-top:2px solid transparent;
+        border-radius:50%;
+        margin-right:8px;
+        vertical-align:middle;
+        animation: spin 0.8s linear infinite;"></span> Sending...`;
+
+      // Inline spinner CSS
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes spin { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
+      `;
+      document.head.appendChild(style);
 
       try {
-        const fd = new FormData(contactForm);
-        fd.append('ip', cachedIP);
-        fd.append('origin', window.location.hostname);
-        if (fd.get('website_hp')) throw new Error('Spam detected');
+        // Collect form data
+        const name = contactForm.querySelector('input[placeholder="Your Name"]').value.trim();
+        const organization = contactForm.querySelector('input[placeholder="Organization"]').value.trim();
+        const country_code = document.getElementById('countryCode').value;
+        const phone = contactForm.querySelector('input[placeholder="Phone Number"]').value.trim();
+        const user_email = contactForm.querySelector('input[placeholder="Email Address"]').value.trim();
+        const message = contactForm.querySelector('textarea[placeholder="Your Enquiry"]').value.trim();
 
-        // Basic validations
-        const name = fd.get('name') || ''; if (name.length < 2) throw new Error('Enter a valid name');
-        const email = fd.get('email') || ''; if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Invalid email');
-        const enquiry = fd.get('enquiry') || ''; if (enquiry.length < 10) throw new Error('Enquiry too short');
-        const phone = fd.get('phone') || '';
-        if (phone && !/^[\d\s()+-]+$/.test(phone)) throw new Error('Invalid phone');
+        // Validation
+        if (!name || name.length < 2) throw new Error("Please enter your full name.");
+        if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(user_email)) throw new Error("Please enter a valid email address.");
+        if (message.length < 5) throw new Error("Please enter a detailed message.");
 
-        const resp = await fetch(FORM_ENDPOINT, { method: 'POST', body: fd });
-        const result = await resp.json();
-        if (result.status === 'success') {
-          showMessage(formMessage, 'We have received your message! Please check your email for confirmation.', 'success');
-          contactForm.reset();
-        } else {
-          throw new Error(result.message || 'Submission failed');
-        }
+        // EmailJS parameters
+        const params = {
+          user_name: name,
+          organization,
+          country_code,
+          phone,
+          user_email,
+          message,
+          date: new Date().toLocaleString(),
+          ip: cachedIP,
+          origin: window.location.hostname
+        };
+
+        // Send to admin
+        await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params);
+
+        // Send confirmation to sender
+        await emailjs.send("YOUR_SERVICE_ID", "YOUR_CONFIRMATION_TEMPLATE_ID", params);
+
+        showMessage(formMessage, "✅ Thank you! Your message was sent successfully.", "success");
+        contactForm.reset();
       } catch (err) {
-        showMessage(formMessage, err.message || 'Submission error', 'error');
+        console.error("Contact form error:", err);
+        showMessage(formMessage, err.message || "Something went wrong. Please try again.", "error");
       } finally {
-        if (submitBtn) setTimeout(()=> submitBtn.disabled = false, 1200);
+        // Restore button
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }, 800);
       }
     });
 
-    function showMessage(el, text, type='success'){
-      if (!el) return; el.style.display='block'; el.textContent=text; el.setAttribute('role','alert');
-      el.style.color = (type==='success') ? 'green' : 'red'; el.focus && el.focus();
-      if (type==='success') setTimeout(()=>{ el.style.display='none'; }, 5000);
+    function showMessage(el, text, type = "success") {
+      if (!el) return;
+      el.style.display = "block";
+      el.textContent = text;
+      el.setAttribute("role", "alert");
+      el.style.color = type === "success" ? "green" : "red";
+      if (type === "success") setTimeout(() => (el.style.display = "none"), 5000);
     }
 
-    log('Contact form initialized');
-  } catch (err) { console.error('initContactForm error', err); }
+    console.log("✅ Contact form ready (EmailJS + spinner)");
+  } catch (err) {
+    console.error("initContactForm error:", err);
+  }
 }
-
+//===============
+//quatation
+//================
 function initQuotationForm() {
   try {
     const quotationForm = document.getElementById('quotationForm');
