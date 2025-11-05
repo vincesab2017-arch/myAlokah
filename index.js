@@ -249,7 +249,7 @@ function initContactForm() {
         };
 
         // Send to admin
-        await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", params);
+        await emailjs.send("service_dfawmla", "template_flbv526", params);
 
         // Send confirmation to sender
         await emailjs.send("YOUR_SERVICE_ID", "YOUR_CONFIRMATION_TEMPLATE_ID", params);
@@ -277,7 +277,7 @@ function initContactForm() {
       if (type === "success") setTimeout(() => (el.style.display = "none"), 5000);
     }
 
-    console.log("✅ Contact form ready (EmailJS + spinner)");
+    console.log(" Contact form ready (EmailJS + spinner)");
   } catch (err) {
     console.error("initContactForm error:", err);
   }
