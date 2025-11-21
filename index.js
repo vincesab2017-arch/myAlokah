@@ -1,196 +1,287 @@
 /* main.js - Alokah Ventures Limited
 */
 
-/****************************************************
- *  ALOKAH CONTACT FORM – EMAILJS ONLY (CLEAN)
- ****************************************************/
+const DEBUG = true; // set to false in production to silence console logs
+const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycby79xBqYQbqpma_MgOWNtr3MnQvNp-DR1gnRdrCMZXicTkoI2h64VZ52LExU65lAt4a6A/exec";
 
-// ======== EMAILJS CONFIG ========
-const EMAILJS_PUBLIC_KEY = "Gzr0d4tNcndWpcLWa"; 
-const EMAILJS_ADMIN_SERVICE = "service_dfawmla"; 
-const EMAILJS_ADMIN_TEMPLATE = "template_flbv526"; 
-//const EMAILJS_CONFIRM_SERVICE = "YOUR_CONFIRM_SERVICE_ID"; 
-//const EMAILJS_CONFIRM_TEMPLATE = "YOUR_CONFIRM_TEMPLATE_ID"; 
+function log(...args) { if (DEBUG) console.log(...args); }
+function safeQuery(selector, root = document) { return root.querySelector(selector); }
+function safeQueryAll(selector, root = document) { return Array.from(root.querySelectorAll(selector)); }
+function on(el, evt, handler, opts) { if (!el) return; el.addEventListener(evt, handler, opts); }
 
-
-// ================================
-// HELPERS
-// ================================
-function on(el, evt, handler) {
-  if (el) el.addEventListener(evt, handler);
-}
-
-function showMessage(el, text, type = "success") {
-  if (!el) return;
-  el.style.display = "block";
-  el.textContent = text;
-  el.style.color = type === "success" ? "green" : "red";
-
-  if (type === "success") {
-    setTimeout(() => (el.style.display = "none"), 5000);
+// Reusable honeypot helper
+function ensureHoneypot(form) {
+  if (!form) return;
+  if (!form.querySelector('#website_hp')) {
+    const hp = document.createElement('input');
+    hp.type = 'text'; hp.name = 'website_hp'; hp.id = 'website_hp';
+    hp.style.display = 'none'; hp.tabIndex = -1; hp.autocomplete = 'off';
+    form.appendChild(hp);
   }
 }
 
+// Guard wrapper to avoid double-binding
+function onceBound(obj, key, fn) {
+  if (!obj.dataset) return fn();
+  if (obj.dataset[key]) return; obj.dataset[key] = 'true'; return fn();
+}
 
+// -------------------------
+// Initializers
+// -------------------------
+
+function initNavbar() {
+  try {
+    const menuToggle = document.querySelector('.menu-toggle') || document.getElementById('menu-toggle');
+    const navLinks = document.querySelector('.nav-links') || document.getElementById('nav-links');
+    if (!menuToggle || !navLinks) { log('Navbar: not found - skipping'); return; }
+
+    onceBound(menuToggle, 'menuBound', () => {
+      on(menuToggle, 'click', () => {
+        navLinks.classList.toggle('active');
+        menuToggle.classList.toggle('open');
+        const icon = menuToggle.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars', !menuToggle.classList.contains('open'));
+          icon.classList.toggle('fa-times', menuToggle.classList.contains('open'));
+        }
+      });
+      log('Navbar initialized');
+    });
+
+    // Close nav when clicking a hash link (delegated)
+    on(document, 'click', (e) => {
+      const a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href || href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        navLinks.classList.remove('active');
+      }
+    });
+
+  } catch (err) { console.error('initNavbar error', err); }
+}
+
+function initSmoothScroll() {
+  try {
+    // Back-to-top (if present)
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+      on(backToTop, 'click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
+    log('Smooth scroll initialized');
+  } catch (err) { console.error('initSmoothScroll error', err); }
+}
+
+function initAboutCarousel() {
+  try {
+    const aboutTrack = document.querySelector('.carousel-track');
+    if (!aboutTrack) { log('About carousel: not found'); return; }
+
+    // Prevent double-init
+    if (aboutTrack.dataset.bound) { log('About carousel already bound'); return; }
+    aboutTrack.dataset.bound = 'true';
+
+    // Duplicate items for seamless scroll (only once)
+    if (!aboutTrack.dataset.cloned) {
+      aboutTrack.innerHTML += aboutTrack.innerHTML;
+      aboutTrack.dataset.cloned = 'true';
+    }
+
+    let scrollSpeed = 1;
+    const updateScrollSpeed = () => {
+      const w = window.innerWidth;
+      scrollSpeed = w <= 480 ? 2 : (w <= 768 ? 1.5 : 1);
+    };
+    updateScrollSpeed(); on(window, 'resize', updateScrollSpeed);
+
+    let scrollPosition = 0;
+    let rafId = null;
+    function step() {
+      scrollPosition += scrollSpeed;
+      if (scrollPosition >= aboutTrack.scrollWidth / 2) scrollPosition = 0;
+      aboutTrack.scrollLeft = scrollPosition;
+      rafId = requestAnimationFrame(step);
+    }
+    step();
+
+    // Buttons
+    const btnLeft = document.querySelector('.carousel-btn.left');
+    const btnRight = document.querySelector('.carousel-btn.right');
+    on(btnLeft, 'click', () => { aboutTrack.scrollLeft = Math.max(0, aboutTrack.scrollLeft - 300); });
+    on(btnRight, 'click', () => { aboutTrack.scrollLeft += 300; });
+
+    // Pause on hover/focus for accessibility
+    on(aboutTrack, 'mouseenter', () => { if (rafId) cancelAnimationFrame(rafId); rafId = null; });
+    on(aboutTrack, 'mouseleave', () => { if (!rafId) step(); });
+
+    log('About carousel initialized');
+  } catch (err) { console.error('initAboutCarousel error', err); }
+}
 // ================================
-// COUNTRY DROPDOWN
-// ================================
+// COUNTRY DROPDOWN INITIALIZATION 
+//=================================
 function initCountryDropdown() {
-  const dropdown = document.getElementById("countryCode");
-  if (!dropdown || dropdown.dataset.bound) return;
+  try {
+    const dropdown = document.getElementById('countryCode');
+    if (!dropdown || dropdown.dataset.bound) return;
+    dropdown.dataset.bound = 'true';
 
-  dropdown.dataset.bound = "true";
+    const countries = [
+      { name: "Uganda", code: "+256", iso: "ug", continent: "Africa", default: true },
+      { name: "Kenya", code: "+254", iso: "ke", continent: "Africa" },
+      { name: "Tanzania", code: "+255", iso: "tz", continent: "Africa" },
+      { name: "Nigeria", code: "+234", iso: "ng", continent: "Africa" },
+      { name: "South Africa", code: "+27", iso: "za", continent: "Africa" },
+      { name: "United States", code: "+1", iso: "us", continent: "North America" },
+      { name: "United Kingdom", code: "+44", iso: "gb", continent: "Europe" },
+      { name: "India", code: "+91", iso: "in", continent: "Asia" },
+      { name: "China", code: "+86", iso: "cn", continent: "Asia" },
+      { name: "Australia", code: "+61", iso: "au", continent: "Oceania" }
+    ];
 
-  const countries = [
-    { name: "Uganda", code: "+256", continent: "Africa", default: true },
-    { name: "Kenya", code: "+254", continent: "Africa" },
-    { name: "Tanzania", code: "+255", continent: "Africa" },
-    { name: "Nigeria", code: "+234", continent: "Africa" },
-    { name: "South Africa", code: "+27", continent: "Africa" },
-    { name: "United States", code: "+1", continent: "North America" },
-    { name: "United Kingdom", code: "+44", continent: "Europe" },
-    { name: "India", code: "+91", continent: "Asia" },
-    { name: "China", code: "+86", continent: "Asia" },
-    { name: "Australia", code: "+61", continent: "Oceania" }
-  ];
+    const continents = {};
+    countries.forEach(c => {
+      if (!continents[c.continent]) continents[c.continent] = [];
+      continents[c.continent].push(c);
+    });
 
-  const byContinent = {};
-
-  countries.forEach(c => {
-    (byContinent[c.continent] ||= []).push(c);
-  });
-
-  ["Africa", "Asia", "Europe", "North America", "Oceania"].forEach(cont => {
-    if (!byContinent[cont]) return;
-
-    const group = document.createElement("optgroup");
-    group.label = cont;
-
-    byContinent[cont]
-      .sort((a, b) => a.name.localeCompare(b.name))
-      .forEach(country => {
-        const opt = document.createElement("option");
+    ["Africa","Asia","Europe","North America","Oceania"].forEach(cont => {
+      if (!continents[cont]) return;
+      const group = document.createElement('optgroup');
+      group.label = cont;
+      continents[cont].sort((a,b)=>a.name.localeCompare(b.name)).forEach(country => {
+        const opt = document.createElement('option');
         opt.value = country.code;
         opt.textContent = `${country.name} (${country.code})`;
         if (country.default) opt.selected = true;
         group.appendChild(opt);
       });
+      dropdown.appendChild(group);
+    });
 
-    dropdown.appendChild(group);
-  });
+    const other = document.createElement('option');
+    other.value = 'Other';
+    other.textContent = 'Other (Enter manually)';
+    dropdown.appendChild(other);
 
-  const other = document.createElement("option");
-  other.value = "Other";
-  other.textContent = "Other (Enter manually)";
-  dropdown.appendChild(other);
+    console.log("✅ Country dropdown initialized");
+  } catch (err) {
+    console.error("initCountryDropdown error:", err);
+  }
 }
 
-
-// ================================
-// CONTACT FORM (EMAILJS ONLY)
-// ================================
+// === CONTACT FORM INITIALIZATION (EMAILJS + SPINNER) ===
 function initContactForm() {
-  const form = document.getElementById("contactForm");
-  if (!form || form.dataset.bound) return;
+  try {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm || contactForm.dataset.bound) return;
+    contactForm.dataset.bound = 'true';
 
-  form.dataset.bound = "true";
+    // Initialize EmailJS
+    emailjs.init("YOUR_PUBLIC_KEY"); // 🔁 Replace with your actual EmailJS Public Key
 
-  // Load EmailJS
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+    // Optional honeypot
+    if (typeof ensureHoneypot === 'function') ensureHoneypot(contactForm);
 
-  // Cache IP (optional)
-  let userIP = "";
-  fetch("https://api64.ipify.org?format=json")
-    .then(res => res.json())
-    .then(data => (userIP = data.ip))
-    .catch(() => {});
+    // Fetch IP (best effort)
+    let cachedIP = '';
+    fetch('https://api64.ipify.org?format=json')
+      .then(r => r.json())
+      .then(d => cachedIP = d.ip)
+      .catch(() => {});
 
-  on(form, "submit", async (e) => {
-    e.preventDefault();
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
+      if (!submitBtn) return;
 
-    const submitBtn = document.getElementById("submitBtn");
-    const msgBox = document.getElementById("formMessage");
+      // Add spinner + disable button
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="spinner" style="
+        display:inline-block;
+        width:18px; height:18px;
+        border:2px solid #fff;
+        border-top:2px solid transparent;
+        border-radius:50%;
+        margin-right:8px;
+        vertical-align:middle;
+        animation: spin 0.8s linear infinite;"></span> Sending...`;
 
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = `<span class="spinner"></span> Sending...`;
-
-    // Add spinner
-    if (!document.getElementById("spinner-style")) {
-      const s = document.createElement("style");
-      s.id = "spinner-style";
-      s.textContent = `
-        .spinner {
-          width: 18px; height: 18px;
-          border: 2px solid #fff;
-          border-top: 2px solid transparent;
-          border-radius: 50%;
-          display: inline-block;
-          vertical-align: middle;
-          margin-right: 6px;
-          animation: spin .8s linear infinite;
-        }
-        @keyframes spin { from {rotate:0deg;} to {rotate:360deg;} }
+      // Inline spinner CSS
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes spin { from {transform:rotate(0deg);} to {transform:rotate(360deg);} }
       `;
-      document.head.appendChild(s);
+      document.head.appendChild(style);
+
+      try {
+        // Collect form data
+        const name = contactForm.querySelector('input[placeholder="Your Name"]').value.trim();
+        const organization = contactForm.querySelector('input[placeholder="Organization"]').value.trim();
+        const country_code = document.getElementById('countryCode').value;
+        const phone = contactForm.querySelector('input[placeholder="Phone Number"]').value.trim();
+        const user_email = contactForm.querySelector('input[placeholder="Email Address"]').value.trim();
+        const message = contactForm.querySelector('textarea[placeholder="Your Enquiry"]').value.trim();
+
+        // Validation
+        if (!name || name.length < 2) throw new Error("Please enter your full name.");
+        if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(user_email)) throw new Error("Please enter a valid email address.");
+        if (message.length < 5) throw new Error("Please enter a detailed message.");
+
+        // EmailJS parameters
+        const params = {
+          user_name: name,
+          organization,
+          country_code,
+          phone,
+          user_email,
+          message,
+          date: new Date().toLocaleString(),
+          ip: cachedIP,
+          origin: window.location.hostname
+        };
+
+        // Send to admin
+        await emailjs.send("service_dfawmla", "template_flbv526", params);
+
+        // Send confirmation to sender
+        await emailjs.send("YOUR_SERVICE_ID", "YOUR_CONFIRMATION_TEMPLATE_ID", params);
+
+        showMessage(formMessage, "✅ Thank you! Your message was sent successfully.", "success");
+        contactForm.reset();
+      } catch (err) {
+        console.error("Contact form error:", err);
+        showMessage(formMessage, err.message || "Something went wrong. Please try again.", "error");
+      } finally {
+        // Restore button
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+        }, 800);
+      }
+    });
+
+    function showMessage(el, text, type = "success") {
+      if (!el) return;
+      el.style.display = "block";
+      el.textContent = text;
+      el.setAttribute("role", "alert");
+      el.style.color = type === "success" ? "green" : "red";
+      if (type === "success") setTimeout(() => (el.style.display = "none"), 5000);
     }
 
-    try {
-      // Collect form data
-      const name = form.querySelector('input[placeholder="Your Name"]').value.trim();
-      const organization = form.querySelector('input[placeholder="Organization"]').value.trim();
-      const countryCode = document.getElementById("countryCode").value;
-      const phone = form.querySelector('input[placeholder="Phone Number"]').value.trim();
-      const email = form.querySelector('input[placeholder="Email Address"]').value.trim();
-      const message = form.querySelector("textarea").value.trim();
-
-      // Validation
-      if (name.length < 2) throw new Error("Please enter your full name.");
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error("Invalid email address.");
-      if (message.length < 5) throw new Error("Please enter a more detailed message.");
-
-      // Params for EmailJS
-      const params = {
-        user_name: name,
-        organization,
-        country_code: countryCode,
-        phone,
-        user_email: email,
-        message,
-        date: new Date().toLocaleString(),
-        ip: userIP,
-        origin: window.location.hostname
-      };
-
-      // 1. Send email to admin
-      await emailjs.send(EMAILJS_ADMIN_SERVICE, EMAILJS_ADMIN_TEMPLATE, params);
-
-      // 2. Confirmation email to sender
-      await emailjs.send(EMAILJS_CONFIRM_SERVICE, EMAILJS_CONFIRM_TEMPLATE, params);
-
-      showMessage(msgBox, "✅ Thank you! Your message was successfully sent.");
-
-      form.reset();
-    } catch (err) {
-      showMessage(msgBox, err.message || "Something went wrong. Please try again.", "error");
-    } finally {
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-      }, 800);
-    }
-  });
+    console.log(" Contact form ready (EmailJS + spinner)");
+  } catch (err) {
+    console.error("initContactForm error:", err);
+  }
 }
-
-
-// ================================
-// INIT EVERYTHING
-// ================================
-document.addEventListener("DOMContentLoaded", () => {
-  initCountryDropdown();
-  initContactForm();
-});
-
 //===============
 //quatation
 //================
