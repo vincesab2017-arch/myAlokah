@@ -97,43 +97,337 @@
       </div>
     </header>
 
- <section class="blog-page">
-  <div class="container">
-    <h2 class="section-title">Our Blogs</h2>
-    <p class="section-subtitle">Insights, news, and updates from Alokah Ventures to keep you informed on logistics and supply chain trends.</p>
+  <style>
+    body { margin: 0; font-family: Arial, sans-serif; background: #f9f9fb; }
+    :root { --gold: #c8a043; --blue: #003a70; --light-bg: #ffffff; --shadow: rgba(0,0,0,0.1); }
 
-    <!-- Search & Filter -->
-    <div class="blog-controls">
-      <input type="text" id="searchBlog" placeholder="Search blogs...">
-      <select id="filterCategory">
-        <option value="all">All Categories</option>
-        <option value="logistics">Logistics</option>
-        <option value="supplychain">Supply Chain</option>
-        <option value="technology">Technology</option>
-      </select>
-    </div>
+    .blog-page { padding: 60px 5%; }
+    .section-title { font-size: 2.2rem; color: var(--blue); text-align: center; font-weight: 700; margin-bottom: 14px; }
 
-    <!-- Blog Grid -->
-    <div id="blog-container" class="blogs-grid">
-      <!-- Placeholder blogs shown initially -->
-      <div class="blog-placeholder">
-        <div class="image-placeholder"></div>
-        <div class="content-placeholder">
-          <div class="line-placeholder short"></div>
-          <div class="line-placeholder long"></div>
-          <div class="line-placeholder medium"></div>
-        </div>
-      </div>
-    </div>
+    /* Filter + Search bar */
+    .controls { display:flex; gap:12px; justify-content:center; align-items:center; flex-wrap:wrap; margin-bottom:24px; }
+    .filter-bar { display:flex; gap:10px; flex-wrap:wrap; }
+    .filter-btn { background: var(--gold); color:#fff; padding:8px 14px; border-radius:30px; border:none; cursor:pointer; font-size:0.95rem; }
+    .filter-btn.active { box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+    .filter-btn:hover { transform:translateY(-2px); }
 
-    <!-- Load More Button -->
-    <div class="load-more-container">
-      <button id="loadMoreBlogs" class="btn-load-more">Load More Blogs</button>
-    </div>
+    .search-input { padding:10px 14px; border-radius:30px; border:1px solid #e6e6e6; min-width:240px; }
+
+    .blog-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px; }
+    .blog-card { background:var(--light-bg); border-radius:12px; box-shadow: 0 6px 18px var(--shadow); overflow:hidden; position:relative; }
+    .blog-card:hover { transform:translateY(-6px); box-shadow:0 12px 28px rgba(0,0,0,0.12); }
+    .blog-card img { width:100%; height:200px; object-fit:cover; display:block; }
+    .blog-content { padding:18px; }
+    .blog-title { font-size:1.15rem; color:var(--blue); font-weight:700; margin:0 0 8px 0; }
+    .blog-desc { color:#555; margin:0 0 12px 0; }
+    .blog-meta { font-size:0.9rem; color:#666; display:flex; gap:10px; align-items:center; margin-bottom:12px; }
+
+    .read-more-arrow { background:var(--blue); color:#fff; width:40px; height:40px; border-radius:8px; border:none; display:flex; align-items:center; justify-content:center; font-size:1.3rem; cursor:pointer; position:absolute; right:16px; bottom:16px; }
+    .read-more-arrow:hover { background:var(--gold); }
+
+    .share-btn { background:var(--gold); color:#fff; padding:7px 12px; border-radius:20px; border:none; cursor:pointer; font-size:0.85rem; }
+
+    /* Pagination */
+    .pagination { display:flex; gap:8px; justify-content:center; margin-top:26px; margin-bottom:40px; }
+    .page-btn { padding:8px 12px; border-radius:8px; border:1px solid #e6e6e6; cursor:pointer; background:#fff; }
+    .page-btn.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+
+    /* Popup */
+    .popup-container { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; padding:20px; z-index:9999; }
+    .popup-box { background:#fff; width:95%; max-width:900px; max-height:90vh; overflow-y:auto; border-radius:12px; padding:22px; position:relative; }
+    .popup-close { position:absolute; top:12px; right:12px; font-size:20px; cursor:pointer; background:#eee; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; }
+    .popup-img { width:100%; border-radius:8px; margin-bottom:16px; }
+    .popup-title { font-size:1.6rem; color:var(--blue); margin:0 0 12px 0; }
+    .popup-share { background:var(--gold); color:#fff; padding:10px 18px; border-radius:30px; border:none; cursor:pointer; margin-top:10px; }
+
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:none; } }
+    .fade-in { animation:fadeIn 0.45s ease both; }
+
+    /* Responsive tweaks */
+    @media (max-width:600px){ .section-title{font-size:1.6rem;} .read-more-arrow{right:12px; bottom:12px;} }
+  </style>
+</head>
+<body>
+
+<section class="blog-page">
+  <h2 class="section-title">Our Latest Insights</h2>
+
+  <div class="controls">
+    <div class="filter-bar" id="filterBar"></div>
+    <input id="searchInput" class="search-input" type="search" placeholder="Search articles..." />
   </div>
+
+  <div class="blog-grid" id="blogContainer"></div>
+
+  <div class="pagination" id="pagination"></div>
 </section>
 
+<!-- Popup Blog Details -->
+<div class="popup-container" id="popupContainer">
+  <div class="popup-box" id="popupBox">
+    <div class="popup-close" onclick="closePopup()">&times;</div>
+    <img id="popupImg" class="popup-img" src="" alt="Blog image">
+    <h2 id="popupTitle" class="popup-title"></h2>
+    <p id="popupContent"></p>
+    <button id="popupShare" class="popup-share">Share this post</button>
+  </div>
+</div>
 
+<script>
+  // Categories (defined before any code that references them)
+  const categories = [
+    "Logistics",
+    "Shipping",
+    "Import/Export",
+    "Business Tips",
+    "Supply Chain",
+    "Company News",
+    "Policies"
+  ];
+
+  // Sample blogs - each MUST include a category that matches one of the categories above
+  const blogs = [
+    {
+      title: "Understanding Import & Export Compliance in East Africa",
+      desc: "A simple breakdown of the regulatory requirements businesses must follow when moving goods across borders.",
+      img: "https://via.placeholder.com/800x500?text=Import-Export",
+      content: "Full blog content: Compliance, documentation, common pitfalls, and tips for exporters and importers operating in East Africa.",
+      category: "Import/Export"
+    },
+    {
+      title: "Why Efficient Supply Chains Matter for African Businesses",
+      desc: "Supply chain efficiency directly impacts business performance. Here is how to optimize yours.",
+      img: "https://via.placeholder.com/800x500?text=Supply-Chain",
+      content: "Full blog content: Strategies to reduce lead times, optimize inventory, and build resilient supply chains.",
+      category: "Supply Chain"
+    },
+    {
+      title: "How Alokah Ventures Supports SMEs with Smart Logistics",
+      desc: "A look into the logistics solutions we offer to help SMEs grow and scale.",
+      img: "https://via.placeholder.com/800x500?text=Logistics",
+      content: "Full blog content: Case studies, service offerings, and client success stories.",
+      category: "Logistics"
+    },
+    {
+      title: "Tips for Faster Shipping and Lower Costs",
+      desc: "Practical tips for small businesses to save on shipping while improving delivery times.",
+      img: "https://via.placeholder.com/800x500?text=Shipping",
+      content: "Full blog content: Packaging, carrier selection, consolidations and negotiation tips.",
+      category: "Shipping"
+    },
+    {
+      title: "Company News: New Warehouse Opening",
+      desc: "We are excited to announce the opening of our new regional warehouse to serve customers better.",
+      img: "https://via.placeholder.com/800x500?text=Company-News",
+      content: "Full blog content: Details about the facility, services, and how clients benefit.",
+      category: "Company News"
+    },
+    {
+      title: "Policy Update: New Customs Procedures",
+      desc: "Important policy changes affecting cross-border shipments and customs clearance.",
+      img: "https://via.placeholder.com/800x500?text=Policies",
+      content: "Full blog content: What changed, how it affects importers/exporters, and recommended actions.",
+      category: "Policies"
+    },
+    {
+      title: "Business Tips: Scaling Your Export Business",
+      desc: "Advice for entrepreneurs ready to scale their export operations.",
+      img: "https://via.placeholder.com/800x500?text=Business-Tips",
+      content: "Full blog content: Market research, partnerships, compliance, and financing options.",
+      category: "Business Tips"
+    }
+  ];
+
+  // State
+  const state = {
+    currentCategory: 'All',
+    searchQuery: '',
+    currentPage: 1,
+    perPage: 6
+  };
+
+  // DOM refs
+  const blogContainer = document.getElementById('blogContainer');
+  const filterBar = document.getElementById('filterBar');
+  const searchInput = document.getElementById('searchInput');
+  const paginationEl = document.getElementById('pagination');
+  const popupContainer = document.getElementById('popupContainer');
+  const popupImg = document.getElementById('popupImg');
+  const popupTitle = document.getElementById('popupTitle');
+  const popupContent = document.getElementById('popupContent');
+  const popupShare = document.getElementById('popupShare');
+
+  // Initialize
+  function init() {
+    renderFilters();
+    attachSearch();
+    render();
+  }
+
+  // Render filter buttons
+  function renderFilters() {
+    // Clear
+    filterBar.innerHTML = '';
+    const allBtn = document.createElement('button');
+    allBtn.className = 'filter-btn active';
+    allBtn.textContent = 'All';
+    allBtn.onclick = () => { setCategory('All'); };
+    filterBar.appendChild(allBtn);
+
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.textContent = cat;
+      btn.onclick = () => { setCategory(cat); };
+      filterBar.appendChild(btn);
+    });
+  }
+
+  function setCategory(cat) {
+    state.currentCategory = cat;
+    state.currentPage = 1;
+    // update active class
+    Array.from(filterBar.children).forEach(btn => btn.classList.toggle('active', btn.textContent === cat));
+    render();
+  }
+
+  // Search
+  function attachSearch() {
+    searchInput.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value.trim().toLowerCase();
+      state.currentPage = 1;
+      render();
+    });
+  }
+
+  // Compute filtered list
+  function getFiltered() {
+    return blogs.filter(b => {
+      const matchesCategory = (state.currentCategory === 'All') || (b.category === state.currentCategory);
+      const matchesSearch = !state.searchQuery || (b.title.toLowerCase().includes(state.searchQuery) || b.desc.toLowerCase().includes(state.searchQuery));
+      return matchesCategory && matchesSearch;
+    });
+  }
+
+  // Pagination helper
+  function paginate(items, page, perPage) {
+    const total = items.length;
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    return { items: items.slice(start, end), total };
+  }
+
+  // Render everything
+  function render() {
+    const filtered = getFiltered();
+    const { items, total } = paginate(filtered, state.currentPage, state.perPage);
+
+    blogContainer.innerHTML = '';
+    if (items.length === 0) {
+      blogContainer.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:#666;">No articles match your search.</p>';
+    } else {
+      items.forEach((b, i) => {
+        createBlogCard(b, (state.currentPage - 1) * state.perPage + i);
+      });
+    }
+
+    renderPagination(total);
+  }
+
+  // Create card
+  function createBlogCard(blog, index) {
+    const card = document.createElement('article');
+    card.className = 'blog-card fade-in';
+
+    card.innerHTML = `
+      <img src="${blog.img}" alt="${escapeHtml(blog.title)}" />
+      <div class="blog-content">
+        <h3 class="blog-title">${escapeHtml(blog.title)}</h3>
+        <p class="blog-desc">${escapeHtml(blog.desc)}</p>
+        <div class="blog-meta">
+          <span>admin</span>
+          <span>• 0 Comments</span>
+          <span>• ${escapeHtml(blog.category)}</span>
+        </div>
+        <button class="share-btn" onclick="shareBlog(${index})">Share</button>
+        <button class="read-more-arrow" onclick="openPopup(${index})">→</button>
+      </div>
+    `;
+
+    blogContainer.appendChild(card);
+  }
+
+  // Pagination UI
+  function renderPagination(totalItems) {
+    paginationEl.innerHTML = '';
+    const totalPages = Math.max(1, Math.ceil(totalItems / state.perPage));
+
+    // Prev
+    const prev = document.createElement('button'); prev.className = 'page-btn'; prev.textContent = 'Prev';
+    prev.disabled = state.currentPage === 1; prev.onclick = () => { state.currentPage = Math.max(1, state.currentPage - 1); render(); };
+    paginationEl.appendChild(prev);
+
+    // pages (show up to 5 pages)
+    const startPage = Math.max(1, state.currentPage - 2);
+    const endPage = Math.min(totalPages, startPage + 4);
+    for (let p = startPage; p <= endPage; p++) {
+      const btn = document.createElement('button'); btn.className = 'page-btn' + (p === state.currentPage ? ' active' : ''); btn.textContent = p;
+      btn.onclick = () => { state.currentPage = p; render(); };
+      paginationEl.appendChild(btn);
+    }
+
+    // Next
+    const next = document.createElement('button'); next.className = 'page-btn'; next.textContent = 'Next';
+    next.disabled = state.currentPage === totalPages; next.onclick = () => { state.currentPage = Math.min(totalPages, state.currentPage + 1); render(); };
+    paginationEl.appendChild(next);
+  }
+
+  // Popup handlers
+  function openPopup(index) {
+    const blog = blogs[index];
+    if (!blog) return;
+    popupImg.src = blog.img;
+    popupTitle.textContent = blog.title;
+    popupContent.textContent = blog.content;
+    popupContainer.style.display = 'flex';
+
+    // set share handler in popup
+    popupShare.onclick = () => shareBlog(index);
+  }
+  function closePopup() { popupContainer.style.display = 'none'; }
+  // expose to global scope for inline onclick attributes
+  window.openPopup = openPopup;
+  window.closePopup = closePopup;
+
+  // Share handler
+  function shareBlog(index) {
+    const blog = blogs[index];
+    if (!blog) return;
+    const shareText = `Check out this article: ${blog.title}`;
+    const shareUrl = window.location.href;
+    if (navigator.share) {
+      navigator.share({ title: blog.title, text: shareText, url: shareUrl }).catch(()=>{});
+    } else {
+      // fallback: copy to clipboard
+      copyToClipboard(`${shareText} - ${shareUrl}`);
+      alert('Link copied to clipboard.');
+    }
+  }
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    const ta = document.createElement('textarea'); ta.value = text; ta.style.position='fixed'; ta.style.left='-9999px'; document.body.appendChild(ta); ta.focus(); ta.select(); try { document.execCommand('copy'); } catch(e){} ta.remove();
+  }
+
+  // small utility
+  function escapeHtml(str) { return String(str).replace(/[&<>"]/g, (s) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[s])); }
+
+  // start
+  init();
+
+</script>
+
+</body>
   <!-- ==========================
      FOOTER
 ========================== -->
