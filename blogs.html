@@ -138,6 +138,21 @@
     .popup-close { position:absolute; top:12px; right:12px; font-size:20px; cursor:pointer; background:#eee; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; }
     .popup-img { width:100%; border-radius:8px; margin-bottom:16px; }
     .popup-title { font-size:1.6rem; color:var(--blue); margin:0 0 12px 0; }
+    /* Popup blog content text color */
+    #popupContent,
+    #popupContent p,
+    #popupContent li,
+    #popupContent ul,
+    #popupContent strong,
+    #popupContent h2,
+    #popupContent h3 {
+      color: #000;
+}
+
+#popupContent {
+  line-height: 1.7;
+  font-size: 1rem;
+}
     .popup-share { background:var(--gold); color:#fff; padding:10px 18px; border-radius:30px; border:none; cursor:pointer; margin-top:10px; }
 
     @keyframes fadeIn { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:none; } }
@@ -188,54 +203,364 @@
   // Sample blogs - each MUST include a category that matches one of the categories above
   const blogs = [
     {
-      title: "Understanding Import & Export Compliance in East Africa",
-      desc: "A simple breakdown of the regulatory requirements businesses must follow when moving goods across borders.",
-      img: "assets/images/network.jpg",
-      content: "Full blog content: Compliance, documentation, common pitfalls, and tips for exporters and importers operating in East Africa.",
-      category: "Import/Export"
-    },
+  title: "Understanding Import & Export Compliance in East Africa",
+  desc: "A simple breakdown of the regulatory requirements businesses must follow when moving goods across borders.",
+  img: "assets/images/network.jpg",
+  content: `
+    <h2>Understanding Import & Export Compliance in East Africa</h2>
+
+    <p>
+      Navigating the import and export landscape in East Africa can be challenging, especially for businesses new to cross-border trade.
+      Compliance with regulatory requirements is essential to ensure smooth operations, avoid fines, and build a reputation as a reliable
+      trading partner. This article breaks down the key compliance elements that every business should understand.
+    </p>
+
+    <h3>1. Regulatory Compliance</h3>
+    <p>
+      Importers and exporters in East Africa must adhere to the rules set by government authorities such as the East African Community (EAC),
+      national customs departments, and relevant ministries. Regulations typically cover:
+    </p>
+    <ul>
+      <li><strong>Import/export licensing:</strong> Certain goods require permits before they can cross borders.</li>
+      <li><strong>Customs duties and taxes:</strong> Businesses must correctly classify goods and pay applicable tariffs.</li>
+      <li><strong>Standards and quality control:</strong> Products must meet safety, health, and technical standards defined by authorities
+        like the Kenya Bureau of Standards (KEBS) or Uganda National Bureau of Standards (UNBS).</li>
+    </ul>
+
+    <h3>2. Documentation</h3>
+    <p>
+      Proper documentation is crucial for compliance and smooth customs clearance. Common documents include:
+    </p>
+    <ul>
+      <li><strong>Commercial invoice</strong> – details of the goods, pricing, and seller/buyer information.</li>
+      <li><strong>Packing list</strong> – outlines the contents of each shipment.</li>
+      <li><strong>Bill of lading / airway bill</strong> – transport contract issued by the shipping or airline company.</li>
+      <li><strong>Certificate of origin</strong> – confirms where the goods were produced, sometimes needed for tariff exemptions.</li>
+      <li><strong>Import/export permit</strong> – required for restricted or regulated items.</li>
+    </ul>
+    <p>
+      Maintaining accurate records and copies of all documentation can prevent delays and penalties.
+    </p>
+
+    <h3>3. Common Pitfalls</h3>
+    <p>Businesses often face compliance challenges such as:</p>
+    <ul>
+      <li>Misclassification of goods, leading to incorrect duties and taxes.</li>
+      <li>Incomplete or inaccurate documentation.</li>
+      <li>Failure to meet quality or safety standards.</li>
+      <li>Delays caused by unfamiliarity with customs procedures.</li>
+    </ul>
+    <p>
+      Being aware of these pitfalls and proactively addressing them can save time and money.
+    </p>
+
+    <h3>4. Tips for Exporters and Importers</h3>
+    <ul>
+      <li><strong>Stay updated:</strong> Regulations and tariffs in East Africa can change frequently. Subscribe to updates from relevant authorities.</li>
+      <li><strong>Engage local expertise:</strong> Customs brokers or logistics consultants can guide businesses through complex procedures.</li>
+      <li><strong>Use technology:</strong> Digital platforms for filing documents and tracking shipments can increase efficiency and compliance.</li>
+      <li><strong>Plan for inspections:</strong> Some goods may require physical inspections at border points—anticipate time and cost implications.</li>
+    </ul>
+
+    <h3>Conclusion</h3>
+    <p>
+      Compliance is more than a bureaucratic requirement; it’s a critical component of successful trading in East Africa.
+      Businesses that understand regulatory frameworks, maintain proper documentation, and stay proactive in avoiding pitfalls
+      will benefit from smoother operations, reduced risk, and stronger international partnerships.
+    </p>
+  `,
+  category: "Import/Export"
+},
     {
-      title: "Why Efficient Supply Chains Matter for African Businesses",
-      desc: "Supply chain efficiency directly impacts business performance. Here is how to optimize yours.",
-      img: "assets/images/supplli.jpg",
-      content: "Full blog content: Strategies to reduce lead times, optimize inventory, and build resilient supply chains.",
-      category: "Supply Chain"
-    },
+  title: "Why Efficient Supply Chains Matter for African Businesses",
+  desc: "Supply chain efficiency directly impacts business performance. Here is how to optimize yours.",
+  img: "assets/images/supplli.jpg",
+  content: `
+    <h2>Why Efficient Supply Chains Matter for African Businesses</h2>
+
+    <p>
+      Efficient supply chains are a critical driver of competitiveness and growth for African businesses operating in dynamic and often
+      challenging environments. High transportation costs, infrastructure gaps, border delays, and fluctuating demand can significantly
+      affect profitability if supply chains are poorly managed. An efficient supply chain helps businesses reduce operational costs,
+      improve delivery times, and respond quickly to market changes.
+    </p>
+
+    <p>
+      One key strategy is reducing lead times through better coordination with suppliers and logistics partners. Businesses should also
+      optimize inventory levels to avoid overstocking or stockouts, both of which tie up capital and disrupt operations. The use of digital
+      tools for demand forecasting, shipment tracking, and warehouse management improves visibility and decision-making across the supply
+      chain.
+    </p>
+
+    <p>
+      Building resilient supply chains is equally important. Diversifying suppliers, planning for disruptions, and investing in reliable
+      transport networks enable African businesses to maintain continuity, meet customer expectations, and scale sustainably in regional
+      and international markets.
+    </p>
+  `,
+  category: "Supply Chain"
+},
     {
-      title: "How Alokah Ventures Supports SMEs with Smart Logistics",
-      desc: "A look into the logistics solutions we offer to help SMEs grow and scale.",
-      img: "assets/images/supplyi.jpg",
-      content: "Full blog content: Case studies, service offerings, and client success stories.",
-      category: "Logistics"
-    },
+  title: "How Alokah Ventures Supports SMEs with Smart Logistics",
+  desc: "A look into the logistics solutions we offer to help SMEs grow and scale.",
+  img: "assets/images/supplyi.jpg",
+  content: `
+    <h2>How Alokah Ventures Supports SMEs with Smart Logistics</h2>
+
+    <p>
+      Small and medium-sized enterprises (SMEs) are the backbone of many African economies, yet they often face significant logistics
+      challenges that limit growth and competitiveness. Alokah Ventures addresses these challenges by providing smart, flexible, and
+      cost-effective logistics solutions tailored to the unique needs of SMEs.
+    </p>
+
+    <p>
+      Our services include end-to-end supply chain coordination, efficient transportation planning, customs clearance support, and
+      inventory management solutions designed to reduce costs and improve delivery timelines. By leveraging technology and local market
+      expertise, we help businesses gain real-time visibility into their shipments and make informed operational decisions.
+    </p>
+
+    <p>
+      Through practical case-driven approaches and close client collaboration, Alokah Ventures has enabled SMEs to expand into new
+      markets, improve customer satisfaction, and build resilient logistics operations. Our commitment to reliability, compliance, and
+      innovation ensures that SMEs can focus on growth while we handle the complexity of logistics.
+    </p>
+  `,
+  category: "Logistics"
+},
     {
-      title: "Tips for Faster Shipping and Lower Costs",
-      desc: "Practical tips for small businesses to save on shipping while improving delivery times.",
-      img: "https://via.placeholder.com/800x500?text=Shipping",
-      content: "Full blog content: Packaging, carrier selection, consolidations and negotiation tips.",
-      category: "Shipping"
-    },
+  title: "Tips for Faster Shipping and Lower Costs",
+  desc: "Practical tips for small businesses to save on shipping while improving delivery times.",
+  img: "https://via.placeholder.com/800x500?text=Shipping",
+  content: `
+    <h2>Tips for Faster Shipping and Lower Costs</h2>
+
+    <p>
+      Shipping costs and delivery delays are among the biggest challenges facing small businesses, especially those involved in
+      regional and international trade. However, with the right strategies in place, businesses can significantly reduce shipping
+      expenses while improving delivery speed and customer satisfaction.
+    </p>
+
+    <p>
+      One of the most effective ways to lower shipping costs is through smart packaging. Using packaging that fits products accurately
+      reduces dimensional weight charges and minimizes the risk of damage during transit. Standardizing packaging materials also
+      improves handling efficiency and lowers material costs over time.
+    </p>
+
+    <p>
+      Choosing the right carrier is equally important. Businesses should compare carriers based on delivery timelines, reliability,
+      coverage, and pricing rather than cost alone. Working with multiple carriers provides flexibility and helps businesses select
+      the most efficient option for each shipment. Negotiating rates based on shipping volume can also result in substantial savings.
+    </p>
+
+    <p>
+      Shipment consolidation is another proven strategy for improving efficiency. Combining multiple small shipments into a single
+      larger one reduces per-unit shipping costs and simplifies customs clearance. Planning shipping schedules in advance allows
+      businesses to avoid expensive express shipping and last-minute surcharges.
+    </p>
+
+    <p>
+      Finally, leveraging digital logistics tools for tracking, documentation, and performance analysis enables businesses to identify
+      inefficiencies and continuously improve their shipping operations. Faster shipping and lower costs not only protect margins but
+      also strengthen customer trust and long-term business growth.
+    </p>
+  `,
+  category: "Shipping"
+},
     {
-      title: "Company News: New Warehouse Opening",
-      desc: "We are excited to announce the opening of our new regional warehouse to serve customers better.",
-      img: "https://via.placeholder.com/800x500?text=Company-News",
-      content: "Full blog content: Details about the facility, services, and how clients benefit.",
-      category: "Company News"
-    },
+  title: "Company News: New Warehouse Opening",
+  desc: "We are excited to announce the opening of our new regional warehouse to serve customers better.",
+  img: "https://via.placeholder.com/800x500?text=Company-News",
+  content: `
+    <h2>Company News: New Warehouse Opening</h2>
+
+    <p>
+      Alokah Ventures is proud to announce the official opening of our new regional warehouse, a strategic investment aimed at improving
+      service delivery, operational efficiency, and customer satisfaction. This facility represents an important milestone in our
+      continued commitment to supporting businesses with reliable, scalable, and modern logistics solutions.
+    </p>
+
+    <p>
+      The new warehouse has been designed to handle a wide range of cargo types, including general merchandise, palletized goods, and
+      time-sensitive shipments. Equipped with modern storage systems, improved security controls, and efficient loading bays, the
+      facility enables faster order processing and reduced turnaround times. Its strategic location allows for improved access to key
+      transport routes, making both inbound and outbound logistics more efficient.
+    </p>
+
+    <p>
+      Clients will benefit from enhanced services such as short- and long-term warehousing, inventory management, order consolidation,
+      and distribution support. By centralizing storage and distribution operations, businesses can reduce handling costs, improve stock
+      visibility, and respond more quickly to customer demand. The facility also supports compliance with safety and handling standards,
+      ensuring goods are stored and managed responsibly.
+    </p>
+
+    <p>
+      This warehouse opening reflects Alokah Ventures’ long-term vision to strengthen supply chains across the region. As we continue to
+      expand our infrastructure and service offerings, we remain focused on delivering dependable logistics solutions that empower our
+      clients to grow, compete, and succeed in both regional and international markets.
+    </p>
+  `,
+  category: "Company News"
+},
+   {
+  title: "Policy Update: New Customs Procedures",
+  desc: "Important policy changes affecting cross-border shipments and customs clearance.",
+  img: "https://via.placeholder.com/800x500?text=Policies",
+  content: `
+    <h2>Policy Update: New Customs Procedures</h2>
+
+    <p>
+      Recent changes to customs procedures across several East African countries are set to significantly impact how businesses manage
+      cross-border trade. These policy updates are aimed at improving transparency, reducing revenue leakages, enhancing security, and
+      aligning national customs systems with regional and international trade standards. While the long-term objective is to facilitate
+      smoother trade, businesses must understand and adapt to these changes to avoid delays, penalties, and increased costs.
+    </p>
+
+    <p>
+      One of the key changes involves stricter documentation requirements and enhanced verification processes. Importers and exporters
+      are now expected to submit more accurate and detailed declarations, including correct tariff classifications, product values, and
+      supporting documents such as certificates of origin and conformity. Customs authorities have also increased the use of digital
+      platforms, requiring traders to lodge declarations electronically and track shipment status through integrated customs systems.
+    </p>
+
+    <p>
+      These new procedures directly affect clearance timelines and compliance obligations. Businesses that fail to provide complete or
+      accurate documentation may experience longer inspection times, shipment holds, or financial penalties. Additionally, certain
+      categories of goods are now subject to more frequent physical inspections and post-clearance audits, particularly high-risk or
+      regulated products.
+    </p>
+
+    <p>
+      To adapt effectively, importers and exporters should review their internal compliance processes and ensure that staff are trained
+      on the updated requirements. Engaging licensed customs agents and logistics partners with up-to-date regulatory knowledge can help
+      minimize errors and streamline clearance. Businesses are also encouraged to maintain organized records, as post-clearance audits
+      may be conducted months after goods have been released.
+    </p>
+
+    <p>
+      In the long term, these policy changes present an opportunity for businesses to build more compliant and efficient trade
+      operations. Companies that proactively align with the new customs procedures will benefit from reduced risks, improved border
+      predictability, and stronger relationships with regulatory authorities. Staying informed and responsive is essential for
+      maintaining competitiveness in an evolving cross-border trade environment.
+    </p>
+  `,
+  category: "Policies"
+},
     {
-      title: "Policy Update: New Customs Procedures",
-      desc: "Important policy changes affecting cross-border shipments and customs clearance.",
-      img: "https://via.placeholder.com/800x500?text=Policies",
-      content: "Full blog content: What changed, how it affects importers/exporters, and recommended actions.",
-      category: "Policies"
-    },
-    {
-      title: "Business Tips: Scaling Your Export Business",
-      desc: "Advice for entrepreneurs ready to scale their export operations.",
-      img: "https://via.placeholder.com/800x500?text=Business-Tips",
-      content: "Full blog content: Market research, partnerships, compliance, and financing options.",
-      category: "Business Tips"
-    }
+  title: "Company News: New Warehouse Opening",
+  desc: "We are excited to announce the opening of our new regional warehouse to serve customers better.",
+  img: "https://via.placeholder.com/800x500?text=Company-News",
+  content: `
+    <h2>Company News: New Warehouse Opening</h2>
+
+    <p>
+      We are proud to announce the official opening of our new regional warehouse, a significant milestone in Alokah Ventures’ journey
+      to strengthen logistics and supply chain solutions across the region. This expansion reflects our continued commitment to
+      improving service delivery, increasing operational efficiency, and supporting our growing client base.
+    </p>
+
+    <p>
+      The new facility is strategically located to enhance access to major transport routes, border points, and key commercial hubs.
+      It is equipped with modern storage infrastructure, enhanced security systems, and efficient loading and unloading bays designed
+      to handle diverse cargo types. These features enable faster order processing, reduced transit delays, and improved inventory
+      control for our clients.
+    </p>
+
+    <p>
+      With increased storage capacity and optimized warehouse workflows, customers will benefit from improved stock availability,
+      reduced handling costs, and greater flexibility in managing seasonal or high-volume shipments. The facility also supports value-
+      added services such as consolidation, labeling, short-term storage, and distribution planning.
+    </p>
+
+    <p>
+      This new warehouse strengthens our ability to serve SMEs and large enterprises alike, providing scalable logistics solutions
+      aligned with business growth. As Alokah Ventures continues to invest in infrastructure and technology, this expansion reinforces
+      our mission to deliver reliable, efficient, and customer-focused logistics services that empower businesses to operate and grow
+      with confidence.
+    </p>
+  `,
+  category: "Company News"
+},
+{
+  title: "Policy Update: New Customs Procedures",
+  desc: "Important policy changes affecting cross-border shipments and customs clearance.",
+  img: "https://via.placeholder.com/800x500?text=Policies",
+  content: `
+    <h2>Policy Update: New Customs Procedures</h2>
+
+    <p>
+      Recent updates to customs procedures across the region have introduced significant changes that affect how goods are imported
+      and exported. These policy adjustments are aimed at improving transparency, enhancing revenue collection, strengthening border
+      security, and facilitating smoother cross-border trade. However, for businesses, understanding and adapting to these changes is
+      essential to avoid delays and additional costs.
+    </p>
+
+    <p>
+      One of the key changes involves stricter documentation requirements and enhanced verification processes. Importers and exporters
+      are now expected to submit more detailed shipment information, including accurate product classification, declared values, and
+      certificates of origin where applicable. Increased use of digital customs systems has also reduced manual processing but requires
+      businesses to ensure data accuracy and compliance at every stage.
+    </p>
+
+    <p>
+      Inspection procedures have been strengthened, particularly for regulated goods such as food products, pharmaceuticals, and
+      electronics. This may result in longer clearance times if documentation is incomplete or standards are not met. Businesses that
+      fail to comply risk penalties, shipment holds, or additional inspection fees.
+    </p>
+
+    <p>
+      To adapt effectively, businesses should review their internal compliance processes, train staff on updated customs requirements,
+      and work closely with licensed customs agents. Staying informed through official customs communications and trade associations is
+      also critical.
+    </p>
+
+    <p>
+      At Alokah Ventures, we support clients by providing guidance on regulatory changes, assisting with documentation preparation,
+      and coordinating with customs authorities to ensure smooth clearance. Proactively responding to these policy updates allows
+      businesses to minimize disruptions, maintain supply chain reliability, and continue trading confidently across borders.
+    </p>
+  `,
+  category: "Policies"
+},
+{
+  title: "Business Tips: Scaling Your Export Business",
+  desc: "Advice for entrepreneurs ready to scale their export operations.",
+  img: "https://via.placeholder.com/800x500?text=Business-Tips",
+  content: `
+    <h2>Business Tips: Scaling Your Export Business</h2>
+
+    <p>
+      Scaling an export business requires more than increased production—it demands strategic planning, market insight, and strong
+      operational foundations. Entrepreneurs looking to expand into regional or international markets must be prepared to manage
+      increased complexity while maintaining quality and compliance.
+    </p>
+
+    <p>
+      Market research is a critical first step. Understanding target markets, customer preferences, pricing structures, and regulatory
+      requirements helps businesses position their products competitively. Identifying high-demand markets and aligning offerings with
+      local standards reduces entry risks and increases success rates.
+    </p>
+
+    <p>
+      Building strong partnerships is equally important. Reliable logistics providers, customs agents, distributors, and financial
+      institutions play a key role in supporting growth. Strategic partnerships enable exporters to access new networks, reduce
+      operational burdens, and scale efficiently without overextending internal resources.
+    </p>
+
+    <p>
+      Compliance should remain a top priority as operations expand. Exporters must stay updated on customs regulations, quality
+      standards, and trade agreements to avoid costly disruptions. Investing in proper documentation systems and compliance expertise
+      ensures smoother cross-border operations.
+    </p>
+
+    <p>
+      Finally, securing appropriate financing supports sustainable growth. Export financing, trade credit, and working capital
+      solutions help businesses manage cash flow, fulfill larger orders, and invest in expansion. With the right strategy and support,
+      exporters can scale confidently and compete successfully in global markets.
+    </p>
+  `,
+  category: "Business Tips"
+}
+
   ];
 
   // State
@@ -383,17 +708,22 @@
   }
 
   // Popup handlers
-  function openPopup(index) {
-    const blog = blogs[index];
-    if (!blog) return;
-    popupImg.src = blog.img;
-    popupTitle.textContent = blog.title;
-    popupContent.textContent = blog.content;
-    popupContainer.style.display = 'flex';
+ function openPopup(index) {
+  const blog = blogs[index];
+  if (!blog) return;
 
-    // set share handler in popup
-    popupShare.onclick = () => shareBlog(index);
-  }
+  popupImg.src = blog.img;
+  popupTitle.textContent = blog.title;
+
+  // IMPORTANT: Render HTML content (not plain text)
+  popupContent.innerHTML = blog.content;
+
+  popupContainer.style.display = 'flex';
+
+  // Set share handler in popup
+  popupShare.onclick = () => shareBlog(index);
+}
+
   function closePopup() { popupContainer.style.display = 'none'; }
   // expose to global scope for inline onclick attributes
   window.openPopup = openPopup;
