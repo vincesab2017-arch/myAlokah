@@ -1275,7 +1275,7 @@ section:not(#about):not(#vision):not(#mission) p {
 }
 
 
-/* Key services styles (replace the existing .key-services/.services-grid block with this) */
+/* Key services styles */
 .key-services {
   background: linear-gradient(to bottom right, #ffffff, #f3f7fb);
   padding: 80px 20px;
@@ -1808,90 +1808,109 @@ section:not(#about):not(#vision):not(#mission) p {
   --text-dark: #1a1a1a;
   --section-padding:clamp(50px, 6vw, 90px);
 }
+/* ==============================
+   Industries We Serve – Alokah
+============================== */
 
-#industries {
-  width: 100%;
-  padding: var(--section-padding) 8%;
-  background: #f8f9fc;
-  color: var(--text-dark);
+.industries-section {
+  background: #f2f2f2;
+  padding: 90px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.industries-title {
   text-align: center;
-}
-
-/* Title */
-#industries .section-title {
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  color: var(--primary-blue);
-  text-transform: uppercase;
-  font-weight: 800;
-  margin-bottom: 50px;
-  letter-spacing: 1.5px;
-}
-
-#industries .section-title::after {
-  content: "";
-  width: 80px;
-  height: 4px;
-  display: block;
-  margin: 12px auto 0;
-  background: var(--accent-gold);
-  border-radius: 3px;
-}
-
-/* GRID */
-#industries .industries-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 36px;
-  max-width: 1500px;
-  margin: 0 auto;
-}
-
-/* PREMIUM CARD */
-#industries .industries-grid > div {
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-top: 5px solid var(--accent-gold);
-  padding: 30px 20px;
-  border-radius: 14px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.06);
-  text-align: center;
-
-  height: 300px; /* uniform height */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: all .35s ease;
-}
-
-#industries .industries-grid > div:hover {
-  transform: translateY(-6px);
-  border-color: var(--light-gold);
-  box-shadow: 0 14px 32px rgba(0,0,0,0.12);
-}
-
-/* IMAGE (uniform size) */
-#industries .industries-grid img {
-  width: 160px;
-  height: 130px;
-  object-fit: contain;
-  border-radius: 10px;
-  padding: 14px;
-  background: #ffffff;
-  border: 1px solid rgba(0,0,0,0.06);
-  transition: transform 0.3s ease;
-}
-
-#industries .industries-grid img:hover {
-  transform: scale(1.1);
-}
-
-/* Text / Label */
-#industries .industries-grid p {
-  font-size: 1rem;
+  font-size: 2.3rem;
   font-weight: 700;
-  color: var(--primary-blue);
-  margin: 0;
-  letter-spacing: 0.5px;
+  color: #004aad;
+  margin-bottom: 60px;
+}
+
+/* Grid */
+.industries-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 45px 35px;
+}
+
+/* Card */
+.industry-box {
+  background: #ffffff;
+  border: 2px solid #2b6cb0;
+  border-radius: 14px;
+  padding: 55px 35px 35px;
+  min-height: 220px;
+  position: relative;
+  transition: all 0.35s ease;
+}
+
+/* Hover effect */
+.industry-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(0, 74, 173, 0.2);
+  border-color: #004aad;
+}
+
+/* Icon */
+.icon-circle {
+  width: 62px;
+  height: 62px;
+  background: #2b6cb0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: -31px;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.35s ease;
+}
+
+.industry-box:hover .icon-circle {
+  background: #004aad;
+  box-shadow: 0 0 0 6px rgba(0, 74, 173, 0.15);
+}
+
+.icon-circle svg {
+  width: 30px;
+  height: 30px;
+  fill: #ffffff;
+}
+
+/* Text */
+.industry-box h3 {
+  margin-top: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 12px;
+}
+
+.industry-box p {
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .industries-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .industries-section {
+    padding: 70px 15px;
+  }
+  .industries-title {
+    font-size: 2rem;
+  }
 }
 
 /*====================
