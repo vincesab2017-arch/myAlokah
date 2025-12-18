@@ -1084,195 +1084,82 @@ section:not(#about):not(#vision):not(#mission) p {
 @media (max-width: 768px)  { .carousel-item { width: 200px; } }
 @media (max-width: 480px)  { .carousel-item { width: 160px; } }
 
-/* ============================================
-   SERVICES SECTION – BALANCED & PROFESSIONAL
-============================================ */
-:root {
-  --gold: #ffae00;
-  --blue-dark: #003366;
-  --text-dark: #222;
-  --text-light: #555;
-  --card-bg: #ffffff;
-  --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  --card-shadow-hover: 0 8px 18px rgba(0,0,0,0.14);
-  --section-padding: clamp(50px, 6vw, 90px);
+
+
+.alokah-services {
+  padding: 120px 6%;
+  background: #fff;
 }
 
-.services-section {
-  width: 100%;
-  padding: var(--section-padding) 8%;
-  background: linear-gradient(135deg, #f7f7f7, #e8e8e8);
-  color: var(--text-dark);
-  box-sizing: border-box;
+.services-title {
+  text-align: center;
+  font-size: 2.9rem;
+  font-weight: 700;
+  margin-bottom: 120px;
 }
 
-/* ============================================
-   BALANCED TWO-COLUMN GRID (THIS FIXES LAYOUT)
-============================================ */
-.split-row {
+.alokah-service {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Perfect 50/50 split */
-  gap: clamp(30px, 4vw, 70px);
-  align-items: stretch; /* Forces equal column height */
-  max-width: 1300px;
-  margin: 0 auto;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 80px;
+  margin-bottom: 160px;
 }
 
-/* ============================================
-   LEFT COLUMN
-============================================ */
-.services-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: stretch;
+.alokah-text {
+  max-width: 420px;
 }
 
-.services-left .section-title {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
-  color: var(--gold);
-  margin-bottom: 25px;
-  text-transform: uppercase;
+.alokah-text h3 {
+  font-size: 1.6rem;
   letter-spacing: 1px;
+  margin-bottom: 20px;
+  color:  darkblue;
 }
 
-/* Cards stretch to fill same height as the images */
-.services-cards {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(18px, 2.5vw, 30px);
-  flex: 1; /* Critical for balance */
+.alokah-text p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: #333;
 }
 
-.service-card {
-  flex: 1; /* Makes cards share column height evenly */
-  background: var(--card-bg);
-  border-left: 6px solid var(--gold);
-  padding: clamp(18px, 2.5vw, 32px);
-  border-radius: 14px;
-  box-shadow: var(--card-shadow);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.alokah-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: #000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
 }
 
-.service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--card-shadow-hover);
-}
-
-.service-card i {
-  font-size: 2rem;
-  color: var(--gold);
-  margin-bottom: 12px;
-}
-
-.service-card h3 {
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  color: var(--blue-dark);
-  margin-bottom: 10px;
-}
-
-.service-card p {
-  font-size: clamp(0.9rem, 1.2vw, 1rem);
-  color: var(--text-light);
-  line-height: 1.6;
-}
-
-/* ============================================
-   RIGHT COLUMN (IMAGES)
-============================================ */
-.services-right {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(16px, 2vw, 22px);
-  justify-content: stretch;
-}
-
-.services-right img {
+.alokah-image img {
   width: 100%;
-  height: auto;
-  border-radius: 14px;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-  object-fit: cover;
-  transition: transform 0.35s ease;
+  border-radius: 18px;
+  display: block;
 }
 
-.services-right img:hover {
-  transform: scale(1.05);
+/* subtle stagger like the sample image */
+.alokah-image.offset {
+  margin-top: 60px;
 }
 
-/* ============================================
-   MOBILE FRIENDLY STACKING
-============================================ */
-@media (max-width: 850px) {
-  .split-row {
-    grid-template-columns: 1fr;
-  }
-
-  .services-cards,
-  .service-card {
-    flex: unset;
-  }
-}
-
-
-/* ==========================
-   TABLET: 1200px - 901px
-========================== */
-@media (max-width: 1200px) and (min-width: 901px) {
-  .split-row {
-    flex-wrap: nowrap;        /* keep side-by-side */
-    gap: 30px;                /* reduce gap slightly */
-    align-items: flex-start;
-  }
-
-  .services-left {
-    flex: 1 1 55%;
-    max-width: 55%;
-  }
-
-  .services-right {
-    flex: 1 1 40%;
-    max-width: 40%;
-  }
-
-  /* Slightly reduce image size to prevent wrapping */
-  .services-right img {
-    width: 95%;       /* slightly smaller than 100% */
-    max-width: 95%;
-  }
-}
-
-/* ==========================
-   MOBILE: max-width 900px
-========================== */
+/* Mobile */
 @media (max-width: 900px) {
-  .split-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  .alokah-service {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .services-left,
-  .services-right {
-    flex: 1 1 100%;
+  .alokah-image.offset {
+    margin-top: 0;
+  }
+
+  .alokah-text {
     max-width: 100%;
   }
-
-  .services-cards {
-    align-items: center;
-  }
-
-  .services-right img {
-    max-width: 360px;
-  }
-
-  .service-card {
-    width: 100%;
-    padding: 20px;
-  }
 }
+
 
 
 /* Key services styles */
