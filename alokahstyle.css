@@ -1084,10 +1084,12 @@ section:not(#about):not(#vision):not(#mission) p {
 @media (max-width: 768px)  { .carousel-item { width: 200px; } }
 @media (max-width: 480px)  { .carousel-item { width: 160px; } }
 
-
+/*==============
+service we offer
+===============*/
 
 .alokah-services {
-  padding: 120px 6%;
+  padding: 100px 6%;
   background: #fff;
 }
 
@@ -1095,15 +1097,15 @@ section:not(#about):not(#vision):not(#mission) p {
   text-align: center;
   font-size: 2.9rem;
   font-weight: 700;
-  margin-bottom: 120px;
+  margin-bottom: 80px;
 }
 
 .alokah-service {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
   align-items: center;
-  gap: 80px;
-  margin-bottom: 160px;
+  gap: 60px;
+  margin-bottom: 100px;
 }
 
 .alokah-text {
@@ -1114,7 +1116,7 @@ section:not(#about):not(#vision):not(#mission) p {
   font-size: 1.6rem;
   letter-spacing: 1px;
   margin-bottom: 20px;
-  color:  darkblue;
+  color: darkblue;
 }
 
 .alokah-text p {
@@ -1131,17 +1133,34 @@ section:not(#about):not(#vision):not(#mission) p {
   color: #fff;
   text-decoration: none;
   border-radius: 6px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.alokah-btn:hover {
+  background: #0a2a66;
+  transform: translateY(-2px);
 }
 
 .alokah-image img {
   width: 100%;
   border-radius: 18px;
   display: block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.alokah-image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
 /* subtle stagger like the sample image */
 .alokah-image.offset {
-  margin-top: 60px;
+  margin-top: 40px;
+}
+
+.alokah-btn,
+.alokah-image img {
+  cursor: pointer;
 }
 
 /* Mobile */
@@ -1149,6 +1168,7 @@ section:not(#about):not(#vision):not(#mission) p {
   .alokah-service {
     grid-template-columns: 1fr;
     gap: 40px;
+    margin-bottom: 70px;
   }
 
   .alokah-image.offset {
