@@ -542,11 +542,17 @@ const facts = [
 ];
 
 let factIndex = 0;
-const factEl = document.getElementById("fact");
 
-function showFact() {
-  factEl.textContent = facts[factIndex];
-  factIndex = (factIndex + 1) % facts.length;
-}
-setInterval(showFact, 4000);
-showFact();
+document.addEventListener("DOMContentLoaded", () => {
+  const factEl = document.getElementById("fact");
+
+  if (!factEl) return; // STOP if element doesn't exist
+
+  function showFact() {
+    factEl.textContent = facts[factIndex];
+    factIndex = (factIndex + 1) % facts.length;
+  }
+
+  showFact();
+  setInterval(showFact, 4000);
+});
