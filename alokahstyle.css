@@ -157,7 +157,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 80px; /* nav offset */
+    padding-top: 80px;
     position: relative;
 }
 
@@ -172,6 +172,7 @@
     margin-bottom: 20px;
 }
 
+/* Buttons */
 .btn, .btn-quote {
     padding: 12px 20px;
     border-radius: 5px;
@@ -186,25 +187,18 @@
     color: #0B1F5B;
 }
 
-.btn:hover {
-    background: #e65c00;
-}
-
 .btn-quote {
     background: #003366;
     color: gold;
 }
 
-.btn-quote:hover {
-    background: #0055aa;
-}
-/* Centered About Us Title and Paragraph */
+/* About section */
 .about-title {
-    color:#FFD700; /* gold */
+    color: #FFD700;
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-align: center;
-    padding top: 40px;
+    padding-top: 40px;
 }
 
 .about-paragraph {
@@ -212,7 +206,7 @@
     font-size: 1.1rem;
     margin-bottom: 40px;
     text-align: center;
-    max-width: 700px;     
+    max-width: 700px;
     margin-left: auto;
     margin-right: auto;
 }
