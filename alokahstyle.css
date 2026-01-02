@@ -172,13 +172,17 @@ body {
    ========================== */
 .hero-section {
     position: relative;
-    height: 100vh; /* SAME height on all devices */
-    background: url('assets/images/alokah_card image.png') center/cover no-repeat;
+    height: 100vh;
+    background-image: url("assets/images/alokah_card image.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
 }
+
 
 /* Overlay */
 .hero-overlay {
@@ -220,7 +224,7 @@ body {
 
 .hero-glass p {
     font-size: 18px; /* fixed size */
-    color: #f2f2f2;
+    color:silver black;
     margin-bottom: 30px;
     opacity: 0.95;
 }
