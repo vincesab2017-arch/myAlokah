@@ -166,6 +166,186 @@ body {
   }
 }
 
+/* WRAPPER */
+.alokah-hero-wrapper {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 70px); /* navbar height */
+  min-height: 520px;
+}
+
+/* LEFT BAR */
+.alokah-service-bar {
+  width: 260px;
+  background: #2f3f4e;
+  color: #fff;
+}
+
+.alokah-service-bar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.alokah-service-bar li {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.alokah-service-bar a,
+.alokah-service-bar button {
+  width: 100%;
+  padding: 15px 22px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.alokah-service-bar a:hover,
+.alokah-service-bar button:hover {
+  background: #22303b;
+}
+
+/* DROPDOWN */
+.dropdown {
+  display: none;
+  background: #25333f;
+}
+
+.dropdown a {
+  padding-left: 40px;
+  font-size: 14px;
+}
+
+.has-dropdown.open .dropdown {
+  display: block;
+}
+
+.has-dropdown span {
+  transition: transform 0.3s ease;
+}
+
+.has-dropdown.open span {
+  transform: rotate(180deg);
+}
+
+/* SLIDER */
+.alokah-hero-slider {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.hero-slide.active {
+  opacity: 1;
+}
+
+.hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+/* TEXT */
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 90px 80px;
+  color: #fff;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.hero-btn {
+  background: #ff6a00;
+  color: #fff;
+  padding: 14px 28px;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 3px;
+}
+
+/* ARROWS */
+.hero-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.25);
+  border: none;
+  font-size: 28px;
+  color: #fff;
+  padding: 8px 14px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.hero-arrow.left { left: 25px; }
+.hero-arrow.right { right: 25px; }
+
+/* DOTS */
+.hero-dots {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 3;
+}
+
+.hero-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  cursor: pointer;
+}
+
+.hero-dots span.active {
+  background: #ff6a00;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+  .alokah-hero-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .alokah-service-bar {
+    width: 100%;
+  }
+
+  .hero-text {
+    padding: 50px 25px;
+  }
+
+  .hero-text h1 {
+    font-size: 32px;
+  }
+}
+
 
 /* ==========================
    CONSISTENT HERO SECTION
